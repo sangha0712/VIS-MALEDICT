@@ -5,15 +5,9 @@ let genAI: GoogleGenAI | null = null;
 
 const getGenAI = () => {
   if (!genAI) {
-    const apiKey = process.env.API_KEY;
-    if (!apiKey) {
-      console.error("API_KEY is missing from environment variables");
-      // In a real app we might handle this gracefully, but for now we log.
-    }
-    // Only initialize if key exists to avoid immediate crash if env is missing in dev
-    if (apiKey) {
-        genAI = new GoogleGenAI({ apiKey });
-    }
+    // Guideline: API key must be obtained exclusively from process.env.API_KEY and used directly.
+    // Guideline: Assume the variable is pre-configured and valid.
+    genAI = new GoogleGenAI({ apiKey: process.env.API_KEY });
   }
   return genAI;
 };
