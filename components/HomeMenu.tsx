@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Megaphone, Calendar, Users, BookOpen, PenTool, ExternalLink, Star, Shield, Target, Crosshair } from 'lucide-react';
+import { Megaphone, Calendar, Users, BookOpen, PenTool, ExternalLink, Star, Shield, Target, Crosshair, Briefcase, Dumbbell } from 'lucide-react';
 
 interface HomeMenuProps {
   onNavigate: (view: 'CHARACTER' | 'HISTORY' | 'ADMISSION') => void;
@@ -9,12 +9,39 @@ const HomeMenu: React.FC<HomeMenuProps> = ({ onNavigate }) => {
   const [activeTab, setActiveTab] = useState<'NOTICE' | 'RECRUIT' | 'TRAINING'>('NOTICE');
 
   const notices = [
-    { id: 1, title: '2077년도 ASH GUARD 조기 특채 합격자 명단 공고', date: '2077-02-15', new: true },
-    { id: 2, title: '[필독] 제2훈련장 모의 시가전 훈련 일정 안내 (소음 주의)', date: '2077-02-14', new: true },
-    { id: 3, title: '3학년 졸업생 히어로 면허(B급 이상) 자격시험 대비 특강', date: '2077-02-10', new: false },
-    { id: 4, title: '개인 전술 장비(파워슈트/아티팩트) 정기 검사 안내', date: '2077-02-01', new: false },
-    { id: 5, title: '교내 이능력 폭주 사고 예방 수칙', date: '2077-01-28', new: false },
+    { id: 1, title: '2084학년도 1학기 중간고사 일정 및 부정행위(이능력 사용) 단속 안내', date: '2084-04-10', new: true, category: '학사' },
+    { id: 2, title: '[필독] 교내 이능력 제어 장치(PCD) 정기 펌웨어 업데이트', date: '2084-04-08', new: true, category: '시설' },
+    { id: 3, title: '제13회 ASH GUARD 배 전국 고교 전술 대회 우승 축하', date: '2084-04-01', new: false, category: '뉴스' },
+    { id: 4, title: '도서관 "고대 아티팩트" 섹션 열람 제한 구역 설정 (보안등급 B 이상)', date: '2084-03-25', new: false, category: '도서' },
+    { id: 5, title: '[경고] 외부인 출입 통제 강화 (테러 경보 단계 "Code: ORANGE" 격상)', date: '2084-03-15', new: false, category: '보안' },
   ];
+
+  const recruits = [
+    { id: 1, title: 'ASH GUARD 전략분석팀 하계 인턴십 모집 (3학년 대상)', date: '2084-04-12', new: true, category: '인턴' },
+    { id: 2, title: '경찰청 사이버수사국 특채 설명회 (화이트해커 트랙)', date: '2084-04-05', new: true, category: '특채' },
+    { id: 3, title: '글로벌 민간군사기업(PMC) "블랙스톤" 졸업 예정자 채용 공고', date: '2084-03-30', new: false, category: '채용' },
+    { id: 4, title: '국립 이능력 연구소 연구 보조원 모집 (물리학/마법학 전공)', date: '2084-03-20', new: false, category: '아르바이트' },
+    { id: 5, title: 'S급 히어로 에이전시 "오로라" 스카우트 팀 학교 방문 일정', date: '2084-03-10', new: false, category: '스카우트' },
+  ];
+
+  const trainings = [
+    { id: 1, title: '5월 1주차: 대테러 시가전 모의 훈련 (전학년 필수)', date: '2084-05-01', new: true, category: '전술' },
+    { id: 2, title: '5월 2주차: 수중 전술 및 심해 인명 구조 실습 (레스큐과)', date: '2084-05-08', new: false, category: '실습' },
+    { id: 3, title: '5월 3주차: 사이버 방어 및 딥다이브 해킹 대응 훈련 (정보과)', date: '2084-05-15', new: false, category: '사이버' },
+    { id: 4, title: '5월 4주차: 야간 산악 침투 및 생존 훈련 (히어로전술과)', date: '2084-05-22', new: false, category: '야전' },
+    { id: 5, title: '[특강] 레전드 히어로 "썬더볼트" 초청 실전 전술 세미나', date: '2084-05-25', new: false, category: '특강' },
+  ];
+
+  const getActiveList = () => {
+    switch (activeTab) {
+      case 'NOTICE': return notices;
+      case 'RECRUIT': return recruits;
+      case 'TRAINING': return trainings;
+      default: return notices;
+    }
+  };
+
+  const activeList = getActiveList();
 
   return (
     <div className="w-full">
@@ -22,27 +49,27 @@ const HomeMenu: React.FC<HomeMenuProps> = ({ onNavigate }) => {
       <div className="bg-gray-50 py-10 border-b border-gray-200">
          <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-6">
             
-            {/* Column 1 & 2: Notice Board */}
-            <div className="md:col-span-2 bg-white p-6 rounded-xl shadow-soft border border-gray-100">
+            {/* Column 1 & 2: Main Board */}
+            <div className="md:col-span-2 bg-white p-6 rounded-xl shadow-soft border border-gray-100 min-h-[300px]">
                <div className="flex items-center justify-between mb-4 border-b border-gray-100 pb-2">
                   <div className="flex gap-4 text-lg font-bold">
                      <button 
                         onClick={() => setActiveTab('NOTICE')}
-                        className={`${activeTab === 'NOTICE' ? 'text-school-orange' : 'text-gray-400'} hover:text-school-orange transition-colors`}
+                        className={`flex items-center gap-1 ${activeTab === 'NOTICE' ? 'text-school-orange' : 'text-gray-400'} hover:text-school-orange transition-colors`}
                      >
-                        공지사항
+                        <Megaphone className="w-4 h-4" /> 공지사항
                      </button>
                      <button 
                         onClick={() => setActiveTab('RECRUIT')}
-                        className={`${activeTab === 'RECRUIT' ? 'text-school-orange' : 'text-gray-400'} hover:text-school-orange transition-colors`}
+                        className={`flex items-center gap-1 ${activeTab === 'RECRUIT' ? 'text-school-orange' : 'text-gray-400'} hover:text-school-orange transition-colors`}
                      >
-                        채용/진로
+                        <Briefcase className="w-4 h-4" /> 채용/진로
                      </button>
                      <button 
                         onClick={() => setActiveTab('TRAINING')}
-                        className={`${activeTab === 'TRAINING' ? 'text-school-orange' : 'text-gray-400'} hover:text-school-orange transition-colors`}
+                        className={`flex items-center gap-1 ${activeTab === 'TRAINING' ? 'text-school-orange' : 'text-gray-400'} hover:text-school-orange transition-colors`}
                      >
-                        훈련일정
+                        <Dumbbell className="w-4 h-4" /> 훈련일정
                      </button>
                   </div>
                   <button className="text-gray-400 hover:text-black">
@@ -51,16 +78,18 @@ const HomeMenu: React.FC<HomeMenuProps> = ({ onNavigate }) => {
                </div>
                
                <ul className="space-y-3">
-                  {notices.map((notice) => (
-                     <li key={notice.id} className="flex justify-between items-center text-sm group cursor-pointer">
+                  {activeList.map((item) => (
+                     <li key={item.id} className="flex justify-between items-center text-sm group cursor-pointer hover:bg-gray-50 p-1 rounded transition-colors">
                         <div className="flex items-center gap-2 overflow-hidden">
-                           <span className="w-1.5 h-1.5 bg-gray-300 rounded-full group-hover:bg-school-orange"></span>
-                           <span className="truncate text-gray-700 group-hover:underline group-hover:text-school-orange max-w-[280px] md:max-w-[350px]">
-                              {notice.title}
+                           <span className="text-[10px] font-bold text-gray-500 bg-gray-200 px-1.5 py-0.5 rounded min-w-[40px] text-center">
+                             {item.category}
                            </span>
-                           {notice.new && <span className="bg-red-600 text-white text-[10px] px-1 rounded font-bold">N</span>}
+                           <span className="truncate text-gray-700 group-hover:text-school-orange font-medium max-w-[240px] md:max-w-[320px]">
+                              {item.title}
+                           </span>
+                           {item.new && <span className="bg-red-600 text-white text-[10px] px-1 rounded font-bold animate-pulse">N</span>}
                         </div>
-                        <span className="text-gray-400 text-xs whitespace-nowrap font-mono">{notice.date}</span>
+                        <span className="text-gray-400 text-xs whitespace-nowrap font-mono">{item.date}</span>
                      </li>
                   ))}
                </ul>
@@ -69,12 +98,12 @@ const HomeMenu: React.FC<HomeMenuProps> = ({ onNavigate }) => {
             {/* Column 3: Popup Zone (Visual) */}
             <div className="md:col-span-1 bg-white rounded-xl shadow-soft border border-gray-100 overflow-hidden relative group cursor-pointer h-64 md:h-auto">
                <div className="absolute top-0 left-0 bg-red-600 text-white text-xs font-bold px-3 py-1 z-10 rounded-br-lg">
-                  ASH GUARD
+                  D-DAY
                </div>
                <img src="https://picsum.photos/seed/special_forces/400/300" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 grayscale group-hover:grayscale-0" alt="Recruit" />
                <div className="absolute bottom-0 w-full bg-gradient-to-t from-black/90 to-transparent p-4 text-white">
-                  <p className="font-bold text-lg">히어로 면허 필기시험</p>
-                  <p className="text-xs text-gray-300 mt-1">강현고 고사장: 제1체육관</p>
+                  <p className="font-bold text-lg">제52회 히어로 면허 필기시험</p>
+                  <p className="text-xs text-gray-300 mt-1">2084. 06. 12 (토) | 제1체육관</p>
                </div>
             </div>
 
@@ -86,7 +115,7 @@ const HomeMenu: React.FC<HomeMenuProps> = ({ onNavigate }) => {
                   </div>
                   <h3 className="font-bold text-gray-800 text-lg">ASH GUARD<br/>트랙 신청</h3>
                   <button className="mt-3 bg-blue-600 text-white text-xs px-4 py-1.5 rounded-full font-bold hover:bg-blue-700 transition-colors">
-                     지원하기
+                     지원하기 (2084)
                   </button>
                </div>
             </div>

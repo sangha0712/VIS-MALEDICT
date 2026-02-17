@@ -21,7 +21,7 @@ const SectionAdmission: React.FC<SectionAdmissionProps> = ({ onGoHome }) => {
         <div className="bg-white border-2 border-school-orange p-10 rounded-lg shadow-lg inline-block">
             <h2 className="text-2xl font-bold text-school-text mb-4">지원서가 접수되었습니다</h2>
             <p className="text-gray-600 mb-8">
-                예비 요원님의 지원서(접수번호: GH-2077-009)가 ASH GUARD 인사 시스템으로 전송되었습니다.<br/>
+                예비 요원님의 지원서(접수번호: GH-2084-009)가 ASH GUARD 인사 시스템으로 전송되었습니다.<br/>
                 1차 서류 합격 여부는 문자메시지로 개별 통보됩니다.
             </p>
             <div className="flex gap-4 justify-center">
@@ -110,7 +110,7 @@ const SectionAdmission: React.FC<SectionAdmissionProps> = ({ onGoHome }) => {
                    <div className="bg-gray-50 p-6 rounded-lg border border-gray-200">
                       <h3 className="text-xl font-bold text-school-text mb-2 flex items-center gap-2">
                          <Shield className="w-6 h-6 text-school-orange" />
-                         2077학년도 신입생 선발 기준 안내
+                         2084학년도 신입생 선발 기준 안내
                       </h3>
                       <p className="text-sm text-gray-600 leading-relaxed">
                          본교는 성적뿐만 아니라 정의감, 희생정신, 그리고 실전 전투 능력을 종합적으로 평가합니다.<br/>
@@ -133,17 +133,17 @@ const SectionAdmission: React.FC<SectionAdmissionProps> = ({ onGoHome }) => {
                             <tbody>
                                <tr>
                                   <td className="py-3 border-b border-gray-200">원서 접수</td>
-                                  <td className="py-3 border-b border-gray-200">2077.02.01 (월) ~ 02.28 (일)</td>
+                                  <td className="py-3 border-b border-gray-200">2084.02.01 (월) ~ 02.28 (일)</td>
                                   <td className="py-3 border-b border-gray-200">온라인 접수 원칙</td>
                                </tr>
                                <tr>
                                   <td className="py-3 border-b border-gray-200">실기 전형 (1차)</td>
-                                  <td className="py-3 border-b border-gray-200">2077.03.05 (금)</td>
+                                  <td className="py-3 border-b border-gray-200">2084.03.05 (금)</td>
                                   <td className="py-3 border-b border-gray-200">체력검정 / 기초전투</td>
                                </tr>
                                <tr>
                                   <td className="py-3 border-b border-gray-200">면접 및 능력심사</td>
-                                  <td className="py-3 border-b border-gray-200">2077.03.10 (수)</td>
+                                  <td className="py-3 border-b border-gray-200">2084.03.10 (수)</td>
                                   <td className="py-3 border-b border-gray-200">이능력자 필수</td>
                                </tr>
                             </tbody>
@@ -153,7 +153,7 @@ const SectionAdmission: React.FC<SectionAdmissionProps> = ({ onGoHome }) => {
 
                    {/* Cut-off Table */}
                    <section>
-                      <h4 className="text-lg font-bold border-l-4 border-school-orange pl-3 mb-4 text-gray-800">작년(2076) 합격 커트라인</h4>
+                      <h4 className="text-lg font-bold border-l-4 border-school-orange pl-3 mb-4 text-gray-800">작년(2083) 합격 커트라인</h4>
                       <p className="text-xs text-gray-500 mb-2">* 합격선은 매년 변동될 수 있으며, 참고용으로만 활용하시기 바랍니다.</p>
                       <div className="overflow-x-auto">
                          <table className="w-full text-sm text-center border-t border-gray-800">
@@ -230,7 +230,7 @@ const SectionAdmission: React.FC<SectionAdmissionProps> = ({ onGoHome }) => {
                             <tr>
                                <th className="bg-gray-100 p-4 text-left font-bold border-b border-gray-200">주민등록번호</th>
                                <td className="p-4 border-b border-gray-200">
-                                   <input type="text" className="border border-gray-300 px-2 py-1.5 w-full md:w-64 focus:outline-none focus:border-school-orange" placeholder="예: 20600101-3xxxxxx" />
+                                   <input type="text" className="border border-gray-300 px-2 py-1.5 w-full md:w-64 focus:outline-none focus:border-school-orange" placeholder="예: 20680101-3xxxxxx" />
                                </td>
                             </tr>
                             <tr>

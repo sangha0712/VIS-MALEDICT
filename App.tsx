@@ -246,7 +246,7 @@ const App: React.FC = () => {
                     <span><Phone className="w-3 h-3 inline mr-1"/> 교무실: 02-XXX-XXXX</span>
                     <span><Lock className="w-3 h-3 inline mr-1"/> 훈련통제실: 02-XXX-XXXX</span>
                  </p>
-                 <p className="mt-4 text-gray-500">Copyright © 2077 Ganghyeon Special Police High School. All Rights Reserved.</p>
+                 <p className="mt-4 text-gray-500">Copyright © 2084 Ganghyeon Special Police High School. All Rights Reserved.</p>
               </div>
            </div>
            

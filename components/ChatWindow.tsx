@@ -106,7 +106,7 @@ const ChatWindow: React.FC<ChatWindowProps> = ({ character, onClose }) => {
         {/* Chat Area - Clean Style */}
         <div className="flex-1 overflow-y-auto p-4 bg-blue-50/50 space-y-4">
           <div className="text-center text-xs text-gray-400 my-4">
-             <span>----- 2077년 2월 15일 일요일 -----</span>
+             <span>----- 2084년 5월 12일 수요일 -----</span>
           </div>
 
           {messages.map((msg) => (
