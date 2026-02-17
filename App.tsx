@@ -7,9 +7,11 @@ import HomeMenu from './components/HomeMenu';
 import SectionHistory from './components/SectionHistory';
 import SectionAdmission from './components/SectionAdmission';
 import SectionMap from './components/SectionMap';
+import SectionAshGuard from './components/SectionAshGuard';
+import SectionTraining from './components/SectionTraining';
 import { Search, Menu, ChevronRight, Home, User, LogIn, Lock, Phone, Mail, Shield } from 'lucide-react';
 
-type ViewState = 'HOME' | 'CHARACTER' | 'HISTORY' | 'ADMISSION' | 'MAP';
+type ViewState = 'HOME' | 'CHARACTER' | 'HISTORY' | 'ADMISSION' | 'MAP' | 'ASHGUARD' | 'TRAINING';
 
 const App: React.FC = () => {
   const [currentView, setCurrentView] = useState<ViewState>('HOME');
@@ -40,6 +42,12 @@ const App: React.FC = () => {
 
       case 'MAP':
         return <SectionMap onGoHome={() => handleNavigate('HOME')} />;
+
+      case 'ASHGUARD':
+        return <SectionAshGuard onGoHome={() => handleNavigate('HOME')} />;
+
+      case 'TRAINING':
+        return <SectionTraining onGoHome={() => handleNavigate('HOME')} />;
 
       case 'CHARACTER':
         return (
@@ -150,7 +158,7 @@ const App: React.FC = () => {
             </div>
             
             {/* Right side banner for ASH GUARD */}
-            <div className="hidden md:flex items-center gap-3 bg-gray-50 px-4 py-2 rounded-lg border border-gray-200">
+            <div className="hidden md:flex items-center gap-3 bg-gray-50 px-4 py-2 rounded-lg border border-gray-200 cursor-pointer hover:bg-gray-100 transition-colors" onClick={() => handleNavigate('ASHGUARD')}>
                <Shield className="w-8 h-8 text-gray-400" />
                <div className="flex flex-col text-right">
                   <span className="text-[10px] text-gray-500 font-bold uppercase">National Partnership</span>
@@ -170,13 +178,13 @@ const App: React.FC = () => {
                <li className={`h-full flex items-center cursor-pointer border-b-4 ${currentView === 'MAP' ? 'border-white font-bold' : 'border-transparent hover:border-orange-300'}`} onClick={() => handleNavigate('MAP')}>
                   강현지도
                </li>
-               <li className="h-full flex items-center cursor-pointer border-b-4 border-transparent hover:border-orange-300">
+               <li className={`h-full flex items-center cursor-pointer border-b-4 ${currentView === 'TRAINING' ? 'border-white font-bold' : 'border-transparent hover:border-orange-300'}`} onClick={() => handleNavigate('TRAINING')}>
                   훈련/교육
                </li>
                <li className={`h-full flex items-center cursor-pointer border-b-4 ${currentView === 'CHARACTER' ? 'border-white font-bold' : 'border-transparent hover:border-orange-300'}`} onClick={() => handleNavigate('CHARACTER')}>
                   구성원소개
                </li>
-               <li className="h-full flex items-center cursor-pointer border-b-4 border-transparent hover:border-orange-300">
+               <li className={`h-full flex items-center cursor-pointer border-b-4 ${currentView === 'ASHGUARD' ? 'border-white font-bold' : 'border-transparent hover:border-orange-300'}`} onClick={() => handleNavigate('ASHGUARD')}>
                   ASH GUARD
                </li>
                <li className={`h-full flex items-center cursor-pointer border-b-4 ${currentView === 'ADMISSION' ? 'border-white font-bold' : 'border-transparent hover:border-orange-300'}`} onClick={() => handleNavigate('ADMISSION')}>

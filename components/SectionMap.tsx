@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ChevronRight, Home, MapPin, Info } from 'lucide-react';
+import { ChevronRight, Home, MapPin, Info, X } from 'lucide-react';
 
 interface SectionMapProps {
   onGoHome: () => void;
@@ -10,7 +10,7 @@ interface Building {
   name: string;
   description: string;
   facilities: string[];
-  gridArea: string;
+  pos: { top: string; left: string };
   color: string;
 }
 
@@ -21,33 +21,33 @@ const SectionMap: React.FC<SectionMapProps> = ({ onGoHome }) => {
     {
       id: 'main',
       name: '본관 (Headquarters)',
-      description: '학교 행정의 중심이자 일반 교과 수업이 이루어지는 곳입니다. 교장실, 행정실, 일반 교실이 위치해 있습니다.',
+      description: '학교 행정의 중심이자 일반 교과 수업이 이루어지는 곳입니다. 교장실, 행정실, 일반 교실이 위치해 있습니다. 중앙 광장을 마주보고 있습니다.',
       facilities: ['교무실', '행정실', '방송실', '이사장실'],
-      gridArea: 'row-start-3 row-end-5 col-start-3 col-end-5',
+      pos: { top: '45%', left: '50%' },
       color: 'bg-blue-600'
     },
     {
       id: 'arena',
       name: '제1전술훈련관 (The Arena)',
-      description: '실전 모의 전투 훈련을 위한 최첨단 시설입니다. 홀로그램 시뮬레이션실과 대규모 대련장이 갖춰져 있습니다.',
+      description: '실전 모의 전투 훈련을 위한 최첨단 시설입니다. 돔 형태의 경기장 내부에는 홀로그램 시뮬레이션실과 대규모 대련장이 갖춰져 있습니다.',
       facilities: ['대련장', '사격장', '무기고', '전술분석실'],
-      gridArea: 'row-start-2 row-end-4 col-start-6 col-end-8',
+      pos: { top: '35%', left: '75%' },
       color: 'bg-red-600'
     },
     {
       id: 'dorm',
       name: '생활관 (Barracks)',
-      description: '학생들의 거주 공간입니다. 전원 기숙사 생활이 원칙이며, 24시간 보안 시스템이 가동됩니다.',
+      description: '학생들의 거주 공간입니다. 전원 기숙사 생활이 원칙이며, 24시간 보안 시스템이 가동됩니다. 북쪽 숲과 인접해 있어 조용합니다.',
       facilities: ['학생식당', '체력단련실', '의무실', '휴게실'],
-      gridArea: 'row-start-1 row-end-3 col-start-2 col-end-4',
+      pos: { top: '20%', left: '35%' },
       color: 'bg-green-600'
     },
     {
       id: 'lab',
       name: '특수연구동 (R&D Center)',
-      description: '이능력 분석 및 아티팩트 연구가 진행되는 곳입니다. 출입 권한이 없는 학생은 접근할 수 없습니다.',
+      description: '이능력 분석 및 아티팩트 연구가 진행되는 곳입니다. 지하 벙커와 연결되어 있으며 출입 권한이 없는 학생은 접근할 수 없습니다.',
       facilities: ['이능력측정실', '장비개발실', '사이버보안센터', '도서관'],
-      gridArea: 'row-start-4 row-end-6 col-start-6 col-end-8',
+      pos: { top: '65%', left: '75%' },
       color: 'bg-purple-600'
     },
     {
@@ -55,19 +55,19 @@ const SectionMap: React.FC<SectionMapProps> = ({ onGoHome }) => {
       name: '대운동장 (Parade Ground)',
       description: '기초 체력 훈련 및 각종 행사가 열리는 야외 운동장입니다. 아침 점호가 이곳에서 실시됩니다.',
       facilities: ['육상트랙', '장애물코스', '조례대'],
-      gridArea: 'row-start-5 row-end-7 col-start-2 col-end-5',
+      pos: { top: '70%', left: '30%' },
       color: 'bg-yellow-600'
     }
   ];
 
   return (
-    <div className="max-w-6xl mx-auto py-10 px-4 animate-in fade-in duration-500">
+    <div className="max-w-7xl mx-auto py-10 px-4 animate-in fade-in duration-500">
       
        {/* Breadcrumb Header */}
        <div className="flex flex-col md:flex-row md:items-center justify-between border-b-2 border-school-text pb-4 mb-8">
           <div>
              <h2 className="text-3xl font-bold text-school-text">강현지도 (Campus Map)</h2>
-             <p className="text-school-sub mt-2 text-sm">강현고등학교의 캠퍼스 배치도 및 시설 안내입니다.</p>
+             <p className="text-school-sub mt-2 text-sm">대학교 규모의 최첨단 훈련 시설을 갖춘 강현 캠퍼스 안내입니다.</p>
           </div>
           <div className="flex text-sm text-gray-500 mt-4 md:mt-0">
              <span 
@@ -83,75 +83,110 @@ const SectionMap: React.FC<SectionMapProps> = ({ onGoHome }) => {
           </div>
        </div>
 
-       <div className="grid lg:grid-cols-3 gap-8">
-          {/* Map Visualization Area */}
-          <div className="lg:col-span-2 bg-gray-100 p-4 rounded-xl shadow-inner border border-gray-300 relative overflow-hidden h-[500px] flex items-center justify-center">
+       <div className="flex flex-col lg:flex-row gap-6">
+          {/* Detailed Map Visualization Area */}
+          <div className="flex-1 bg-slate-100 rounded-xl overflow-hidden border border-gray-300 relative h-[600px] shadow-inner group select-none">
              
-             {/* Map Grid Background */}
-             <div className="absolute inset-0 grid grid-cols-8 grid-rows-8 gap-2 p-8 opacity-90">
-                {/* Roads/Paths (Visual Only) */}
-                <div className="row-start-1 row-end-9 col-start-5 col-end-6 bg-gray-300 rounded-sm opacity-50"></div>
-                <div className="row-start-4 row-end-5 col-start-1 col-end-9 bg-gray-300 rounded-sm opacity-50"></div>
+             {/* Map Background Layer (Satellite/Plan View) */}
+             <div className="absolute inset-0 bg-[#e3e5ea]">
+                {/* Simulated Greenery/Forest (North) */}
+                <div className="absolute top-0 left-0 right-0 h-1/4 bg-emerald-100/50 rounded-b-[50%]"></div>
+                
+                {/* Simulated Roads/Paths */}
+                <svg className="absolute inset-0 w-full h-full opacity-30 pointer-events-none">
+                    {/* Main Road Loop */}
+                    <path d="M 30% 70% Q 50% 90% 75% 70% Q 90% 40% 50% 45% Q 10% 40% 30% 70%" fill="none" stroke="white" strokeWidth="25" strokeLinecap="round" />
+                    {/* Connection to Dorm */}
+                    <path d="M 50% 45% L 35% 20%" fill="none" stroke="white" strokeWidth="15" />
+                    {/* Connection to Arena */}
+                    <path d="M 50% 45% L 75% 35%" fill="none" stroke="white" strokeWidth="15" />
+                </svg>
 
-                {/* Buildings */}
-                {buildings.map((b) => (
-                   <button
-                      key={b.id}
-                      onClick={() => setSelectedBuilding(b)}
-                      className={`${b.gridArea} ${b.color} text-white font-bold rounded-lg shadow-lg transform transition-all hover:scale-105 hover:z-10 flex flex-col items-center justify-center p-2 text-center border-2 border-white/20`}
-                   >
-                      <MapPin className="w-6 h-6 mb-1" />
-                      <span className="text-xs md:text-sm">{b.name.split(' ')[0]}</span>
-                   </button>
-                ))}
-
-                {/* Entrance */}
-                <div className="row-start-8 row-end-9 col-start-5 col-end-6 flex items-center justify-center">
-                   <div className="bg-gray-800 text-white text-[10px] px-2 py-1 rounded">정문</div>
+                {/* Main Gate Area */}
+                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-32 h-12 bg-gray-300 rounded-t-lg border-t-4 border-school-orange flex items-center justify-center">
+                    <span className="text-xs font-bold text-gray-600">정문 (Main Gate)</span>
                 </div>
              </div>
-             
-             {/* Compass */}
-             <div className="absolute top-4 right-4 w-12 h-12 border-2 border-gray-400 rounded-full flex items-center justify-center text-gray-500 font-serif font-bold opacity-50 pointer-events-none">
-                <div className="absolute top-0 text-xs">N</div>
-                <div className="w-0.5 h-full bg-gray-400"></div>
-                <div className="h-0.5 w-full bg-gray-400 absolute"></div>
+
+             {/* Interactive Building Markers */}
+             {buildings.map((b) => (
+                <button
+                   key={b.id}
+                   onClick={() => setSelectedBuilding(b)}
+                   style={{ top: b.pos.top, left: b.pos.left }}
+                   className={`absolute -translate-x-1/2 -translate-y-1/2 flex flex-col items-center group/marker z-10 hover:z-20 transition-transform duration-300 ${selectedBuilding?.id === b.id ? 'scale-110 z-30' : 'hover:scale-105'}`}
+                >
+                   {/* Marker Icon */}
+                   <div className={`p-3 md:p-4 rounded-full ${b.color} text-white shadow-lg border-4 border-white relative`}>
+                      <MapPin className="w-5 h-5 md:w-6 md:h-6" />
+                      {/* Pulse Effect for selected */}
+                      {selectedBuilding?.id === b.id && (
+                        <span className="absolute inset-0 rounded-full bg-white opacity-30 animate-ping"></span>
+                      )}
+                   </div>
+                   
+                   {/* Building Label */}
+                   <span className="mt-2 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold shadow-md text-gray-800 whitespace-nowrap border border-gray-200 group-hover/marker:bg-school-orange group-hover/marker:text-white transition-colors">
+                      {b.name.split(' ')[0]}
+                   </span>
+                </button>
+             ))}
+
+             {/* Compass & Legend */}
+             <div className="absolute top-6 right-6 bg-white/90 p-3 rounded-lg backdrop-blur-sm text-xs text-gray-600 border border-gray-200 shadow-sm pointer-events-none">
+                <div className="w-10 h-10 border-2 border-gray-400 rounded-full flex items-center justify-center mb-2 mx-auto relative">
+                    <span className="font-serif font-bold text-red-500 absolute -top-1 bg-white px-0.5">N</span>
+                    <div className="w-0.5 h-full bg-gray-300 transform rotate-45"></div>
+                    <div className="w-full h-0.5 bg-gray-300 absolute transform rotate-45"></div>
+                </div>
+                <div className="space-y-1">
+                    <div className="flex items-center gap-2"><div className="w-2 h-2 bg-blue-600 rounded-full"></div>교육/행정</div>
+                    <div className="flex items-center gap-2"><div className="w-2 h-2 bg-red-600 rounded-full"></div>전술훈련</div>
+                    <div className="flex items-center gap-2"><div className="w-2 h-2 bg-green-600 rounded-full"></div>거주구역</div>
+                    <div className="flex items-center gap-2"><div className="w-2 h-2 bg-purple-600 rounded-full"></div>연구시설</div>
+                </div>
              </div>
           </div>
 
-          {/* Details Sidebar */}
-          <div className="lg:col-span-1 space-y-4">
-             <div className="bg-white border-2 border-school-orange rounded-xl p-6 shadow-lg h-full">
-                {selectedBuilding ? (
-                   <div className="animate-in fade-in duration-300">
-                      <div className="flex items-center gap-2 mb-4">
-                         <div className={`w-3 h-8 ${selectedBuilding.color} rounded-sm`}></div>
-                         <h3 className="text-xl font-bold text-gray-800">{selectedBuilding.name}</h3>
-                      </div>
-                      <p className="text-gray-600 text-sm leading-relaxed mb-6 border-b border-gray-100 pb-4">
-                         {selectedBuilding.description}
-                      </p>
-                      
-                      <h4 className="font-bold text-gray-700 mb-3 flex items-center text-sm">
-                         <Info className="w-4 h-4 mr-2 text-school-orange" />
-                         주요 시설
-                      </h4>
-                      <ul className="space-y-2">
-                         {selectedBuilding.facilities.map((facility, idx) => (
-                            <li key={idx} className="flex items-center text-sm text-gray-600 bg-gray-50 p-2 rounded">
-                               <span className="w-1.5 h-1.5 bg-gray-400 rounded-full mr-2"></span>
-                               {facility}
-                            </li>
-                         ))}
-                      </ul>
-                   </div>
-                ) : (
-                   <div className="h-full flex flex-col items-center justify-center text-gray-400 text-center">
-                      <MapPin className="w-12 h-12 mb-4 text-gray-300" />
-                      <p>지도의 건물을 클릭하여<br/>상세 정보를 확인하세요.</p>
-                   </div>
-                )}
+          {/* Details Sidebar / Overlay for Mobile */}
+          <div className={`
+              lg:w-80 bg-white border-2 border-school-orange rounded-xl shadow-xl overflow-hidden flex flex-col
+              fixed lg:static bottom-4 left-4 right-4 lg:bottom-auto lg:left-auto lg:right-auto z-40
+              transition-all duration-300
+              ${selectedBuilding ? 'translate-y-0 opacity-100' : 'translate-y-[120%] lg:translate-y-0 lg:opacity-50 lg:pointer-events-none'}
+          `}>
+             <div className="bg-school-orange p-4 flex justify-between items-center text-white">
+                 <h3 className="font-bold text-lg">{selectedBuilding?.name || "건물 정보"}</h3>
+                 <button onClick={() => setSelectedBuilding(null)} className="lg:hidden hover:bg-white/20 rounded p-1">
+                     <X className="w-5 h-5" />
+                 </button>
              </div>
+             
+             {selectedBuilding ? (
+                 <div className="p-6 overflow-y-auto max-h-[40vh] lg:max-h-none">
+                    <p className="text-gray-600 text-sm leading-relaxed mb-6 pb-4 border-b border-gray-100">
+                       {selectedBuilding.description}
+                    </p>
+                    
+                    <h4 className="font-bold text-gray-700 mb-3 flex items-center text-sm">
+                       <Info className="w-4 h-4 mr-2 text-school-orange" />
+                       주요 시설
+                    </h4>
+                    <ul className="space-y-2">
+                       {selectedBuilding.facilities.map((facility, idx) => (
+                          <li key={idx} className="flex items-center text-sm text-gray-600 bg-gray-50 p-2 rounded border border-gray-100">
+                             <span className="w-1.5 h-1.5 bg-gray-400 rounded-full mr-2"></span>
+                             {facility}
+                          </li>
+                       ))}
+                    </ul>
+                 </div>
+             ) : (
+                 <div className="p-6 h-full flex flex-col items-center justify-center text-gray-400 text-center">
+                    <MapPin className="w-12 h-12 mb-4 text-gray-300" />
+                    <p className="text-sm">지도의 건물을 클릭하여<br/>상세 시설 정보를 확인하세요.</p>
+                 </div>
+             )}
           </div>
        </div>
 

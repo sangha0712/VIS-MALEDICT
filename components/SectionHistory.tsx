@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ChevronRight, Home, Shield, Target, Users, MapPin, Bus, Train, Navigation } from 'lucide-react';
+import { ChevronRight, Home, Shield, Target, Users, MapPin, Bus, Train, Navigation, CornerDownRight } from 'lucide-react';
 
 interface SectionHistoryProps {
   onGoHome: () => void;
@@ -188,17 +188,63 @@ const SectionHistory: React.FC<SectionHistoryProps> = ({ onGoHome }) => {
         return (
           <div className="space-y-8 animate-in fade-in slide-in-from-right-4 duration-500">
              <div className="bg-white p-1 rounded-xl border border-gray-200 shadow-soft">
-                {/* Fake Map Visualization */}
-                <div className="w-full h-[400px] bg-gray-200 rounded-lg relative overflow-hidden group">
-                   <img src="https://picsum.photos/seed/mapo/1200/600" className="w-full h-full object-cover opacity-60 grayscale group-hover:grayscale-0 transition-all duration-500" alt="Map" />
-                   <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="bg-school-orange text-white px-4 py-2 rounded-full font-bold shadow-lg flex items-center gap-2 animate-bounce">
+                {/* Detailed Street Map Visualization */}
+                <div className="w-full h-[450px] bg-[#e5e7eb] rounded-lg relative overflow-hidden group">
+                   
+                   {/* Han River Area */}
+                   <div className="absolute bottom-0 left-0 w-full h-1/4 bg-[#a5bfdd] flex items-center justify-center">
+                      <span className="text-white font-bold opacity-50 text-xl tracking-widest">HAN RIVER</span>
+                   </div>
+                   
+                   {/* Land / Grid */}
+                   <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(#9ca3af 1px, transparent 1px)', backgroundSize: '20px 20px' }}></div>
+                   
+                   {/* Major Roads */}
+                   <div className="absolute top-[30%] left-0 w-full h-6 bg-white border-y border-gray-300"></div> {/* Horizontal Road (World Cup Blvd) */}
+                   <div className="absolute top-0 right-[30%] h-full w-8 bg-white border-x border-gray-300"></div> {/* Vertical Road */}
+
+                   {/* Locations */}
+                   
+                   {/* School Location */}
+                   <div className="absolute top-[20%] right-[32%] z-10 flex flex-col items-center">
+                      <div className="bg-school-orange text-white px-4 py-2 rounded-lg font-bold shadow-xl border-2 border-white flex items-center gap-2 animate-bounce">
                          <MapPin className="w-5 h-5" />
                          강현고등학교
                       </div>
+                      <div className="w-1 h-8 bg-gray-800"></div>
+                      <div className="w-4 h-4 bg-gray-800 rounded-full"></div>
                    </div>
-                   <div className="absolute bottom-4 right-4 bg-white/90 p-2 text-xs rounded shadow text-gray-600">
-                      Map Data ©2084 Naver Corp.
+
+                   {/* Subway Station */}
+                   <div className="absolute top-[35%] right-[10%] flex flex-col items-center group/station cursor-pointer">
+                      <div className="w-10 h-10 bg-yellow-500 rounded-full border-2 border-white shadow-md flex items-center justify-center font-bold text-white text-xs z-10">
+                         DMC
+                      </div>
+                      <span className="bg-white/90 text-xs px-2 py-0.5 rounded shadow mt-1 font-bold">디지털미디어시티역</span>
+                   </div>
+
+                   {/* Bus Stop */}
+                   <div className="absolute top-[32%] right-[25%] flex flex-col items-center">
+                      <div className="w-6 h-6 bg-blue-500 rounded-full border border-white shadow-sm flex items-center justify-center text-white">
+                         <Bus className="w-3 h-3" />
+                      </div>
+                   </div>
+
+                   {/* Landmark: World Cup Park */}
+                   <div className="absolute top-[10%] left-[10%] w-40 h-32 bg-green-200/50 rounded-xl border border-green-300 flex items-center justify-center">
+                      <span className="text-green-800 font-bold text-xs">월드컵공원</span>
+                   </div>
+
+                   {/* Landmark: ASH GUARD HQ */}
+                   <div className="absolute top-[50%] right-[35%] w-32 h-24 bg-slate-700 rounded-lg border border-slate-600 flex items-center justify-center shadow-lg">
+                      <div className="text-center">
+                        <Shield className="w-6 h-6 text-gray-400 mx-auto mb-1" />
+                        <span className="text-gray-200 font-bold text-[10px]">ASH GUARD<br/>제3지부</span>
+                      </div>
+                   </div>
+
+                   <div className="absolute bottom-4 right-4 bg-white/90 p-2 text-xs rounded shadow text-gray-600 z-20">
+                      2084 Mapo-gu Digital Map
                    </div>
                 </div>
              </div>
@@ -218,7 +264,7 @@ const SectionHistory: React.FC<SectionHistoryProps> = ({ onGoHome }) => {
                          <Navigation className="w-5 h-5 text-school-orange flex-shrink-0 mt-0.5" />
                          <div>
                             <p className="font-bold text-gray-800">위치 설명</p>
-                            <p>상암 DMC 랜드마크 타워 북서쪽 500m 지점 (ASH GUARD 제3지부 옆)</p>
+                            <p>상암 DMC 랜드마크 타워 북서쪽 500m 지점<br/>(ASH GUARD 제3지부 및 월드컵공원 인접)</p>
                          </div>
                       </li>
                    </ul>
@@ -233,9 +279,9 @@ const SectionHistory: React.FC<SectionHistoryProps> = ({ onGoHome }) => {
                             <p className="font-bold text-gray-800">지하철/하이퍼튜브</p>
                             <p className="text-sm">
                                <span className="bg-orange-100 text-orange-800 px-1 rounded font-bold mr-1">6호선</span>
-                               디지털미디어시티역 9번 출구 (도보 10분)<br/>
-                               <span className="bg-blue-100 text-blue-800 px-1 rounded font-bold mr-1">GTX-E</span>
-                               상암역 2번 출구 (셔틀버스 환승)
+                               <span className="bg-cyan-100 text-cyan-800 px-1 rounded font-bold mr-1">경의중앙</span>
+                               <span className="bg-blue-100 text-blue-800 px-1 rounded font-bold mr-1">공항철도</span>
+                               디지털미디어시티역 9번 출구 (도보 10분)
                             </p>
                          </div>
                       </li>
@@ -244,8 +290,8 @@ const SectionHistory: React.FC<SectionHistoryProps> = ({ onGoHome }) => {
                          <div>
                             <p className="font-bold text-gray-800">자율주행 버스</p>
                             <p className="text-sm">
-                               간선 710, 271, 470 (강현고 입구 하차)<br/>
-                               지선 7011, 7013 (후문 하차)
+                               <CornerDownRight className="w-3 h-3 inline mr-1" />
+                               정류장 ID: 14-205 (강현고교.ASH GUARD 지부) 하차
                             </p>
                          </div>
                       </li>
