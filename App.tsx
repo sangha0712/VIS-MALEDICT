@@ -9,14 +9,23 @@ import SectionAdmission from './components/SectionAdmission';
 import SectionMap from './components/SectionMap';
 import SectionAshGuard from './components/SectionAshGuard';
 import SectionTraining from './components/SectionTraining';
-import { Search, Menu, ChevronRight, Home, User, LogIn, Lock, Phone, Mail, Shield } from 'lucide-react';
+import SectionAcademicInfo from './components/SectionAcademicInfo';
+import SectionStudentCouncil from './components/SectionStudentCouncil';
+import SectionGifted from './components/SectionGifted';
+import SectionLibrary from './components/SectionLibrary';
+import SectionNotice from './components/SectionNotice';
+import SectionStudentLife from './components/SectionStudentLife';
+import FullMenuOverlay from './components/FullMenuOverlay';
+import { Search, Menu, ChevronRight, Home, User, LogIn, Shield, Phone, Lock } from 'lucide-react';
 
-type ViewState = 'HOME' | 'CHARACTER' | 'HISTORY' | 'ADMISSION' | 'MAP' | 'ASHGUARD' | 'TRAINING';
+type ViewState = 'HOME' | 'CHARACTER' | 'HISTORY' | 'ADMISSION' | 'MAP' | 'ASHGUARD' | 'TRAINING' | 'ACADEMIC_INFO' | 'STUDENT_COUNCIL' | 'GIFTED_EDU' | 'LIBRARY' | 'NOTICE' | 'STUDENT_LIFE';
 
 const App: React.FC = () => {
   const [currentView, setCurrentView] = useState<ViewState>('HOME');
+  const [currentTab, setCurrentTab] = useState<string | undefined>(undefined);
   const [selectedCharacter, setSelectedCharacter] = useState<Character | null>(null);
   const [activeFilter, setActiveFilter] = useState<string>('All');
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const filters = ['All', 'ASH GUARD (예비역)', '특수수사과', '외부 초빙 강사', '학교 시설팀'];
 
@@ -24,30 +33,49 @@ const App: React.FC = () => {
     ? CHARACTERS 
     : CHARACTERS.filter(c => c.faction === activeFilter);
 
-  const handleNavigate = (view: ViewState) => {
+  const handleNavigate = (view: ViewState, tab?: string) => {
     setCurrentView(view);
+    setCurrentTab(tab);
     window.scrollTo(0, 0);
   };
 
   const renderContent = () => {
     switch (currentView) {
       case 'HOME':
-        return <HomeMenu onNavigate={handleNavigate} />;
+        return <HomeMenu onNavigate={(view) => handleNavigate(view)} />;
       
       case 'HISTORY':
-        return <SectionHistory onGoHome={() => handleNavigate('HOME')} />;
+        return <SectionHistory onGoHome={() => handleNavigate('HOME')} initialTab={currentTab} />;
 
       case 'ADMISSION':
         return <SectionAdmission onGoHome={() => handleNavigate('HOME')} />;
+
+      case 'ACADEMIC_INFO':
+        return <SectionAcademicInfo onGoHome={() => handleNavigate('HOME')} initialTab={currentTab} />;
 
       case 'MAP':
         return <SectionMap onGoHome={() => handleNavigate('HOME')} />;
 
       case 'ASHGUARD':
-        return <SectionAshGuard onGoHome={() => handleNavigate('HOME')} />;
+        return <SectionAshGuard onGoHome={() => handleNavigate('HOME')} initialTab={currentTab} />;
 
       case 'TRAINING':
-        return <SectionTraining onGoHome={() => handleNavigate('HOME')} />;
+        return <SectionTraining onGoHome={() => handleNavigate('HOME')} initialTab={currentTab} />;
+        
+      case 'STUDENT_COUNCIL':
+        return <SectionStudentCouncil onGoHome={() => handleNavigate('HOME')} />;
+
+      case 'GIFTED_EDU':
+        return <SectionGifted onGoHome={() => handleNavigate('HOME')} />;
+
+      case 'LIBRARY':
+        return <SectionLibrary onGoHome={() => handleNavigate('HOME')} />;
+
+      case 'NOTICE':
+        return <SectionNotice onGoHome={() => handleNavigate('HOME')} initialTab={currentTab} />;
+
+      case 'STUDENT_LIFE':
+        return <SectionStudentLife onGoHome={() => handleNavigate('HOME')} initialTab={currentTab} />;
 
       case 'CHARACTER':
         return (
@@ -124,7 +152,6 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-white text-school-text font-sans flex flex-col">
-      
       {/* Top Utility Bar */}
       <div className="border-b border-gray-200 bg-white">
         <div className="max-w-7xl mx-auto px-4 h-10 flex items-center justify-end text-xs text-gray-500 space-x-4">
@@ -134,7 +161,7 @@ const App: React.FC = () => {
           <span className="w-[1px] h-3 bg-gray-300"></span>
           <span className="cursor-pointer hover:text-school-orange flex items-center gap-1"><User className="w-3 h-3"/> 회원가입</span>
           <span className="w-[1px] h-3 bg-gray-300"></span>
-          <span className="cursor-pointer hover:text-school-orange">사이트맵</span>
+          <span className="cursor-pointer hover:text-school-orange" onClick={() => setIsMenuOpen(true)}>사이트맵</span>
           <div className="ml-4 flex items-center bg-gray-100 rounded-full px-3 py-1">
              <input type="text" placeholder="통합검색" className="bg-transparent border-none text-xs focus:outline-none w-32" />
              <Search className="w-3 h-3 text-school-orange" />
@@ -146,7 +173,6 @@ const App: React.FC = () => {
       <header className="bg-white py-6">
          <div className="max-w-7xl mx-auto px-4 flex items-center justify-between">
             <div className="flex items-center gap-4 cursor-pointer" onClick={() => handleNavigate('HOME')}>
-               {/* School Logo */}
                <div className="w-14 h-14 bg-gradient-to-br from-school-orange to-red-600 text-white rounded-full flex items-center justify-center font-serif font-bold text-2xl shadow-md border-4 border-orange-100 relative overflow-hidden">
                   <Shield className="w-8 h-8 absolute opacity-20" />
                   <span className="relative z-10">G</span>
@@ -157,7 +183,6 @@ const App: React.FC = () => {
                </div>
             </div>
             
-            {/* Right side banner for ASH GUARD */}
             <div className="hidden md:flex items-center gap-3 bg-gray-50 px-4 py-2 rounded-lg border border-gray-200 cursor-pointer hover:bg-gray-100 transition-colors" onClick={() => handleNavigate('ASHGUARD')}>
                <Shield className="w-8 h-8 text-gray-400" />
                <div className="flex flex-col text-right">
@@ -190,7 +215,10 @@ const App: React.FC = () => {
                <li className={`h-full flex items-center cursor-pointer border-b-4 ${currentView === 'ADMISSION' ? 'border-white font-bold' : 'border-transparent hover:border-orange-300'}`} onClick={() => handleNavigate('ADMISSION')}>
                   입학안내
                </li>
-               <li className="hidden md:flex ml-auto items-center cursor-pointer bg-orange-600 px-4 h-full hover:bg-orange-700 transition-colors text-sm">
+               <li 
+                 className="hidden md:flex ml-auto items-center cursor-pointer bg-orange-600 px-4 h-full hover:bg-orange-700 transition-colors text-sm"
+                 onClick={() => setIsMenuOpen(true)}
+               >
                   <Menu className="w-5 h-5 mr-2" />
                   전체메뉴
                </li>
@@ -219,7 +247,7 @@ const App: React.FC = () => {
                      국가 히어로 조직 ASH GUARD와 함께 안전한 사회를 만들어갑니다.
                   </p>
                   <div className="flex gap-4">
-                     <button className="bg-school-orange hover:bg-orange-600 text-white px-6 py-3 rounded font-bold transition-colors shadow-lg" onClick={() => handleNavigate('ADMISSION')}>
+                     <button className="bg-school-orange hover:bg-orange-600 text-white px-6 py-3 rounded font-bold transition-colors shadow-lg" onClick={() => handleNavigate('ADMISSION', 'GUIDE')}>
                         신입생 모집요강
                      </button>
                      <button className="bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white border border-white/50 px-6 py-3 rounded font-bold transition-colors">
@@ -272,6 +300,13 @@ const App: React.FC = () => {
            </div>
         </div>
       </footer>
+
+      {/* Full Menu Overlay */}
+      <FullMenuOverlay 
+        isOpen={isMenuOpen} 
+        onClose={() => setIsMenuOpen(false)} 
+        onNavigate={handleNavigate} 
+      />
 
       {/* Chat Overlay */}
       {selectedCharacter && (

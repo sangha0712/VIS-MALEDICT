@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Megaphone, Calendar, Users, BookOpen, PenTool, ExternalLink, Star, Shield, Target, Crosshair, Briefcase, Dumbbell } from 'lucide-react';
+import { Megaphone, Calendar, Users, BookOpen, PenTool, ExternalLink, Star, Shield, Target, Crosshair, Briefcase, Dumbbell, Library, Monitor, GraduationCap, Gavel, Radio, HeartPulse, FileText } from 'lucide-react';
 
 interface HomeMenuProps {
-  onNavigate: (view: 'CHARACTER' | 'HISTORY' | 'ADMISSION') => void;
+  onNavigate: (view: 'CHARACTER' | 'HISTORY' | 'ADMISSION' | 'ACADEMIC_INFO') => void;
 }
 
 const HomeMenu: React.FC<HomeMenuProps> = ({ onNavigate }) => {
@@ -42,6 +42,16 @@ const HomeMenu: React.FC<HomeMenuProps> = ({ onNavigate }) => {
   };
 
   const activeList = getActiveList();
+
+  const iconLinks = [
+    { label: "아티팩트 도서관", icon: Library, color: "bg-cyan-100 text-cyan-600" },
+    { label: "강현 알리미", icon: Megaphone, color: "bg-blue-100 text-blue-600" },
+    { label: "히어로 랭킹 포털", icon: Monitor, color: "bg-purple-100 text-purple-600" },
+    { label: "작전 지휘 통제실", icon: Gavel, color: "bg-slate-100 text-slate-600" },
+    { label: "G-NET (전술망)", icon: Radio, color: "bg-rose-100 text-rose-600" },
+    { label: "이능력 사용 규정", icon: GraduationCap, color: "bg-green-100 text-green-600" },
+    { label: "장비/치료비 청구", icon: FileText, color: "bg-yellow-100 text-yellow-600" },
+  ];
 
   return (
     <div className="w-full">
@@ -131,7 +141,7 @@ const HomeMenu: React.FC<HomeMenuProps> = ({ onNavigate }) => {
                </div>
                <span className="font-bold text-gray-700 text-sm">학교소개</span>
             </button>
-            <button onClick={() => onNavigate('ADMISSION')} className="flex flex-col items-center justify-center p-6 bg-white border border-gray-200 rounded-lg hover:border-school-orange hover:shadow-md transition-all group h-32">
+            <button onClick={() => onNavigate('ACADEMIC_INFO')} className="flex flex-col items-center justify-center p-6 bg-white border border-gray-200 rounded-lg hover:border-school-orange hover:shadow-md transition-all group h-32">
                <div className="w-12 h-12 bg-green-50 text-green-500 rounded-full flex items-center justify-center mb-2 group-hover:bg-school-orange group-hover:text-white transition-colors">
                   <PenTool className="w-6 h-6" />
                </div>
@@ -155,6 +165,24 @@ const HomeMenu: React.FC<HomeMenuProps> = ({ onNavigate }) => {
                </div>
                <span className="font-bold text-gray-700 text-sm">학사/훈련 일정</span>
             </button>
+         </div>
+      </div>
+
+      {/* Circle Icon Links (Footer Style) */}
+      <div className="bg-white py-10 border-t border-gray-200">
+         <div className="max-w-7xl mx-auto px-4">
+            <div className="grid grid-cols-3 md:grid-cols-7 gap-6 text-center">
+               {iconLinks.map((link, idx) => (
+                  <button key={idx} className="flex flex-col items-center group cursor-pointer" onClick={() => alert("현재 준비 중인 서비스입니다.")}>
+                     <div className={`w-16 h-16 rounded-full flex items-center justify-center mb-3 shadow-sm transition-transform group-hover:-translate-y-1 group-hover:shadow-md ${link.color}`}>
+                        <link.icon className="w-8 h-8" />
+                     </div>
+                     <span className="text-xs font-bold text-gray-600 group-hover:text-school-orange transition-colors">
+                        {link.label}
+                     </span>
+                  </button>
+               ))}
+            </div>
          </div>
       </div>
 

@@ -1,14 +1,27 @@
 import React, { useState } from 'react';
-import { ChevronRight, Home, Shield, Target, Users, MapPin, Bus, Train, Navigation, CornerDownRight } from 'lucide-react';
+import { ChevronRight, Home, Shield, Target, Users, MapPin, Bus, Train, Navigation, CornerDownRight, User, GitGraph, Building } from 'lucide-react';
 
 interface SectionHistoryProps {
   onGoHome: () => void;
+  initialTab?: string;
 }
 
-type TabType = 'HISTORY' | 'PHILOSOPHY' | 'BADGE' | 'LOCATION';
+type TabType = 'HISTORY' | 'PHILOSOPHY' | 'BADGE' | 'LOCATION' | 'PRINCIPAL' | 'ORGANIZATION' | 'FACILITY_STATUS';
 
-const SectionHistory: React.FC<SectionHistoryProps> = ({ onGoHome }) => {
-  const [activeTab, setActiveTab] = useState<TabType>('HISTORY');
+const SectionHistory: React.FC<SectionHistoryProps> = ({ onGoHome, initialTab }) => {
+  const [activeTab, setActiveTab] = useState<TabType>((initialTab as TabType) || 'HISTORY');
+
+  const getTabLabel = (tab: TabType) => {
+    switch (tab) {
+      case 'HISTORY': return '학교연혁';
+      case 'PHILOSOPHY': return '설립이념';
+      case 'BADGE': return '교표/상징';
+      case 'LOCATION': return '오시는길';
+      case 'PRINCIPAL': return '학교장 인사말';
+      case 'ORGANIZATION': return '조직도';
+      case 'FACILITY_STATUS': return '시설현황';
+    }
+  };
 
   const renderContent = () => {
     switch (activeTab) {
@@ -123,21 +136,134 @@ const SectionHistory: React.FC<SectionHistoryProps> = ({ onGoHome }) => {
                    </p>
                 </div>
              </div>
-
-             <div className="bg-gray-800 text-white p-8 rounded-xl flex flex-col md:flex-row items-center justify-between">
-                <div>
-                   <h4 className="text-xl font-bold mb-2">교육 목표 (Education Goals)</h4>
-                   <ul className="space-y-2 text-gray-300">
-                      <li>• 정의감과 도덕성에 기반한 인성 교육</li>
-                      <li>• 상황 대처 능력 향상을 위한 실무 중심 교육</li>
-                      <li>• 글로벌 치안 환경에 대응하는 융합 교육</li>
-                   </ul>
-                </div>
-                <Target className="w-24 h-24 text-gray-700 md:mr-8 mt-6 md:mt-0" />
-             </div>
           </div>
         );
-
+      case 'PRINCIPAL':
+         return (
+            <div className="space-y-8 animate-in fade-in slide-in-from-right-4 duration-500">
+               <div className="flex flex-col md:flex-row gap-8 items-start">
+                  <div className="w-full md:w-64 flex-shrink-0">
+                     <img src="https://picsum.photos/seed/principal/300/400" alt="Principal" className="w-full rounded-lg shadow-lg" />
+                     <div className="mt-4 text-center">
+                        <p className="text-lg font-bold">제7대 교장</p>
+                        <p className="text-2xl font-serif font-bold text-gray-800">이 강 현</p>
+                        <p className="text-sm text-gray-500 mt-1">(전) ASH GUARD 총사령관</p>
+                     </div>
+                  </div>
+                  <div className="flex-1">
+                     <h3 className="text-3xl font-serif font-bold text-gray-800 mb-6">"여러분이 곧 대한민국의 방패입니다."</h3>
+                     <div className="space-y-4 text-gray-600 leading-relaxed">
+                        <p>
+                           사랑하는 강현 가족 여러분, 그리고 미래의 히어로 여러분 안녕하십니까.
+                           강현고등학교장 이강현입니다.
+                        </p>
+                        <p>
+                           우리는 지금 대변혁의 시대에 살고 있습니다. 날로 강력해지는 위협 속에서,
+                           단순히 힘이 센 영웅이 아닌, 올바른 정신과 냉철한 판단력을 갖춘 
+                           '진정한 수호자'가 그 어느 때보다 절실히 요구되고 있습니다.
+                        </p>
+                        <p>
+                           본교는 최첨단 훈련 시설과 최고의 교진을 바탕으로, 여러분의 잠재력을 
+                           극한까지 끌어올릴 것입니다. 하지만 잊지 마십시오. 우리가 힘을 기르는 이유는 
+                           타인 위에 군림하기 위함이 아니라, 가장 낮은 곳에서 가장 약한 이들을 지키기 위함입니다.
+                        </p>
+                        <p>
+                           여러분의 뜨거운 심장이 이 사회의 희망이 될 수 있도록, 
+                           저와 모든 교직원은 최선을 다해 지원하겠습니다.
+                        </p>
+                        <p className="pt-8 text-right font-serif">
+                           2084. 03. 02<br/>
+                           강현고등학교장 <strong>이 강 현</strong>
+                        </p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         );
+      case 'ORGANIZATION':
+         return (
+            <div className="animate-in fade-in slide-in-from-right-4 duration-500">
+               <div className="border border-gray-200 rounded-xl p-8 bg-white text-center">
+                  <div className="inline-block p-4 border-2 border-school-orange rounded-lg font-bold text-xl mb-8 shadow-sm">교장 (이강현)</div>
+                  <div className="h-8 w-px bg-gray-400 mx-auto"></div>
+                  <div className="h-px w-2/3 bg-gray-400 mx-auto mb-8"></div>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                     <div>
+                        <div className="inline-block p-3 border border-gray-300 rounded bg-gray-50 font-bold mb-4">학교운영위원회</div>
+                     </div>
+                     <div className="relative">
+                        <div className="h-8 w-px bg-gray-400 mx-auto absolute -top-8 left-1/2"></div>
+                         <div className="inline-block p-3 border-2 border-blue-500 rounded font-bold mb-4">교감</div>
+                         <div className="h-8 w-px bg-gray-400 mx-auto"></div>
+                         <div className="h-px w-full bg-gray-400 mx-auto mb-8"></div>
+                         <div className="grid grid-cols-4 gap-2 text-sm">
+                            <div className="p-2 border rounded bg-white">교무기획부</div>
+                            <div className="p-2 border rounded bg-white">훈련교육부</div>
+                            <div className="p-2 border rounded bg-white">생활안전부</div>
+                            <div className="p-2 border rounded bg-white">진로진학부</div>
+                            <div className="p-2 border rounded bg-white">행정실</div>
+                            <div className="p-2 border rounded bg-white">시설관리팀</div>
+                            <div className="p-2 border rounded bg-white">정보보안팀</div>
+                            <div className="p-2 border rounded bg-white">국제협력팀</div>
+                         </div>
+                     </div>
+                     <div>
+                        <div className="inline-block p-3 border border-gray-300 rounded bg-gray-50 font-bold mb-4">학부모회</div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         );
+      case 'FACILITY_STATUS':
+         return (
+            <div className="animate-in fade-in slide-in-from-right-4 duration-500">
+               <div className="bg-gray-50 p-6 rounded-lg mb-8 border border-gray-200">
+                  <p className="text-center text-gray-600">
+                     강현고등학교는 150,000㎡ 부지에 최첨단 훈련 및 교육 시설을 갖추고 있습니다.<br/>
+                     상세 위치는 <strong className="text-school-orange cursor-pointer hover:underline" onClick={() => { /* Navigate map */ }}>강현지도</strong> 메뉴에서 확인하실 수 있습니다.
+                  </p>
+               </div>
+               <div className="grid md:grid-cols-2 gap-6">
+                  <div className="border border-gray-200 rounded p-4">
+                     <h4 className="font-bold text-gray-800 mb-3 flex items-center gap-2"><Building className="w-5 h-5"/> 일반 교사동</h4>
+                     <ul className="text-sm space-y-2 text-gray-600">
+                        <li>- 일반 강의실: 45실</li>
+                        <li>- 특별 교실(과학/어학): 12실</li>
+                        <li>- 대강당 (수용인원 1,000명)</li>
+                        <li>- 중앙 도서관</li>
+                     </ul>
+                  </div>
+                  <div className="border border-gray-200 rounded p-4">
+                     <h4 className="font-bold text-gray-800 mb-3 flex items-center gap-2"><Target className="w-5 h-5 text-red-500"/> 전술 훈련동</h4>
+                     <ul className="text-sm space-y-2 text-gray-600">
+                        <li>- 제1전술훈련관 (아레나)</li>
+                        <li>- 수중 전술 훈련장 (수심 20m)</li>
+                        <li>- 사격장 (실탄/에너지탄)</li>
+                        <li>- 시뮬레이션 센터 (VR)</li>
+                     </ul>
+                  </div>
+                  <div className="border border-gray-200 rounded p-4">
+                     <h4 className="font-bold text-gray-800 mb-3 flex items-center gap-2"><Home className="w-5 h-5 text-green-500"/> 생활관</h4>
+                     <ul className="text-sm space-y-2 text-gray-600">
+                        <li>- 수용 정원: 600명 (전교생 수용 가능)</li>
+                        <li>- 2인 1실 (개인 욕실 완비)</li>
+                        <li>- 학생 식당 / 매점</li>
+                        <li>- 체력 단련실</li>
+                     </ul>
+                  </div>
+                  <div className="border border-gray-200 rounded p-4">
+                     <h4 className="font-bold text-gray-800 mb-3 flex items-center gap-2"><Shield className="w-5 h-5 text-blue-500"/> 지원 시설</h4>
+                     <ul className="text-sm space-y-2 text-gray-600">
+                        <li>- 메디컬 센터 (Regen-Pod 보유)</li>
+                        <li>- 장비 정비소 (Workshop)</li>
+                        <li>- 이능력 측정실</li>
+                        <li>- 대나무숲 산책로</li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+         );
       case 'BADGE':
         return (
           <div className="space-y-12 animate-in fade-in slide-in-from-right-4 duration-500">
@@ -306,15 +432,6 @@ const SectionHistory: React.FC<SectionHistoryProps> = ({ onGoHome }) => {
     }
   };
 
-  const getTabLabel = (tab: TabType) => {
-    switch (tab) {
-      case 'HISTORY': return '학교연혁';
-      case 'PHILOSOPHY': return '설립이념';
-      case 'BADGE': return '교표';
-      case 'LOCATION': return '오시는길';
-    }
-  };
-
   return (
     <div className="max-w-6xl mx-auto py-10 px-4 animate-in fade-in duration-500">
       
@@ -342,30 +459,23 @@ const SectionHistory: React.FC<SectionHistoryProps> = ({ onGoHome }) => {
           {/* Side Menu */}
           <div className="hidden md:block col-span-1">
              <ul className="border-t-2 border-school-orange">
-                <li 
-                   onClick={() => setActiveTab('HISTORY')}
-                   className={`p-4 border-b border-gray-200 cursor-pointer transition-colors ${activeTab === 'HISTORY' ? 'bg-school-orange text-white font-bold' : 'hover:bg-gray-50 text-gray-600'}`}
-                >
-                   학교연혁
-                </li>
-                <li 
-                   onClick={() => setActiveTab('PHILOSOPHY')}
-                   className={`p-4 border-b border-gray-200 cursor-pointer transition-colors ${activeTab === 'PHILOSOPHY' ? 'bg-school-orange text-white font-bold' : 'hover:bg-gray-50 text-gray-600'}`}
-                >
-                   설립이념
-                </li>
-                <li 
-                   onClick={() => setActiveTab('BADGE')}
-                   className={`p-4 border-b border-gray-200 cursor-pointer transition-colors ${activeTab === 'BADGE' ? 'bg-school-orange text-white font-bold' : 'hover:bg-gray-50 text-gray-600'}`}
-                >
-                   교표
-                </li>
-                <li 
-                   onClick={() => setActiveTab('LOCATION')}
-                   className={`p-4 border-b border-gray-200 cursor-pointer transition-colors ${activeTab === 'LOCATION' ? 'bg-school-orange text-white font-bold' : 'hover:bg-gray-50 text-gray-600'}`}
-                >
-                   오시는길
-                </li>
+                {[
+                   { id: 'HISTORY', label: '학교연혁' },
+                   { id: 'PHILOSOPHY', label: '설립이념' },
+                   { id: 'BADGE', label: '교표/상징' },
+                   { id: 'LOCATION', label: '오시는길' },
+                   { id: 'PRINCIPAL', label: '학교장 인사말' },
+                   { id: 'ORGANIZATION', label: '조직도' },
+                   { id: 'FACILITY_STATUS', label: '시설현황' }
+                ].map((item) => (
+                   <li 
+                      key={item.id}
+                      onClick={() => setActiveTab(item.id as TabType)}
+                      className={`p-4 border-b border-gray-200 cursor-pointer transition-colors ${activeTab === item.id ? 'bg-school-orange text-white font-bold' : 'hover:bg-gray-50 text-gray-600'}`}
+                   >
+                      {item.label}
+                   </li>
+                ))}
              </ul>
              
              {/* Back Button for Side Menu */}
