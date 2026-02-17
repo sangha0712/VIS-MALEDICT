@@ -6,9 +6,10 @@ import ChatWindow from './components/ChatWindow';
 import HomeMenu from './components/HomeMenu';
 import SectionHistory from './components/SectionHistory';
 import SectionAdmission from './components/SectionAdmission';
+import SectionMap from './components/SectionMap';
 import { Search, Menu, ChevronRight, Home, User, LogIn, Lock, Phone, Mail, Shield } from 'lucide-react';
 
-type ViewState = 'HOME' | 'CHARACTER' | 'HISTORY' | 'ADMISSION';
+type ViewState = 'HOME' | 'CHARACTER' | 'HISTORY' | 'ADMISSION' | 'MAP';
 
 const App: React.FC = () => {
   const [currentView, setCurrentView] = useState<ViewState>('HOME');
@@ -36,6 +37,9 @@ const App: React.FC = () => {
 
       case 'ADMISSION':
         return <SectionAdmission onGoHome={() => handleNavigate('HOME')} />;
+
+      case 'MAP':
+        return <SectionMap onGoHome={() => handleNavigate('HOME')} />;
 
       case 'CHARACTER':
         return (
@@ -163,8 +167,8 @@ const App: React.FC = () => {
                <li className={`h-full flex items-center cursor-pointer border-b-4 ${currentView === 'HISTORY' ? 'border-white font-bold' : 'border-transparent hover:border-orange-300'}`} onClick={() => handleNavigate('HISTORY')}>
                   학교소개
                </li>
-               <li className="h-full flex items-center cursor-pointer border-b-4 border-transparent hover:border-orange-300">
-                  강현광장
+               <li className={`h-full flex items-center cursor-pointer border-b-4 ${currentView === 'MAP' ? 'border-white font-bold' : 'border-transparent hover:border-orange-300'}`} onClick={() => handleNavigate('MAP')}>
+                  강현지도
                </li>
                <li className="h-full flex items-center cursor-pointer border-b-4 border-transparent hover:border-orange-300">
                   훈련/교육
