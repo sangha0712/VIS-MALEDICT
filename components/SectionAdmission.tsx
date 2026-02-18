@@ -71,36 +71,32 @@ const SectionAdmission: React.FC<SectionAdmissionProps> = ({ onGoHome }) => {
        </div>
 
        <div className="grid md:grid-cols-4 gap-8">
-          {/* Side Menu */}
-          <div className="hidden md:block col-span-1">
-             <ul className="border-t-2 border-school-orange">
-                <li 
-                   className={`p-4 border-b border-gray-200 cursor-pointer ${activeTab === 'GUIDE' ? 'bg-school-orange text-white font-bold' : 'hover:bg-gray-50 text-gray-600'}`}
-                   onClick={() => setActiveTab('GUIDE')}
-                >
-                   모집요강
-                </li>
-                <li 
-                   className={`p-4 border-b border-gray-200 cursor-pointer ${activeTab === 'FORM' ? 'bg-school-orange text-white font-bold' : 'hover:bg-gray-50 text-gray-600'}`}
-                   onClick={() => setActiveTab('FORM')}
-                >
-                   원서접수
-                </li>
-                <li className="p-4 border-b border-gray-200 hover:bg-gray-50 cursor-pointer text-gray-600">실기시험 안내</li>
-                <li className="p-4 border-b border-gray-200 hover:bg-gray-50 cursor-pointer text-gray-600">합격자조회</li>
+          {/* Menu Column: Horizontal Scroll on Mobile, Vertical Sidebar on Desktop */}
+          <div className="col-span-4 md:col-span-1">
+             <ul className="flex md:flex-col overflow-x-auto md:overflow-visible gap-2 md:gap-0 border-b md:border-b-0 border-gray-200 md:border-t-2 md:border-school-orange pb-4 md:pb-0 no-scrollbar">
+                {[
+                    { id: 'GUIDE', label: '모집요강' },
+                    { id: 'FORM', label: '원서접수' },
+                    { id: 'PRACTICAL', label: '실기시험 안내' },
+                    { id: 'RESULT', label: '합격자조회' }
+                ].map((item) => (
+                    <li 
+                        key={item.id}
+                        onClick={() => setActiveTab(item.id as any)}
+                        className={`flex-shrink-0 px-4 py-2 md:p-4 md:border-b border-gray-200 cursor-pointer transition-colors rounded-full md:rounded-none text-sm md:text-base ${activeTab === item.id ? 'bg-school-orange text-white md:bg-school-orange md:text-white font-bold' : 'bg-gray-100 md:bg-white text-gray-600 hover:bg-gray-200 md:hover:bg-gray-50'}`}
+                    >
+                        {item.label}
+                    </li>
+                ))}
              </ul>
              
-             {/* Back Button for Side Menu */}
-             <button 
-                onClick={onGoHome}
-                className="w-full mt-4 py-3 border border-gray-300 text-gray-600 rounded bg-gray-50 hover:bg-gray-100 transition-colors font-bold text-sm"
-             >
+             <button onClick={onGoHome} className="hidden md:block w-full mt-4 py-3 border border-gray-300 text-gray-600 rounded bg-gray-50 hover:bg-gray-100 transition-colors font-bold text-sm">
                 메인 화면으로 이동
              </button>
           </div>
 
           {/* Main Content Area */}
-          <div className="col-span-3">
+          <div className="col-span-4 md:col-span-3">
              
              {/* GUIDE TAB CONTENT */}
              {activeTab === 'GUIDE' && (
@@ -122,7 +118,7 @@ const SectionAdmission: React.FC<SectionAdmissionProps> = ({ onGoHome }) => {
                    <section>
                       <h4 className="text-lg font-bold border-l-4 border-school-orange pl-3 mb-4 text-gray-800">전형 일정</h4>
                       <div className="overflow-x-auto">
-                         <table className="w-full text-sm text-center border-t border-gray-800">
+                         <table className="w-full text-sm text-center border-t border-gray-800 min-w-[500px]">
                             <thead className="bg-gray-100 text-gray-700 font-bold">
                                <tr>
                                   <th className="py-3 border-b border-gray-300">구분</th>
@@ -156,7 +152,7 @@ const SectionAdmission: React.FC<SectionAdmissionProps> = ({ onGoHome }) => {
                       <h4 className="text-lg font-bold border-l-4 border-school-orange pl-3 mb-4 text-gray-800">작년(2083) 합격 커트라인</h4>
                       <p className="text-xs text-gray-500 mb-2">* 합격선은 매년 변동될 수 있으며, 참고용으로만 활용하시기 바랍니다.</p>
                       <div className="overflow-x-auto">
-                         <table className="w-full text-sm text-center border-t border-gray-800">
+                         <table className="w-full text-sm text-center border-t border-gray-800 min-w-[600px]">
                             <thead className="bg-gray-100 text-gray-700 font-bold">
                                <tr>
                                   <th className="py-3 border-b border-gray-300">모집단위</th>

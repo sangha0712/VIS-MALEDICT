@@ -85,22 +85,54 @@ const SectionMap: React.FC<SectionMapProps> = ({ onGoHome }) => {
 
        <div className="flex flex-col lg:flex-row gap-6">
           {/* Detailed Map Visualization Area */}
-          <div className="flex-1 bg-slate-100 rounded-xl overflow-hidden border border-gray-300 relative h-[600px] shadow-inner group select-none">
+          <div className="flex-1 bg-[#F5F5F5] rounded-xl overflow-hidden border border-gray-300 relative h-[600px] shadow-inner group select-none">
              
-             {/* Map Background Layer (Satellite/Plan View) */}
-             <div className="absolute inset-0">
-                <img 
-                  src="https://picsum.photos/seed/ganghyeon_campus_satellite_v2/1200/800" 
-                  alt="Campus Satellite Map" 
-                  className="w-full h-full object-cover filter brightness-[0.85] contrast-[1.1]"
-                />
+             {/* Map Background Layer (Flat Street Map Style) */}
+             <div className="absolute inset-0 bg-[#F2F4F7]">
+                {/* Grid Pattern */}
+                <div className="absolute inset-0 opacity-30" style={{ backgroundImage: 'linear-gradient(#E5E7EB 1px, transparent 1px), linear-gradient(90deg, #E5E7EB 1px, transparent 1px)', backgroundSize: '40px 40px' }}></div>
                 
-                {/* Overlay Gradient for readability */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/10"></div>
+                {/* Roads */}
+                {/* Main Horizontal Road */}
+                <div className="absolute top-[55%] left-0 w-full h-12 bg-white border-y-2 border-gray-300 shadow-sm"></div>
+                {/* Main Vertical Road */}
+                <div className="absolute top-0 left-[45%] h-full w-12 bg-white border-x-2 border-gray-300 shadow-sm"></div>
+                {/* Intersection Cleanup */}
+                <div className="absolute top-[55%] left-[45%] w-12 h-12 bg-white z-0"></div>
+
+                {/* Secondary Roads */}
+                <div className="absolute top-[25%] left-0 w-[45%] h-6 bg-white border-y border-gray-300"></div>
+                <div className="absolute top-[55%] right-0 w-[30%] h-32 bg-gray-100 border border-gray-300 transform -skew-x-12 origin-top-left"></div>
+
+                {/* Campus Zones (Blocks) */}
+                {/* Main Building Block */}
+                <div className="absolute top-[40%] left-[45%] w-40 h-24 bg-[#E8EAED] border border-[#DADCE0] rounded transform -translate-x-1/2 -translate-y-1/2 shadow-sm"></div>
+                
+                {/* Arena Block (Dome shape hint) */}
+                <div className="absolute top-[30%] left-[70%] w-40 h-40 bg-[#E8EAED] border border-[#DADCE0] rounded-full shadow-sm"></div>
+
+                {/* Dorm Block */}
+                <div className="absolute top-[15%] left-[30%] w-24 h-32 bg-[#E8EAED] border border-[#DADCE0] rounded shadow-sm"></div>
+                
+                {/* Lab Block */}
+                <div className="absolute top-[60%] left-[70%] w-32 h-32 bg-[#E8EAED] border border-[#DADCE0] rounded-lg transform rotate-6 shadow-sm"></div>
+
+                {/* Field (Green Zone) */}
+                <div className="absolute top-[65%] left-[20%] w-48 h-32 bg-[#E6F4EA] border border-[#CEEAD6] rounded-xl shadow-inner">
+                   <div className="absolute top-1/2 left-1/2 w-[90%] h-[90%] border-2 border-dashed border-white/60 transform -translate-x-1/2 -translate-y-1/2 rounded-lg"></div>
+                </div>
+
+                {/* Park/Forest Area */}
+                <div className="absolute top-0 right-0 w-48 h-48 bg-[#E6F4EA] border-b border-l border-[#CEEAD6] rounded-bl-[80px]"></div>
+                <div className="absolute bottom-0 left-0 w-32 h-32 bg-[#E6F4EA] border-t border-r border-[#CEEAD6] rounded-tr-[60px]"></div>
+
+                {/* Water (Han River hint) */}
+                <div className="absolute bottom-4 right-[-5%] w-64 h-24 bg-[#AECBFA] transform -rotate-12 rounded-full opacity-50"></div>
 
                 {/* Main Gate Area Label */}
-                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-white/90 px-4 py-1 rounded-full border border-gray-300 shadow-md">
-                    <span className="text-xs font-bold text-gray-800">▼ 정문 (Main Gate)</span>
+                <div className="absolute bottom-4 left-[45%] -translate-x-1/2 bg-white/90 px-4 py-1 rounded-full border border-gray-300 shadow-md z-10 flex items-center gap-1">
+                    <span className="w-2 h-2 rounded-full bg-gray-400"></span>
+                    <span className="text-xs font-bold text-gray-800">정문 (Main Gate)</span>
                 </div>
              </div>
 
@@ -113,7 +145,7 @@ const SectionMap: React.FC<SectionMapProps> = ({ onGoHome }) => {
                    className={`absolute -translate-x-1/2 -translate-y-1/2 flex flex-col items-center group/marker z-10 transition-transform duration-300 ${selectedBuilding?.id === b.id ? 'scale-110 z-30' : 'hover:scale-110'}`}
                 >
                    {/* Marker Icon */}
-                   <div className={`p-3 md:p-4 rounded-full ${b.color} text-white shadow-2xl border-4 border-white relative ring-4 ring-black/10`}>
+                   <div className={`p-3 md:p-4 rounded-full ${b.color} text-white shadow-2xl border-4 border-white relative ring-4 ring-black/5`}>
                       <MapPin className="w-5 h-5 md:w-6 md:h-6" />
                       {/* Pulse Effect for selected */}
                       {selectedBuilding?.id === b.id && (
@@ -122,14 +154,14 @@ const SectionMap: React.FC<SectionMapProps> = ({ onGoHome }) => {
                    </div>
                    
                    {/* Building Label */}
-                   <span className="mt-3 bg-gray-900/90 backdrop-blur px-4 py-1.5 rounded-lg text-xs font-bold shadow-xl text-white whitespace-nowrap border border-white/20 group-hover/marker:bg-school-orange group-hover/marker:text-white transition-colors">
+                   <span className="mt-3 bg-white/95 backdrop-blur px-3 py-1.5 rounded-lg text-xs font-bold shadow-lg text-gray-800 whitespace-nowrap border border-gray-200 group-hover/marker:bg-school-orange group-hover/marker:text-white transition-colors">
                       {b.name.split(' ')[0]}
                    </span>
                 </button>
              ))}
 
              {/* Compass & Legend */}
-             <div className="absolute top-6 right-6 bg-white/95 p-4 rounded-xl backdrop-blur-md text-xs text-gray-600 border border-gray-200 shadow-lg pointer-events-none">
+             <div className="absolute top-6 right-6 bg-white/95 p-4 rounded-xl backdrop-blur-md text-xs text-gray-600 border border-gray-200 shadow-lg pointer-events-none z-20">
                 <div className="w-12 h-12 border-2 border-gray-400 rounded-full flex items-center justify-center mb-3 mx-auto relative bg-gray-50">
                     <span className="font-serif font-bold text-red-600 absolute -top-2 bg-white px-1">N</span>
                     <div className="w-0.5 h-3/4 bg-red-500/50 absolute top-1.5 transform"></div>

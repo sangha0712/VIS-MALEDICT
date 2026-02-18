@@ -41,7 +41,7 @@ const SectionLibrary: React.FC<SectionLibraryProps> = ({ onGoHome }) => {
           </div>
           <div className="flex gap-2 mt-4 text-xs text-gray-500">
              <span>인기 검색어:</span>
-             <span className="bg-white px-2 py-1 rounded border cursor-pointer hover:text-school-orange">기초 마나학</span>
+             <span className="bg-white px-2 py-1 rounded border cursor-pointer hover:text-school-orange">기초 에테르학</span>
              <span className="bg-white px-2 py-1 rounded border cursor-pointer hover:text-school-orange">던전 생태계</span>
              <span className="bg-white px-2 py-1 rounded border cursor-pointer hover:text-school-orange text-red-500">금지된 주술(열람불가)</span>
           </div>

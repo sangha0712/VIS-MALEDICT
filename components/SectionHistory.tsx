@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ChevronRight, Home, Shield, Target, Users, MapPin, Bus, Train, Navigation, CornerDownRight, User, GitGraph, Building } from 'lucide-react';
+import { ChevronRight, Home, Shield, Users, MapPin, Bus, Train, Navigation, CornerDownRight, Building, Target } from 'lucide-react';
 
 interface SectionHistoryProps {
   onGoHome: () => void;
@@ -104,32 +104,32 @@ const SectionHistory: React.FC<SectionHistoryProps> = ({ onGoHome, initialTab })
         return (
           <div className="space-y-12 animate-in fade-in slide-in-from-right-4 duration-500">
              <div className="text-center py-10 bg-gray-50 rounded-xl border border-gray-100">
-                <h3 className="text-3xl font-serif font-bold text-gray-800 mb-6">"정의로운 힘, 지혜로운 헌신"</h3>
-                <p className="text-lg text-gray-600 leading-relaxed max-w-2xl mx-auto">
+                <h3 className="text-2xl md:text-3xl font-serif font-bold text-gray-800 mb-6">"정의로운 힘, 지혜로운 헌신"</h3>
+                <p className="text-sm md:text-lg text-gray-600 leading-relaxed max-w-2xl mx-auto px-4">
                    강현고등학교는 초인적인 힘을 가진 이들이<br/>
                    그 힘을 올바르게 통제하고 사회를 위해 사용할 수 있도록 교육합니다.
                 </p>
              </div>
 
              <div className="grid md:grid-cols-2 gap-8">
-                <div className="bg-white p-8 rounded-xl shadow-soft border border-gray-100 hover:border-school-orange transition-colors group">
+                <div className="bg-white p-6 md:p-8 rounded-xl shadow-soft border border-gray-100 hover:border-school-orange transition-colors group">
                    <div className="w-16 h-16 bg-orange-50 rounded-full flex items-center justify-center mb-6 group-hover:bg-school-orange transition-colors">
                       <Shield className="w-8 h-8 text-school-orange group-hover:text-white" />
                    </div>
                    <h4 className="text-xl font-bold mb-3">히어로 양성</h4>
-                   <p className="text-gray-600 leading-relaxed">
+                   <p className="text-gray-600 leading-relaxed text-sm">
                       단순한 전투 능력 배양을 넘어, 시민의 안전을 최우선으로 생각하는 
                       투철한 직업윤리와 희생정신을 갖춘 차세대 히어로를 양성합니다.
                       ASH GUARD와의 협력을 통해 실전과 동일한 환경에서 훈련합니다.
                    </p>
                 </div>
 
-                <div className="bg-white p-8 rounded-xl shadow-soft border border-gray-100 hover:border-school-orange transition-colors group">
+                <div className="bg-white p-6 md:p-8 rounded-xl shadow-soft border border-gray-100 hover:border-school-orange transition-colors group">
                    <div className="w-16 h-16 bg-blue-50 rounded-full flex items-center justify-center mb-6 group-hover:bg-blue-600 transition-colors">
                       <Users className="w-8 h-8 text-blue-600 group-hover:text-white" />
                    </div>
                    <h4 className="text-xl font-bold mb-3">보다 나은 인재 양성</h4>
-                   <p className="text-gray-600 leading-relaxed">
+                   <p className="text-gray-600 leading-relaxed text-sm">
                       이능력 유무를 떠나 사회 구성원으로서의 책임을 다하고,
                       법과 질서를 존중하며 공동체의 발전에 기여하는 
                       지덕체를 겸비한 우수 인재를 배출합니다.
@@ -151,8 +151,8 @@ const SectionHistory: React.FC<SectionHistoryProps> = ({ onGoHome, initialTab })
                      </div>
                   </div>
                   <div className="flex-1">
-                     <h3 className="text-3xl font-serif font-bold text-gray-800 mb-6">"여러분이 곧 대한민국의 방패입니다."</h3>
-                     <div className="space-y-4 text-gray-600 leading-relaxed">
+                     <h3 className="text-2xl md:text-3xl font-serif font-bold text-gray-800 mb-6">"여러분이 곧 대한민국의 방패입니다."</h3>
+                     <div className="space-y-4 text-gray-600 leading-relaxed text-sm md:text-base">
                         <p>
                            사랑하는 강현 가족 여러분, 그리고 미래의 히어로 여러분 안녕하십니까.
                            강현고등학교장 이강현입니다.
@@ -182,8 +182,8 @@ const SectionHistory: React.FC<SectionHistoryProps> = ({ onGoHome, initialTab })
          );
       case 'ORGANIZATION':
          return (
-            <div className="animate-in fade-in slide-in-from-right-4 duration-500">
-               <div className="border border-gray-200 rounded-xl p-8 bg-white text-center">
+            <div className="animate-in fade-in slide-in-from-right-4 duration-500 overflow-x-auto">
+               <div className="border border-gray-200 rounded-xl p-8 bg-white text-center min-w-[600px]">
                   <div className="inline-block p-4 border-2 border-school-orange rounded-lg font-bold text-xl mb-8 shadow-sm">교장 (이강현)</div>
                   <div className="h-8 w-px bg-gray-400 mx-auto"></div>
                   <div className="h-px w-2/3 bg-gray-400 mx-auto mb-8"></div>
@@ -219,7 +219,7 @@ const SectionHistory: React.FC<SectionHistoryProps> = ({ onGoHome, initialTab })
          return (
             <div className="animate-in fade-in slide-in-from-right-4 duration-500">
                <div className="bg-gray-50 p-6 rounded-lg mb-8 border border-gray-200">
-                  <p className="text-center text-gray-600">
+                  <p className="text-center text-gray-600 text-sm md:text-base">
                      강현고등학교는 150,000㎡ 부지에 최첨단 훈련 및 교육 시설을 갖추고 있습니다.<br/>
                      상세 위치는 <strong className="text-school-orange cursor-pointer hover:underline" onClick={() => { /* Navigate map */ }}>강현지도</strong> 메뉴에서 확인하실 수 있습니다.
                   </p>
@@ -269,8 +269,8 @@ const SectionHistory: React.FC<SectionHistoryProps> = ({ onGoHome, initialTab })
           <div className="space-y-12 animate-in fade-in slide-in-from-right-4 duration-500">
              <div className="flex flex-col items-center justify-center py-16 bg-gray-50 rounded-xl border border-gray-100">
                 {/* Large Logo Representation */}
-                <div className="w-48 h-48 bg-gradient-to-br from-school-orange to-red-600 text-white rounded-full flex items-center justify-center font-serif font-bold text-8xl shadow-2xl border-8 border-orange-100 relative overflow-hidden mb-10">
-                  <Shield className="w-32 h-32 absolute opacity-20" />
+                <div className="w-32 h-32 md:w-48 md:h-48 bg-gradient-to-br from-school-orange to-red-600 text-white rounded-full flex items-center justify-center font-serif font-bold text-6xl md:text-8xl shadow-2xl border-8 border-orange-100 relative overflow-hidden mb-10">
+                  <Shield className="w-20 h-20 md:w-32 md:h-32 absolute opacity-20" />
                   <span className="relative z-10">G</span>
                 </div>
                 
@@ -315,7 +315,7 @@ const SectionHistory: React.FC<SectionHistoryProps> = ({ onGoHome, initialTab })
           <div className="space-y-8 animate-in fade-in slide-in-from-right-4 duration-500">
              <div className="bg-white p-1 rounded-xl border border-gray-200 shadow-soft">
                 {/* Detailed Street Map Visualization */}
-                <div className="w-full h-[450px] bg-[#e5e7eb] rounded-lg relative overflow-hidden group">
+                <div className="w-full h-[300px] md:h-[450px] bg-[#e5e7eb] rounded-lg relative overflow-hidden group">
                    
                    {/* Han River Area */}
                    <div className="absolute bottom-0 left-0 w-full h-1/4 bg-[#a5bfdd] flex items-center justify-center">
@@ -335,7 +335,8 @@ const SectionHistory: React.FC<SectionHistoryProps> = ({ onGoHome, initialTab })
                    <div className="absolute top-[20%] right-[32%] z-10 flex flex-col items-center">
                       <div className="bg-school-orange text-white px-4 py-2 rounded-lg font-bold shadow-xl border-2 border-white flex items-center gap-2 animate-bounce">
                          <MapPin className="w-5 h-5" />
-                         강현고등학교
+                         <span className="hidden md:inline">강현고등학교</span>
+                         <span className="md:hidden">강현고</span>
                       </div>
                       <div className="w-1 h-8 bg-gray-800"></div>
                       <div className="w-4 h-4 bg-gray-800 rounded-full"></div>
@@ -357,15 +358,15 @@ const SectionHistory: React.FC<SectionHistoryProps> = ({ onGoHome, initialTab })
                    </div>
 
                    {/* Landmark: World Cup Park */}
-                   <div className="absolute top-[10%] left-[10%] w-40 h-32 bg-green-200/50 rounded-xl border border-green-300 flex items-center justify-center">
+                   <div className="absolute top-[10%] left-[10%] w-32 md:w-40 h-24 md:h-32 bg-green-200/50 rounded-xl border border-green-300 flex items-center justify-center">
                       <span className="text-green-800 font-bold text-xs">월드컵공원</span>
                    </div>
 
                    {/* Landmark: ASH GUARD HQ */}
-                   <div className="absolute top-[50%] right-[35%] w-32 h-24 bg-slate-700 rounded-lg border border-slate-600 flex items-center justify-center shadow-lg">
+                   <div className="absolute top-[50%] right-[35%] w-24 md:w-32 h-16 md:h-24 bg-slate-700 rounded-lg border border-slate-600 flex items-center justify-center shadow-lg">
                       <div className="text-center">
-                        <Shield className="w-6 h-6 text-gray-400 mx-auto mb-1" />
-                        <span className="text-gray-200 font-bold text-[10px]">ASH GUARD<br/>제3지부</span>
+                        <Shield className="w-4 h-4 md:w-6 md:h-6 text-gray-400 mx-auto mb-1" />
+                        <span className="text-gray-200 font-bold text-[8px] md:text-[10px]">ASH GUARD<br/>제3지부</span>
                       </div>
                    </div>
 
@@ -378,7 +379,7 @@ const SectionHistory: React.FC<SectionHistoryProps> = ({ onGoHome, initialTab })
              <div className="grid md:grid-cols-2 gap-8">
                 <div>
                    <h3 className="text-xl font-bold text-gray-800 mb-4 border-l-4 border-school-orange pl-3">주소 및 연락처</h3>
-                   <ul className="space-y-4 text-gray-600">
+                   <ul className="space-y-4 text-gray-600 text-sm md:text-base">
                       <li className="flex items-start gap-3">
                          <MapPin className="w-5 h-5 text-school-orange flex-shrink-0 mt-0.5" />
                          <div>
@@ -398,7 +399,7 @@ const SectionHistory: React.FC<SectionHistoryProps> = ({ onGoHome, initialTab })
 
                 <div>
                    <h3 className="text-xl font-bold text-gray-800 mb-4 border-l-4 border-school-orange pl-3">교통편 안내 (2084 기준)</h3>
-                   <ul className="space-y-4 text-gray-600">
+                   <ul className="space-y-4 text-gray-600 text-sm md:text-base">
                       <li className="flex items-start gap-3">
                          <Train className="w-5 h-5 text-gray-500 flex-shrink-0 mt-0.5" />
                          <div>
@@ -438,7 +439,7 @@ const SectionHistory: React.FC<SectionHistoryProps> = ({ onGoHome, initialTab })
        {/* Breadcrumb Header */}
        <div className="flex flex-col md:flex-row md:items-center justify-between border-b-2 border-school-text pb-4 mb-8">
           <div>
-             <h2 className="text-3xl font-bold text-school-text">{getTabLabel(activeTab)}</h2>
+             <h2 className="text-2xl md:text-3xl font-bold text-school-text">{getTabLabel(activeTab)}</h2>
              <p className="text-school-sub mt-2 text-sm">정의를 수호하는 강현의 발자취와 정신입니다.</p>
           </div>
           <div className="flex text-sm text-gray-500 mt-4 md:mt-0">
@@ -456,9 +457,9 @@ const SectionHistory: React.FC<SectionHistoryProps> = ({ onGoHome, initialTab })
        </div>
 
        <div className="grid md:grid-cols-4 gap-8">
-          {/* Side Menu */}
-          <div className="hidden md:block col-span-1">
-             <ul className="border-t-2 border-school-orange">
+          {/* Menu Column: Horizontal Scroll on Mobile, Vertical Sidebar on Desktop */}
+          <div className="col-span-4 md:col-span-1">
+             <ul className="flex md:flex-col overflow-x-auto md:overflow-visible gap-2 md:gap-0 border-b md:border-b-0 border-gray-200 md:border-t-2 md:border-school-orange pb-4 md:pb-0 no-scrollbar">
                 {[
                    { id: 'HISTORY', label: '학교연혁' },
                    { id: 'PHILOSOPHY', label: '설립이념' },
@@ -471,35 +472,18 @@ const SectionHistory: React.FC<SectionHistoryProps> = ({ onGoHome, initialTab })
                    <li 
                       key={item.id}
                       onClick={() => setActiveTab(item.id as TabType)}
-                      className={`p-4 border-b border-gray-200 cursor-pointer transition-colors ${activeTab === item.id ? 'bg-school-orange text-white font-bold' : 'hover:bg-gray-50 text-gray-600'}`}
+                      className={`flex-shrink-0 px-4 py-2 md:p-4 md:border-b border-gray-200 cursor-pointer transition-colors rounded-full md:rounded-none text-sm md:text-base ${activeTab === item.id ? 'bg-school-orange text-white md:bg-school-orange md:text-white font-bold' : 'bg-gray-100 md:bg-white text-gray-600 hover:bg-gray-200 md:hover:bg-gray-50'}`}
                    >
                       {item.label}
                    </li>
                 ))}
              </ul>
-             
-             {/* Back Button for Side Menu */}
-             <button 
-                onClick={onGoHome}
-                className="w-full mt-4 py-3 border border-gray-300 text-gray-600 rounded bg-gray-50 hover:bg-gray-100 transition-colors font-bold text-sm"
-             >
+             <button onClick={onGoHome} className="hidden md:block w-full mt-4 py-3 border border-gray-300 text-gray-600 rounded bg-gray-50 hover:bg-gray-100 transition-colors font-bold text-sm">
                 메인 화면으로 이동
              </button>
           </div>
-
-          {/* Main Content */}
-          <div className="col-span-3 min-h-[500px]">
+          <div className="col-span-4 md:col-span-3 min-h-[500px]">
              {renderContent()}
-             
-             {/* Mobile Home Button */}
-             <div className="md:hidden mt-8 text-center">
-               <button 
-                  onClick={onGoHome}
-                  className="px-6 py-2 bg-gray-100 border border-gray-300 text-gray-600 rounded-full font-bold text-sm"
-               >
-                  메인으로 돌아가기
-               </button>
-             </div>
           </div>
        </div>
     </div>

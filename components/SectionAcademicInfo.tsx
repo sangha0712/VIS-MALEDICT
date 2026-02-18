@@ -45,9 +45,9 @@ const SectionAcademicInfo: React.FC<SectionAcademicInfoProps> = ({ onGoHome, ini
        </div>
 
        <div className="grid md:grid-cols-4 gap-8">
-          {/* Side Menu */}
-          <div className="hidden md:block col-span-1">
-             <ul className="border-t-2 border-school-orange">
+          {/* Menu Column: Horizontal Scroll on Mobile, Vertical Sidebar on Desktop */}
+          <div className="col-span-4 md:col-span-1">
+             <ul className="flex md:flex-col overflow-x-auto md:overflow-visible gap-2 md:gap-0 border-b md:border-b-0 border-gray-200 md:border-t-2 md:border-school-orange pb-4 md:pb-0 no-scrollbar">
                 {[
                    { id: 'ADMISSION_TRANSFER', label: '입학/전학 절차' },
                    { id: 'LEAVE_RETURN', label: '휴학/복학 안내' },
@@ -58,20 +58,20 @@ const SectionAcademicInfo: React.FC<SectionAcademicInfoProps> = ({ onGoHome, ini
                    <li 
                       key={item.id}
                       onClick={() => setActiveTab(item.id as TabType)}
-                      className={`p-4 border-b border-gray-200 cursor-pointer transition-colors ${activeTab === item.id ? 'bg-school-orange text-white font-bold' : 'hover:bg-gray-50 text-gray-600'}`}
+                      className={`flex-shrink-0 px-4 py-2 md:p-4 md:border-b border-gray-200 cursor-pointer transition-colors rounded-full md:rounded-none text-sm md:text-base ${activeTab === item.id ? 'bg-school-orange text-white md:bg-school-orange md:text-white font-bold' : 'bg-gray-100 md:bg-white text-gray-600 hover:bg-gray-200 md:hover:bg-gray-50'}`}
                    >
                       {item.label}
                    </li>
                 ))}
              </ul>
              
-             <button onClick={onGoHome} className="w-full mt-4 py-3 border border-gray-300 text-gray-600 rounded bg-gray-50 hover:bg-gray-100 transition-colors font-bold text-sm">
+             <button onClick={onGoHome} className="hidden md:block w-full mt-4 py-3 border border-gray-300 text-gray-600 rounded bg-gray-50 hover:bg-gray-100 transition-colors font-bold text-sm">
                 메인 화면으로 이동
              </button>
           </div>
 
           {/* Main Content */}
-          <div className="col-span-3 min-h-[500px]">
+          <div className="col-span-4 md:col-span-3 min-h-[500px]">
              
              {/* 1. ADMISSION & TRANSFER */}
              {activeTab === 'ADMISSION_TRANSFER' && (

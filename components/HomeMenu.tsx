@@ -61,52 +61,52 @@ const HomeMenu: React.FC<HomeMenuProps> = ({ onNavigate }) => {
             
             {/* Column 1 & 2: Main Board */}
             <div className="md:col-span-2 bg-white p-6 rounded-xl shadow-soft border border-gray-100 min-h-[300px]">
-               <div className="flex items-center justify-between mb-4 border-b border-gray-100 pb-2">
-                  <div className="flex gap-4 text-lg font-bold">
+               <div className="flex items-center justify-between mb-4 border-b border-gray-100 pb-2 overflow-x-auto">
+                  <div className="flex gap-2 md:gap-4 text-sm md:text-lg font-bold flex-nowrap">
                      <button 
                         onClick={() => setActiveTab('NOTICE')}
-                        className={`flex items-center gap-1 ${activeTab === 'NOTICE' ? 'text-school-orange' : 'text-gray-400'} hover:text-school-orange transition-colors`}
+                        className={`flex items-center gap-1 whitespace-nowrap px-2 py-1 rounded transition-colors ${activeTab === 'NOTICE' ? 'bg-school-orange/10 text-school-orange' : 'text-gray-400 hover:text-school-orange'}`}
                      >
                         <Megaphone className="w-4 h-4" /> 공지사항
                      </button>
                      <button 
                         onClick={() => setActiveTab('RECRUIT')}
-                        className={`flex items-center gap-1 ${activeTab === 'RECRUIT' ? 'text-school-orange' : 'text-gray-400'} hover:text-school-orange transition-colors`}
+                        className={`flex items-center gap-1 whitespace-nowrap px-2 py-1 rounded transition-colors ${activeTab === 'RECRUIT' ? 'bg-school-orange/10 text-school-orange' : 'text-gray-400 hover:text-school-orange'}`}
                      >
                         <Briefcase className="w-4 h-4" /> 채용/진로
                      </button>
                      <button 
                         onClick={() => setActiveTab('TRAINING')}
-                        className={`flex items-center gap-1 ${activeTab === 'TRAINING' ? 'text-school-orange' : 'text-gray-400'} hover:text-school-orange transition-colors`}
+                        className={`flex items-center gap-1 whitespace-nowrap px-2 py-1 rounded transition-colors ${activeTab === 'TRAINING' ? 'bg-school-orange/10 text-school-orange' : 'text-gray-400 hover:text-school-orange'}`}
                      >
                         <Dumbbell className="w-4 h-4" /> 훈련일정
                      </button>
                   </div>
-                  <button className="text-gray-400 hover:text-black">
+                  <button className="text-gray-400 hover:text-black hidden md:block">
                      <ExternalLink className="w-4 h-4" />
                   </button>
                </div>
                
                <ul className="space-y-3">
                   {activeList.map((item) => (
-                     <li key={item.id} className="flex justify-between items-center text-sm group cursor-pointer hover:bg-gray-50 p-1 rounded transition-colors">
-                        <div className="flex items-center gap-2 overflow-hidden">
-                           <span className="text-[10px] font-bold text-gray-500 bg-gray-200 px-1.5 py-0.5 rounded min-w-[40px] text-center">
+                     <li key={item.id} className="flex justify-between items-start md:items-center text-sm group cursor-pointer hover:bg-gray-50 p-1 rounded transition-colors flex-col md:flex-row gap-1 md:gap-0">
+                        <div className="flex items-center gap-2 overflow-hidden w-full">
+                           <span className="text-[10px] font-bold text-gray-500 bg-gray-200 px-1.5 py-0.5 rounded min-w-[40px] text-center flex-shrink-0">
                              {item.category}
                            </span>
-                           <span className="truncate text-gray-700 group-hover:text-school-orange font-medium max-w-[240px] md:max-w-[320px]">
+                           <span className="truncate text-gray-700 group-hover:text-school-orange font-medium flex-1">
                               {item.title}
                            </span>
-                           {item.new && <span className="bg-red-600 text-white text-[10px] px-1 rounded font-bold animate-pulse">N</span>}
+                           {item.new && <span className="bg-red-600 text-white text-[10px] px-1 rounded font-bold animate-pulse flex-shrink-0">N</span>}
                         </div>
-                        <span className="text-gray-400 text-xs whitespace-nowrap font-mono">{item.date}</span>
+                        <span className="text-gray-400 text-xs whitespace-nowrap font-mono self-end md:self-auto">{item.date}</span>
                      </li>
                   ))}
                </ul>
             </div>
 
             {/* Column 3: Popup Zone (Visual) */}
-            <div className="md:col-span-1 bg-white rounded-xl shadow-soft border border-gray-100 overflow-hidden relative group cursor-pointer h-64 md:h-auto">
+            <div className="md:col-span-1 bg-white rounded-xl shadow-soft border border-gray-100 overflow-hidden relative group cursor-pointer h-48 md:h-auto">
                <div className="absolute top-0 left-0 bg-red-600 text-white text-xs font-bold px-3 py-1 z-10 rounded-br-lg">
                   D-DAY
                </div>
@@ -118,7 +118,7 @@ const HomeMenu: React.FC<HomeMenuProps> = ({ onNavigate }) => {
             </div>
 
             {/* Column 4: Quick Links Banner */}
-            <div className="md:col-span-1 flex flex-col gap-4 h-full">
+            <div className="md:col-span-1 flex flex-col gap-4 h-auto md:h-full">
                <div className="flex-1 bg-blue-50 rounded-xl shadow-soft border border-blue-100 p-6 flex flex-col justify-center items-center text-center cursor-pointer hover:bg-blue-100 transition-colors" onClick={() => onNavigate('ADMISSION')}>
                   <div className="bg-blue-100 p-3 rounded-full mb-3 text-blue-600">
                      <Shield className="w-8 h-8 fill-blue-600" />
@@ -133,37 +133,37 @@ const HomeMenu: React.FC<HomeMenuProps> = ({ onNavigate }) => {
       </div>
 
       {/* Main Shortcuts Grid */}
-      <div className="max-w-7xl mx-auto px-4 py-12">
-         <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-            <button onClick={() => onNavigate('HISTORY')} className="flex flex-col items-center justify-center p-6 bg-white border border-gray-200 rounded-lg hover:border-school-orange hover:shadow-md transition-all group h-32">
-               <div className="w-12 h-12 bg-blue-50 text-blue-500 rounded-full flex items-center justify-center mb-2 group-hover:bg-school-orange group-hover:text-white transition-colors">
-                  <BookOpen className="w-6 h-6" />
+      <div className="max-w-7xl mx-auto px-4 py-8 md:py-12">
+         <div className="grid grid-cols-2 md:grid-cols-5 gap-3 md:gap-4">
+            <button onClick={() => onNavigate('HISTORY')} className="flex flex-col items-center justify-center p-4 md:p-6 bg-white border border-gray-200 rounded-lg hover:border-school-orange hover:shadow-md transition-all group h-28 md:h-32">
+               <div className="w-10 h-10 md:w-12 md:h-12 bg-blue-50 text-blue-500 rounded-full flex items-center justify-center mb-2 group-hover:bg-school-orange group-hover:text-white transition-colors">
+                  <BookOpen className="w-5 h-5 md:w-6 md:h-6" />
                </div>
-               <span className="font-bold text-gray-700 text-sm">학교소개</span>
+               <span className="font-bold text-gray-700 text-xs md:text-sm">학교소개</span>
             </button>
-            <button onClick={() => onNavigate('ACADEMIC_INFO')} className="flex flex-col items-center justify-center p-6 bg-white border border-gray-200 rounded-lg hover:border-school-orange hover:shadow-md transition-all group h-32">
-               <div className="w-12 h-12 bg-green-50 text-green-500 rounded-full flex items-center justify-center mb-2 group-hover:bg-school-orange group-hover:text-white transition-colors">
-                  <PenTool className="w-6 h-6" />
+            <button onClick={() => onNavigate('ACADEMIC_INFO')} className="flex flex-col items-center justify-center p-4 md:p-6 bg-white border border-gray-200 rounded-lg hover:border-school-orange hover:shadow-md transition-all group h-28 md:h-32">
+               <div className="w-10 h-10 md:w-12 md:h-12 bg-green-50 text-green-500 rounded-full flex items-center justify-center mb-2 group-hover:bg-school-orange group-hover:text-white transition-colors">
+                  <PenTool className="w-5 h-5 md:w-6 md:h-6" />
                </div>
-               <span className="font-bold text-gray-700 text-sm">입학/전학 안내</span>
+               <span className="font-bold text-gray-700 text-xs md:text-sm">입학/전학 안내</span>
             </button>
-            <button onClick={() => onNavigate('CHARACTER')} className="flex flex-col items-center justify-center p-6 bg-white border border-gray-200 rounded-lg hover:border-school-orange hover:shadow-md transition-all group h-32">
-               <div className="w-12 h-12 bg-purple-50 text-purple-500 rounded-full flex items-center justify-center mb-2 group-hover:bg-school-orange group-hover:text-white transition-colors">
-                  <Users className="w-6 h-6" />
+            <button onClick={() => onNavigate('CHARACTER')} className="flex flex-col items-center justify-center p-4 md:p-6 bg-white border border-gray-200 rounded-lg hover:border-school-orange hover:shadow-md transition-all group h-28 md:h-32">
+               <div className="w-10 h-10 md:w-12 md:h-12 bg-purple-50 text-purple-500 rounded-full flex items-center justify-center mb-2 group-hover:bg-school-orange group-hover:text-white transition-colors">
+                  <Users className="w-5 h-5 md:w-6 md:h-6" />
                </div>
-               <span className="font-bold text-gray-700 text-sm">교관/교사 소개</span>
+               <span className="font-bold text-gray-700 text-xs md:text-sm">교관/교사 소개</span>
             </button>
-            <button className="flex flex-col items-center justify-center p-6 bg-white border border-gray-200 rounded-lg hover:border-school-orange hover:shadow-md transition-all group h-32">
-               <div className="w-12 h-12 bg-red-50 text-red-500 rounded-full flex items-center justify-center mb-2 group-hover:bg-school-orange group-hover:text-white transition-colors">
-                  <Crosshair className="w-6 h-6" />
+            <button className="flex flex-col items-center justify-center p-4 md:p-6 bg-white border border-gray-200 rounded-lg hover:border-school-orange hover:shadow-md transition-all group h-28 md:h-32">
+               <div className="w-10 h-10 md:w-12 md:h-12 bg-red-50 text-red-500 rounded-full flex items-center justify-center mb-2 group-hover:bg-school-orange group-hover:text-white transition-colors">
+                  <Crosshair className="w-5 h-5 md:w-6 md:h-6" />
                </div>
-               <span className="font-bold text-gray-700 text-sm">모의전투 신청</span>
+               <span className="font-bold text-gray-700 text-xs md:text-sm">모의전투 신청</span>
             </button>
-            <button className="flex flex-col items-center justify-center p-6 bg-white border border-gray-200 rounded-lg hover:border-school-orange hover:shadow-md transition-all group h-32">
-               <div className="w-12 h-12 bg-gray-50 text-gray-500 rounded-full flex items-center justify-center mb-2 group-hover:bg-school-orange group-hover:text-white transition-colors">
-                  <Calendar className="w-6 h-6" />
+            <button className="flex flex-col items-center justify-center p-4 md:p-6 bg-white border border-gray-200 rounded-lg hover:border-school-orange hover:shadow-md transition-all group h-28 md:h-32">
+               <div className="w-10 h-10 md:w-12 md:h-12 bg-gray-50 text-gray-500 rounded-full flex items-center justify-center mb-2 group-hover:bg-school-orange group-hover:text-white transition-colors">
+                  <Calendar className="w-5 h-5 md:w-6 md:h-6" />
                </div>
-               <span className="font-bold text-gray-700 text-sm">학사/훈련 일정</span>
+               <span className="font-bold text-gray-700 text-xs md:text-sm">학사/훈련 일정</span>
             </button>
          </div>
       </div>
@@ -174,8 +174,8 @@ const HomeMenu: React.FC<HomeMenuProps> = ({ onNavigate }) => {
             <div className="grid grid-cols-3 md:grid-cols-7 gap-6 text-center">
                {iconLinks.map((link, idx) => (
                   <button key={idx} className="flex flex-col items-center group cursor-pointer" onClick={() => alert("현재 준비 중인 서비스입니다.")}>
-                     <div className={`w-16 h-16 rounded-full flex items-center justify-center mb-3 shadow-sm transition-transform group-hover:-translate-y-1 group-hover:shadow-md ${link.color}`}>
-                        <link.icon className="w-8 h-8" />
+                     <div className={`w-14 h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center mb-3 shadow-sm transition-transform group-hover:-translate-y-1 group-hover:shadow-md ${link.color}`}>
+                        <link.icon className="w-7 h-7 md:w-8 md:h-8" />
                      </div>
                      <span className="text-xs font-bold text-gray-600 group-hover:text-school-orange transition-colors">
                         {link.label}
@@ -196,20 +196,20 @@ const HomeMenu: React.FC<HomeMenuProps> = ({ onNavigate }) => {
                    <button className="w-6 h-6 border border-gray-300 bg-white flex items-center justify-center text-gray-500 hover:text-black">&gt;</button>
                 </div>
              </div>
-             <div className="flex gap-4 overflow-hidden">
-                <div className="flex-1 bg-white border border-gray-200 p-3 flex items-center justify-center text-center text-xs font-bold text-gray-600 h-16 shadow-sm">
+             <div className="flex gap-4 overflow-x-auto scrollbar-hide pb-2">
+                <div className="flex-1 min-w-[120px] bg-white border border-gray-200 p-3 flex items-center justify-center text-center text-xs font-bold text-gray-600 h-16 shadow-sm rounded">
                    ASH GUARD<br/>본부
                 </div>
-                <div className="flex-1 bg-white border border-gray-200 p-3 flex items-center justify-center text-center text-xs font-bold text-gray-600 h-16 shadow-sm">
+                <div className="flex-1 min-w-[120px] bg-white border border-gray-200 p-3 flex items-center justify-center text-center text-xs font-bold text-gray-600 h-16 shadow-sm rounded">
                    국가대테러<br/>대책위원회
                 </div>
-                <div className="flex-1 bg-white border border-gray-200 p-3 flex items-center justify-center text-center text-xs font-bold text-gray-600 h-16 shadow-sm">
+                <div className="flex-1 min-w-[120px] bg-white border border-gray-200 p-3 flex items-center justify-center text-center text-xs font-bold text-gray-600 h-16 shadow-sm rounded">
                    특수경찰청
                 </div>
-                <div className="flex-1 bg-white border border-gray-200 p-3 flex items-center justify-center text-center text-xs font-bold text-gray-600 h-16 shadow-sm">
+                <div className="flex-1 min-w-[120px] bg-white border border-gray-200 p-3 flex items-center justify-center text-center text-xs font-bold text-gray-600 h-16 shadow-sm rounded">
                    국립과학수사<br/>연구원
                 </div>
-                <div className="flex-1 bg-white border border-gray-200 p-3 flex items-center justify-center text-center text-xs font-bold text-gray-600 h-16 shadow-sm">
+                <div className="flex-1 min-w-[120px] bg-white border border-gray-200 p-3 flex items-center justify-center text-center text-xs font-bold text-gray-600 h-16 shadow-sm rounded">
                    한국이능력자<br/>협회
                 </div>
              </div>
