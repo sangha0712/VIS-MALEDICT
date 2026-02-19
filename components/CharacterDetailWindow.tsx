@@ -8,35 +8,47 @@ interface CharacterDetailWindowProps {
 }
 
 const CharacterDetailWindow: React.FC<CharacterDetailWindowProps> = ({ character, onClose }) => {
+  const getThemeGradient = (color: string) => {
+    switch (color) {
+      case 'red': return 'bg-gradient-to-r from-red-600 to-orange-600';
+      case 'blue': return 'bg-gradient-to-r from-blue-600 to-cyan-600';
+      case 'green': return 'bg-gradient-to-r from-green-600 to-emerald-600';
+      case 'purple': return 'bg-gradient-to-r from-purple-600 to-pink-600';
+      case 'yellow': return 'bg-gradient-to-r from-yellow-500 to-orange-500';
+      default: return 'bg-gradient-to-r from-gray-700 to-gray-500';
+    }
+  };
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 font-sans backdrop-blur-sm animate-in fade-in duration-200">
       <div className="w-full max-w-2xl bg-white rounded-xl shadow-2xl flex flex-col overflow-hidden border border-gray-200 max-h-[90vh]">
         
-        {/* Header Image */}
-        <div className="relative h-48 bg-gray-200 flex-shrink-0">
-            <img src={character.coverUrl} alt="Cover" className="w-full h-full object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+        {/* Header Area - Replaced Image with Theme Gradient */}
+        <div className={`relative h-48 flex-shrink-0 ${getThemeGradient(character.themeColor)}`}>
+            {/* Texture Overlay */}
+            <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]"></div>
+            
             <button 
                 onClick={onClose} 
-                className="absolute top-4 right-4 bg-black/30 hover:bg-black/50 text-white rounded-full p-2 transition-colors backdrop-blur-md"
+                className="absolute top-4 right-4 bg-black/20 hover:bg-black/40 text-white rounded-full p-2 transition-colors backdrop-blur-md z-10"
             >
                 <X className="w-6 h-6" />
             </button>
             
-            <div className="absolute bottom-[-40px] left-8 flex items-end">
-                <div className="w-28 h-28 rounded-xl border-4 border-white shadow-lg overflow-hidden bg-white">
+            <div className="absolute bottom-[-60px] left-8 flex items-end">
+                <div className="w-48 h-48 rounded-xl border-4 border-white shadow-2xl overflow-hidden bg-white relative z-10">
                     <img src={character.avatarUrl} alt={character.name} className="w-full h-full object-cover" />
                 </div>
             </div>
         </div>
 
         {/* Content */}
-        <div className="pt-12 pb-8 px-8 overflow-y-auto">
+        <div className="pt-20 pb-8 px-8 overflow-y-auto">
             <div className="flex justify-between items-start mb-6">
-                <div>
-                    <h2 className="text-3xl font-bold text-gray-900 mb-2">{character.name}</h2>
+                <div className="ml-2">
+                    <h2 className="text-4xl font-bold text-gray-900 mb-2 font-serif">{character.name}</h2>
                     <div className="flex flex-wrap items-center gap-2 text-gray-600 font-medium">
-                        <span className={`px-2 py-0.5 rounded text-xs font-bold text-white
+                        <span className={`px-2 py-0.5 rounded text-xs font-bold text-white shadow-sm
                             ${character.themeColor === 'red' ? 'bg-red-500' : 
                               character.themeColor === 'blue' ? 'bg-blue-500' :
                               character.themeColor === 'green' ? 'bg-green-500' :
@@ -73,7 +85,7 @@ const CharacterDetailWindow: React.FC<CharacterDetailWindowProps> = ({ character
                         <div className="flex flex-col gap-4">
                            <div>
                               <div className="text-xs font-bold text-gray-500 uppercase mb-1 tracking-wider">Ability Name</div>
-                              <div className="text-2xl font-bold text-gray-800 flex items-center gap-2">
+                              <div className="text-2xl font-bold text-gray-800 flex items-center gap-2 font-serif">
                                  {character.abilityName || '데이터 없음'}
                               </div>
                            </div>
@@ -97,13 +109,13 @@ const CharacterDetailWindow: React.FC<CharacterDetailWindowProps> = ({ character
                         종합 평가
                     </h3>
                    <div className="grid grid-cols-2 gap-4">
-                      <div className="bg-white border border-gray-200 p-3 rounded-lg">
-                         <div className="text-xs text-gray-500 mb-1">이능력 등급</div>
-                         <div className="font-bold text-gray-800">Class {['S', 'A', 'B', 'C'][Math.floor(Math.random() * 4)]}</div>
+                      <div className="bg-white border border-gray-200 p-4 rounded-lg hover:border-school-orange transition-colors">
+                         <div className="text-xs text-gray-500 mb-1 font-bold">이능력 등급</div>
+                         <div className="text-xl font-bold text-gray-800">Class {['S', 'A', 'B', 'C'][Math.floor(Math.random() * 4)]}</div>
                       </div>
-                      <div className="bg-white border border-gray-200 p-3 rounded-lg">
-                         <div className="text-xs text-gray-500 mb-1">전술 이해도</div>
-                         <div className="font-bold text-gray-800">{['최상', '상', '중', '하'][Math.floor(Math.random() * 4)]}</div>
+                      <div className="bg-white border border-gray-200 p-4 rounded-lg hover:border-school-orange transition-colors">
+                         <div className="text-xs text-gray-500 mb-1 font-bold">전술 이해도</div>
+                         <div className="text-xl font-bold text-gray-800">{['최상 (S)', '상 (A)', '중 (B)', '하 (C)'][Math.floor(Math.random() * 4)]}</div>
                       </div>
                    </div>
                 </div>
