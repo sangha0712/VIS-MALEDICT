@@ -33,7 +33,7 @@ const SectionGifted: React.FC<SectionGiftedProps> = ({ onGoHome }) => {
                 <Brain className="w-8 h-8 text-purple-200" />
              </div>
              <h3 className="text-3xl md:text-4xl font-serif font-bold mb-4">Unleash Your Potential</h3>
-             <p className="text-purple-100 text-lg">
+             <p className="text-purple-100 text-base md:text-lg">
                 "재능은 발견하는 것이 아니라, 다듬어지는 것입니다."<br/>
                 국내 유일의 이능력 제어 및 응용 영재 프로그램을 만나보세요.
              </p>
@@ -81,27 +81,27 @@ const SectionGifted: React.FC<SectionGiftedProps> = ({ onGoHome }) => {
        </div>
 
        {/* Admission Info */}
-       <div className="bg-gray-50 rounded-xl p-8 border border-gray-200">
+       <div className="bg-gray-50 rounded-xl p-6 md:p-8 border border-gray-200">
           <div className="flex items-center gap-3 mb-6">
              <GraduationCap className="w-6 h-6 text-school-orange" />
              <h3 className="text-xl font-bold text-gray-800">2084학년도 선발 안내</h3>
           </div>
           <div className="space-y-4">
-             <div className="flex flex-col md:flex-row gap-4 border-b border-gray-200 pb-4">
+             <div className="flex flex-col md:flex-row gap-2 md:gap-4 border-b border-gray-200 pb-4">
                 <div className="w-32 font-bold text-gray-700">모집 대상</div>
                 <div className="flex-1 text-sm text-gray-600">
                    전국 초등학교 5학년 ~ 중학교 2학년 학생 중<br/>
                    국가 이능력 관리국 등록 등급 C급 이상인 자
                 </div>
              </div>
-             <div className="flex flex-col md:flex-row gap-4 border-b border-gray-200 pb-4">
+             <div className="flex flex-col md:flex-row gap-2 md:gap-4 border-b border-gray-200 pb-4">
                 <div className="w-32 font-bold text-gray-700">전형 일정</div>
                 <div className="flex-1 text-sm text-gray-600">
                    원서 접수: 2084. 09. 01 ~ 09. 15<br/>
                    심층 면접 및 영재성 검사: 2084. 10. 10
                 </div>
              </div>
-             <div className="flex flex-col md:flex-row gap-4">
+             <div className="flex flex-col md:flex-row gap-2 md:gap-4">
                 <div className="w-32 font-bold text-gray-700">특전</div>
                 <div className="flex-1 text-sm text-gray-600">
                    수료 시 강현고등학교 입학 가산점 부여<br/>
@@ -110,7 +110,7 @@ const SectionGifted: React.FC<SectionGiftedProps> = ({ onGoHome }) => {
              </div>
           </div>
           <div className="mt-8 text-center">
-             <button className="bg-school-orange text-white px-8 py-3 rounded font-bold hover:bg-orange-600 transition-colors">
+             <button className="bg-school-orange text-white px-8 py-3 rounded font-bold hover:bg-orange-600 transition-colors shadow-md w-full md:w-auto">
                 모집 요강 다운로드
              </button>
           </div>

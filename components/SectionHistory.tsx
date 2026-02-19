@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ChevronRight, Home, Shield, Users, MapPin, Bus, Train, Navigation, CornerDownRight, Building, Target } from 'lucide-react';
+import { ChevronRight, Home, Shield, Users, MapPin, Bus, Train, Navigation, CornerDownRight, Building, Target, Network } from 'lucide-react';
 
 interface SectionHistoryProps {
   onGoHome: () => void;
@@ -182,34 +182,75 @@ const SectionHistory: React.FC<SectionHistoryProps> = ({ onGoHome, initialTab })
          );
       case 'ORGANIZATION':
          return (
-            <div className="animate-in fade-in slide-in-from-right-4 duration-500 overflow-x-auto">
-               <div className="border border-gray-200 rounded-xl p-8 bg-white text-center min-w-[600px]">
-                  <div className="inline-block p-4 border-2 border-school-orange rounded-lg font-bold text-xl mb-8 shadow-sm">교장 (이강현)</div>
-                  <div className="h-8 w-px bg-gray-400 mx-auto"></div>
-                  <div className="h-px w-2/3 bg-gray-400 mx-auto mb-8"></div>
+            <div className="animate-in fade-in slide-in-from-right-4 duration-500">
+               {/* Mobile: Vertical Tree, Desktop: Horizontal Tree */}
+               <div className="border border-gray-200 rounded-xl p-6 md:p-8 bg-white text-center">
                   
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                     <div>
-                        <div className="inline-block p-3 border border-gray-300 rounded bg-gray-50 font-bold mb-4">학교운영위원회</div>
+                  {/* Top Level */}
+                  <div className="inline-block p-4 border-2 border-school-orange rounded-lg font-bold text-lg md:text-xl mb-6 md:mb-8 shadow-sm bg-white z-10 relative">
+                     교장 (이강현)
+                  </div>
+                  
+                  {/* Connectors for Desktop */}
+                  <div className="hidden md:block">
+                     <div className="h-8 w-px bg-gray-400 mx-auto"></div>
+                     <div className="h-px w-2/3 bg-gray-400 mx-auto mb-8"></div>
+                  </div>
+
+                  {/* Connectors for Mobile */}
+                  <div className="md:hidden h-6 w-px bg-gray-400 mx-auto mb-2"></div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 text-left md:text-center">
+                     {/* Left Wing */}
+                     <div className="flex flex-col items-center md:block order-2 md:order-1">
+                        <div className="hidden md:block h-8 w-px bg-gray-400 mx-auto mb-4 absolute top-[-32px] left-1/2"></div>
+                        <div className="w-full md:w-auto p-3 border border-gray-300 rounded bg-gray-50 font-bold mb-2 flex items-center justify-center gap-2">
+                           <Users className="w-4 h-4 md:hidden"/> 학교운영위원회
+                        </div>
                      </div>
-                     <div className="relative">
-                        <div className="h-8 w-px bg-gray-400 mx-auto absolute -top-8 left-1/2"></div>
-                         <div className="inline-block p-3 border-2 border-blue-500 rounded font-bold mb-4">교감</div>
-                         <div className="h-8 w-px bg-gray-400 mx-auto"></div>
-                         <div className="h-px w-full bg-gray-400 mx-auto mb-8"></div>
-                         <div className="grid grid-cols-4 gap-2 text-sm">
-                            <div className="p-2 border rounded bg-white">교무기획부</div>
-                            <div className="p-2 border rounded bg-white">훈련교육부</div>
-                            <div className="p-2 border rounded bg-white">생활안전부</div>
-                            <div className="p-2 border rounded bg-white">진로진학부</div>
-                            <div className="p-2 border rounded bg-white">행정실</div>
-                            <div className="p-2 border rounded bg-white">시설관리팀</div>
-                            <div className="p-2 border rounded bg-white">정보보안팀</div>
-                            <div className="p-2 border rounded bg-white">국제협력팀</div>
+
+                     {/* Center Wing (Main Body) */}
+                     <div className="relative order-1 md:order-2">
+                        <div className="hidden md:block h-8 w-px bg-gray-400 mx-auto absolute -top-8 left-1/2"></div>
+                         
+                         <div className="inline-block w-full md:w-auto p-3 border-2 border-blue-500 rounded font-bold mb-4 md:mb-8 bg-blue-50 md:bg-white text-center">
+                            교감
+                         </div>
+                         
+                         {/* Desktop Departments */}
+                         <div className="hidden md:block">
+                            <div className="h-8 w-px bg-gray-400 mx-auto mt-[-32px]"></div>
+                            <div className="h-px w-full bg-gray-400 mx-auto mb-8"></div>
+                            <div className="grid grid-cols-4 gap-2 text-sm">
+                               <div className="p-2 border rounded bg-white hover:bg-gray-50">교무기획부</div>
+                               <div className="p-2 border rounded bg-white hover:bg-gray-50">훈련교육부</div>
+                               <div className="p-2 border rounded bg-white hover:bg-gray-50">생활안전부</div>
+                               <div className="p-2 border rounded bg-white hover:bg-gray-50">진로진학부</div>
+                               <div className="p-2 border rounded bg-white hover:bg-gray-50">행정실</div>
+                               <div className="p-2 border rounded bg-white hover:bg-gray-50">시설관리팀</div>
+                               <div className="p-2 border rounded bg-white hover:bg-gray-50">정보보안팀</div>
+                               <div className="p-2 border rounded bg-white hover:bg-gray-50">국제협력팀</div>
+                            </div>
+                         </div>
+
+                         {/* Mobile Departments (Vertical List) */}
+                         <div className="md:hidden grid grid-cols-2 gap-2 text-sm text-center">
+                            <div className="p-2 border rounded bg-gray-50">교무기획부</div>
+                            <div className="p-2 border rounded bg-gray-50">훈련교육부</div>
+                            <div className="p-2 border rounded bg-gray-50">생활안전부</div>
+                            <div className="p-2 border rounded bg-gray-50">진로진학부</div>
+                            <div className="p-2 border rounded bg-gray-50">행정실</div>
+                            <div className="p-2 border rounded bg-gray-50">시설관리팀</div>
+                            <div className="p-2 border rounded bg-gray-50">정보보안팀</div>
+                            <div className="p-2 border rounded bg-gray-50">국제협력팀</div>
                          </div>
                      </div>
-                     <div>
-                        <div className="inline-block p-3 border border-gray-300 rounded bg-gray-50 font-bold mb-4">학부모회</div>
+
+                     {/* Right Wing */}
+                     <div className="flex flex-col items-center md:block order-3">
+                        <div className="w-full md:w-auto p-3 border border-gray-300 rounded bg-gray-50 font-bold mb-4 flex items-center justify-center gap-2">
+                           <Network className="w-4 h-4 md:hidden"/> 학부모회
+                        </div>
                      </div>
                   </div>
                </div>

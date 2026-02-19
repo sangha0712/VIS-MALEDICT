@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { CHARACTERS } from './constants';
 import { Character } from './types';
 import CharacterCard from './components/CharacterCard';
-import ChatWindow from './components/ChatWindow';
+import CharacterDetailWindow from './components/CharacterDetailWindow';
 import HomeMenu from './components/HomeMenu';
 import SectionHistory from './components/SectionHistory';
 import SectionAdmission from './components/SectionAdmission';
@@ -27,7 +27,7 @@ const App: React.FC = () => {
   const [activeFilter, setActiveFilter] = useState<string>('All');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const filters = ['All', 'ASH GUARD (예비역)', '특수수사과', '외부 초빙 강사', '학교 시설팀'];
+  const filters = ['All', '1학년', '2학년', '3학년', '교직원', '외부 초빙 강사'];
 
   const filteredCharacters = activeFilter === 'All' 
     ? CHARACTERS 
@@ -83,7 +83,7 @@ const App: React.FC = () => {
              {/* Sub Header */}
              <div className="flex flex-col md:flex-row md:items-center justify-between border-b-2 border-school-text pb-4 mb-8">
                 <div>
-                   <h2 className="text-3xl font-bold text-school-text">교직원 및 학생회 소개</h2>
+                   <h2 className="text-3xl font-bold text-school-text">교직원 및 학생 소개</h2>
                    <p className="text-school-sub mt-2 text-sm">미래의 ASH GUARD를 양성하는 강현의 주역들입니다.</p>
                 </div>
                 <div className="flex text-sm text-gray-500 mt-4 md:mt-0">
@@ -314,9 +314,9 @@ const App: React.FC = () => {
         onNavigate={handleNavigate} 
       />
 
-      {/* Chat Overlay */}
+      {/* Detail Overlay */}
       {selectedCharacter && (
-        <ChatWindow 
+        <CharacterDetailWindow 
           character={selectedCharacter} 
           onClose={() => setSelectedCharacter(null)} 
         />

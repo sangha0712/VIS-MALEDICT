@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { ChevronRight, Home, Download, AlertCircle, Shield, CheckCircle, FileText } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { ChevronRight, Home, Download, AlertCircle, Shield, CheckCircle, FileText, Scan, Activity, Zap, Award, Search, Check, Loader2 } from 'lucide-react';
 
 interface SectionAdmissionProps {
   onGoHome: () => void;
@@ -7,36 +7,210 @@ interface SectionAdmissionProps {
 
 const SectionAdmission: React.FC<SectionAdmissionProps> = ({ onGoHome }) => {
   const [activeTab, setActiveTab] = useState<'GUIDE' | 'FORM' | 'RESULT'>('GUIDE');
-  const [status, setStatus] = useState<'IDLE' | 'PROCESSING' | 'COMPLETED'>('IDLE');
+  const [status, setStatus] = useState<'IDLE' | 'SCANNING' | 'COMPLETED'>('IDLE');
   
+  // Scanning Animation States
+  const [progress, setProgress] = useState({ intro: 0, grade: 0, force: 0 });
+  const [logs, setLogs] = useState<string[]>([]);
+  const logsEndRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (logsEndRef.current) {
+      logsEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [logs]);
+
+  const addLog = (message: string) => {
+    setLogs(prev => [...prev, message]);
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setStatus('PROCESSING');
-    setTimeout(() => setStatus('COMPLETED'), 2000);
+    setStatus('SCANNING');
+    setLogs(['입학 심사 시스템에 접속 중입니다...', '지원자 데이터를 암호화하여 전송합니다.']);
+    
+    let pIntro = 0;
+    let pGrade = 0;
+    let pForce = 0;
+    
+    const interval = setInterval(() => {
+        // 1. 자기소개서 분석
+        if (pIntro < 100) {
+            pIntro += Math.random() * 8;
+            if (pIntro > 100) pIntro = 100;
+            
+            if (pIntro > 20 && pIntro < 30 && !logs.includes('자기소개서 문맥 분석 중...')) addLog('자기소개서 문맥 분석 중...');
+            if (pIntro > 60 && pIntro < 70 && !logs.includes('핵심 키워드 추출: [정의], [노력], [책임감]')) addLog('핵심 키워드 추출: [정의], [노력], [책임감]');
+            if (pIntro === 100 && !logs.includes('인성 평가 모듈: 적합 판정.')) addLog('인성 평가 모듈: 적합 판정.');
+        } 
+        // 2. 내신 성적 스캔 (자기소개서 완료 후)
+        else if (pGrade < 100) {
+            pGrade += Math.random() * 10;
+            if (pGrade > 100) pGrade = 100;
+
+            if (pGrade > 10 && pGrade < 20 && !logs.includes('NEIS 교육행정정보 시스템 연동 중...')) addLog('NEIS 교육행정정보 시스템 연동 중...');
+            if (pGrade > 80 && pGrade < 90 && !logs.includes('중학교 3개년 성적 데이터 수신 완료.')) addLog('중학교 3개년 성적 데이터 수신 완료.');
+            if (pGrade === 100 && !logs.includes('학업 성취도 분석: 상위 30% (Average)')) addLog('학업 성취도 분석: 상위 30% (Average)');
+        }
+        // 3. 포스 측정 (내신 완료 후)
+        else if (pForce < 100) {
+            pForce += Math.random() * 4; // 천천히 올라감
+            if (pForce > 100) pForce = 100;
+
+            if (pForce > 5 && pForce < 10 && !logs.includes('원격 파장 측정기(Remote-Scanner) 활성화...')) addLog('원격 파장 측정기(Remote-Scanner) 활성화...');
+            if (pForce > 40 && pForce < 50 && !logs.includes('원격 신호 간섭 발생... 정밀 측정 불가.')) addLog('원격 신호 간섭 발생... 정밀 측정 불가.');
+            if (pForce > 80 && pForce < 90 && !logs.includes('현장 측정 필요 대상으로 분류됨.')) addLog('현장 측정 필요 대상으로 분류됨.');
+            if (pForce === 100 && !logs.includes('잠재력 측정 보류.')) addLog('잠재력 측정 보류.');
+        }
+
+        setProgress({ intro: Math.floor(pIntro), grade: Math.floor(pGrade), force: Math.floor(pForce) });
+
+        if (pIntro >= 100 && pGrade >= 100 && pForce >= 100) {
+            clearInterval(interval);
+            addLog('최종 합격 여부를 판정하고 있습니다...');
+            setTimeout(() => {
+                setStatus('COMPLETED');
+            }, 1500);
+        }
+    }, 50);
   };
+
+  if (status === 'SCANNING') {
+     return (
+        <div className="max-w-2xl mx-auto py-20 px-4 animate-in fade-in duration-500">
+           <div className="bg-white border border-gray-200 rounded-xl shadow-2xl overflow-hidden relative">
+              
+              {/* Header */}
+              <div className="bg-gray-50 border-b border-gray-200 p-8 text-center">
+                  <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-sm border border-gray-100 relative">
+                      <Shield className="w-10 h-10 text-school-orange animate-pulse" />
+                      <div className="absolute inset-0 border-4 border-school-orange/20 rounded-full animate-spin-slow" style={{ animationDuration: '3s' }}></div>
+                  </div>
+                  <h3 className="text-2xl font-bold text-gray-900 font-serif">입학 심사 진행 중</h3>
+                  <p className="text-sm text-gray-500 mt-2">제출하신 서류와 잠재력을 정밀 분석하고 있습니다.<br/>잠시만 기다려주세요.</p>
+              </div>
+
+              {/* Body */}
+              <div className="p-8 space-y-8">
+                  {/* Step 1: Self Intro */}
+                  <div className="space-y-3">
+                      <div className="flex justify-between items-center text-sm font-bold text-gray-700">
+                          <span className="flex items-center gap-2">
+                              <FileText className={`w-5 h-5 ${progress.intro === 100 ? 'text-school-orange' : 'text-gray-400'}`} />
+                              자기소개서 AI 분석
+                          </span>
+                          <span className={progress.intro === 100 ? "text-school-orange" : "text-gray-500"}>{progress.intro}%</span>
+                      </div>
+                      <div className="h-2.5 bg-gray-100 rounded-full overflow-hidden">
+                          <div className="h-full bg-school-orange transition-all duration-300 ease-out" style={{ width: `${progress.intro}%` }}></div>
+                      </div>
+                  </div>
+
+                  {/* Step 2: Grades */}
+                  <div className="space-y-3">
+                      <div className="flex justify-between items-center text-sm font-bold text-gray-700">
+                          <span className="flex items-center gap-2">
+                               <Award className={`w-5 h-5 ${progress.grade === 100 ? 'text-school-orange' : 'text-gray-400'}`} />
+                              NEIS 학업 성취도 조회
+                          </span>
+                          <span className={progress.grade === 100 ? "text-school-orange" : "text-gray-500"}>{progress.grade}%</span>
+                      </div>
+                      <div className="h-2.5 bg-gray-100 rounded-full overflow-hidden">
+                          <div className="h-full bg-school-orange transition-all duration-300 ease-out" style={{ width: `${progress.grade}%` }}></div>
+                      </div>
+                  </div>
+
+                  {/* Step 3: Force */}
+                  <div className="space-y-3">
+                      <div className="flex justify-between items-center text-sm font-bold text-gray-700">
+                          <span className="flex items-center gap-2">
+                              <Zap className={`w-5 h-5 ${progress.force > 0 ? 'text-school-orange animate-pulse' : 'text-gray-400'}`} />
+                              잠재력(Force) 파장 측정
+                          </span>
+                          <span className="text-gray-500">{progress.force}%</span>
+                      </div>
+                      <div className="h-2.5 bg-gray-100 rounded-full overflow-hidden">
+                          <div 
+                              className="h-full bg-school-orange transition-all duration-300 ease-out" 
+                              style={{ width: `${progress.force}%` }}
+                          ></div>
+                      </div>
+                  </div>
+                  
+                  {/* Status Message Area */}
+                  <div className="mt-8 pt-6 border-t border-gray-100">
+                       <div className="flex items-center justify-center gap-3 text-sm text-gray-600 bg-gray-50 py-3 rounded-lg border border-gray-100">
+                          <Loader2 className="w-4 h-4 text-school-orange animate-spin" />
+                          <span className="font-medium animate-pulse">{logs[logs.length - 1] || '시스템 대기 중...'}</span>
+                       </div>
+                  </div>
+              </div>
+           </div>
+        </div>
+     );
+  }
 
   if (status === 'COMPLETED') {
     return (
-      <div className="max-w-4xl mx-auto py-20 px-4 text-center">
-        <div className="bg-white border-2 border-school-orange p-10 rounded-lg shadow-lg inline-block">
-            <h2 className="text-2xl font-bold text-school-text mb-4">지원서가 접수되었습니다</h2>
-            <p className="text-gray-600 mb-8">
-                예비 요원님의 지원서(접수번호: GH-2084-009)가 ASH GUARD 인사 시스템으로 전송되었습니다.<br/>
-                1차 서류 합격 여부는 문자메시지로 개별 통보됩니다.
-            </p>
-            <div className="flex gap-4 justify-center">
-              <button 
-                  onClick={() => setStatus('IDLE')}
-                  className="bg-gray-800 text-white px-6 py-2 rounded hover:bg-black transition-colors"
-              >
-                  추가 접수하기
-              </button>
-              <button 
-                  onClick={onGoHome}
-                  className="bg-school-orange text-white px-6 py-2 rounded hover:bg-orange-600 transition-colors"
-              >
-                  메인으로 이동
-              </button>
+      <div className="max-w-4xl mx-auto py-12 px-4 animate-in zoom-in-95 duration-700">
+        <div className="bg-white border-4 border-school-orange p-8 md:p-12 rounded-lg shadow-2xl relative overflow-hidden">
+            {/* Background Seal */}
+            <Shield className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 text-school-orange/5 rotate-12" />
+
+            <div className="relative z-10 text-center">
+               <div className="inline-block bg-school-orange text-white px-4 py-1 rounded-full text-sm font-bold mb-6 shadow-md">
+                  2084학년도 신입생 선발 결과
+               </div>
+               
+               <h2 className="text-4xl md:text-5xl font-serif font-bold text-gray-900 mb-2">최종 합격</h2>
+               <p className="text-2xl text-school-orange font-serif font-bold mb-8">ACCEPTED</p>
+
+               <div className="w-20 h-1 bg-gray-200 mx-auto mb-8"></div>
+
+               <div className="grid md:grid-cols-3 gap-6 text-left max-w-2xl mx-auto mb-10">
+                  <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                     <div className="flex items-center gap-2 mb-2 text-blue-600 font-bold">
+                        <FileText className="w-5 h-5" /> 자기소개서
+                     </div>
+                     <div className="text-2xl font-bold text-gray-800">88<span className="text-sm text-gray-500 font-normal">/100</span></div>
+                     <p className="text-xs text-gray-500 mt-1">"진정성 있는 서술"</p>
+                  </div>
+                  <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                     <div className="flex items-center gap-2 mb-2 text-green-600 font-bold">
+                        <Award className="w-5 h-5" /> 내신 성적
+                     </div>
+                     <div className="text-2xl font-bold text-gray-800">상위 30<span className="text-sm text-gray-500 font-normal">%</span></div>
+                     <p className="text-xs text-gray-500 mt-1">"성실한 학업 수행"</p>
+                  </div>
+                  <div className="bg-gray-50 p-4 rounded-lg border border-gray-200 shadow-inner">
+                     <div className="flex items-center gap-2 mb-2 text-gray-600 font-bold">
+                        <Zap className="w-5 h-5" /> 포스(Force)
+                     </div>
+                     <div className="text-2xl font-bold text-gray-600">등급 미정</div>
+                     <p className="text-xs text-gray-500 mt-1 font-bold">"교내에서 측정 예정입니다"</p>
+                  </div>
+               </div>
+
+               <p className="text-gray-700 leading-relaxed mb-8 text-lg font-medium">
+                  귀하의 잠재력과 성실함을 높이 평가하였습니다.<br/>
+                  강현고등학교는 귀하와 함께 성장하기를 기대합니다.<br/>
+                  입학을 진심으로 환영합니다.
+               </p>
+
+               <div className="flex flex-col md:flex-row gap-4 justify-center">
+                 <button 
+                     onClick={() => alert('등록금 납부 페이지로 이동합니다.')}
+                     className="bg-gray-900 text-white px-8 py-3 rounded-lg font-bold hover:bg-black transition-colors shadow-lg"
+                 >
+                     입학 등록금 납부
+                 </button>
+                 <button 
+                     onClick={onGoHome}
+                     className="bg-white text-gray-700 border border-gray-300 px-8 py-3 rounded-lg font-bold hover:bg-gray-50 transition-colors"
+                 >
+                     메인으로 이동
+                 </button>
+               </div>
             </div>
         </div>
       </div>
@@ -268,7 +442,7 @@ const SectionAdmission: React.FC<SectionAdmissionProps> = ({ onGoHome }) => {
                       <div className="mt-8 flex justify-center gap-2">
                          <button type="button" className="px-6 py-2.5 border border-gray-300 bg-white text-gray-700 font-bold rounded hover:bg-gray-50">임시저장</button>
                          <button type="submit" className="px-6 py-2.5 bg-school-orange text-white font-bold rounded hover:bg-orange-600 shadow-md">
-                            {status === 'PROCESSING' ? '암호화 전송중...' : '지원서 제출'}
+                            지원서 제출 및 심사 시작
                          </button>
                       </div>
                    </form>
@@ -281,6 +455,15 @@ const SectionAdmission: React.FC<SectionAdmissionProps> = ({ onGoHome }) => {
                         &lt; 모집요강 다시보기
                      </button>
                    </div>
+                </div>
+             )}
+             
+             {/* RESULT TAB CONTENT (Placeholder for manual navigation if needed) */}
+             {activeTab === 'RESULT' && status !== 'COMPLETED' && (
+                <div className="text-center py-20 border border-gray-200 rounded-lg bg-gray-50">
+                    <Search className="w-16 h-16 text-gray-300 mx-auto mb-4" />
+                    <h3 className="text-xl font-bold text-gray-700 mb-2">합격자 조회</h3>
+                    <p className="text-gray-500">원서 접수 시 발급된 수험번호로 조회 가능합니다.</p>
                 </div>
              )}
 

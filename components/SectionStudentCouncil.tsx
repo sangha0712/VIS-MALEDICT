@@ -29,20 +29,20 @@ const SectionStudentCouncil: React.FC<SectionStudentCouncilProps> = ({ onGoHome 
        {/* Banner */}
        <div className="bg-gradient-to-r from-blue-900 to-indigo-900 rounded-xl p-8 md:p-12 text-white mb-12 relative overflow-hidden">
           <div className="absolute top-0 right-0 w-64 h-64 bg-white opacity-5 rounded-full -mr-16 -mt-16"></div>
-          <div className="relative z-10 flex flex-col md:flex-row items-center gap-8">
+          <div className="relative z-10 flex flex-col md:flex-row items-center gap-8 text-center md:text-left">
              <div className="flex-1">
                 <div className="inline-block bg-white/20 px-3 py-1 rounded-full text-xs font-bold mb-4 border border-white/30">
                    제42대 학생회
                 </div>
-                <h3 className="text-4xl font-serif font-bold mb-4">"THE WATCHERS"</h3>
-                <p className="text-blue-100 leading-relaxed max-w-xl">
+                <h3 className="text-3xl md:text-4xl font-serif font-bold mb-4">"THE WATCHERS"</h3>
+                <p className="text-blue-100 leading-relaxed max-w-xl text-sm md:text-base">
                    저희 학생회 '왓쳐스(Watchers)'는 단순한 자치 활동을 넘어, 
                    예비 히어로들이 올바른 정의관을 확립하고 안전한 학교 생활을 
                    영위할 수 있도록 보이지 않는 곳에서 항상 깨어있겠습니다.
                 </p>
              </div>
-             <div className="w-32 h-32 md:w-48 md:h-48 bg-white/10 rounded-full flex items-center justify-center border-4 border-white/20">
-                <ShieldCheck className="w-16 h-16 md:w-24 md:h-24 text-white" />
+             <div className="w-24 h-24 md:w-48 md:h-48 bg-white/10 rounded-full flex items-center justify-center border-4 border-white/20 flex-shrink-0">
+                <ShieldCheck className="w-12 h-12 md:w-24 md:h-24 text-white" />
              </div>
           </div>
        </div>
@@ -63,7 +63,7 @@ const SectionStudentCouncil: React.FC<SectionStudentCouncilProps> = ({ onGoHome 
 
           <div className="md:col-span-2">
              <h3 className="text-xl font-bold text-gray-800 mb-6 border-l-4 border-school-orange pl-3">조직도 및 주요 업무</h3>
-             <div className="grid sm:grid-cols-2 gap-4">
+             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="bg-gray-50 p-5 rounded-lg border border-gray-100 hover:border-blue-300 transition-colors">
                    <div className="flex items-center gap-2 mb-2 font-bold text-blue-800">
                       <ShieldCheck className="w-5 h-5" /> 선도부 (Enforcement)
@@ -93,27 +93,27 @@ const SectionStudentCouncil: React.FC<SectionStudentCouncilProps> = ({ onGoHome 
        </div>
 
        {/* Promises */}
-       <div className="bg-slate-50 border border-slate-200 rounded-xl p-8">
+       <div className="bg-slate-50 border border-slate-200 rounded-xl p-6 md:p-8">
           <h3 className="text-xl font-bold text-gray-800 mb-6 text-center">제42대 학생회 주요 공약 이행 현황</h3>
           <div className="space-y-4">
-             <div className="flex items-center justify-between bg-white p-4 rounded shadow-sm border-l-4 border-green-500">
-                <div>
-                   <span className="text-xs font-bold text-green-600 bg-green-100 px-2 py-0.5 rounded mr-2">완료</span>
-                   <span className="font-bold text-gray-800">야간 자율 훈련장 24시간 개방</span>
+             <div className="flex flex-col md:flex-row items-start md:items-center justify-between bg-white p-4 rounded shadow-sm border-l-4 border-green-500 gap-2 md:gap-0">
+                <div className="flex items-center">
+                   <span className="text-xs font-bold text-green-600 bg-green-100 px-2 py-0.5 rounded mr-2 flex-shrink-0">완료</span>
+                   <span className="font-bold text-gray-800 text-sm md:text-base">야간 자율 훈련장 24시간 개방</span>
                 </div>
-                <CheckCircle className="w-5 h-5 text-green-500" />
+                <CheckCircle className="w-5 h-5 text-green-500 hidden md:block" />
              </div>
-             <div className="flex items-center justify-between bg-white p-4 rounded shadow-sm border-l-4 border-blue-500">
-                <div>
-                   <span className="text-xs font-bold text-blue-600 bg-blue-100 px-2 py-0.5 rounded mr-2">진행중</span>
-                   <span className="font-bold text-gray-800">학생 식당 '에너지 회복식' 메뉴 다양화</span>
+             <div className="flex flex-col md:flex-row items-start md:items-center justify-between bg-white p-4 rounded shadow-sm border-l-4 border-blue-500 gap-2 md:gap-0">
+                <div className="flex items-center">
+                   <span className="text-xs font-bold text-blue-600 bg-blue-100 px-2 py-0.5 rounded mr-2 flex-shrink-0">진행중</span>
+                   <span className="font-bold text-gray-800 text-sm md:text-base">학생 식당 '에너지 회복식' 메뉴 다양화</span>
                 </div>
                 <div className="text-xs font-bold text-gray-400">75%</div>
              </div>
-             <div className="flex items-center justify-between bg-white p-4 rounded shadow-sm border-l-4 border-gray-300">
-                <div>
-                   <span className="text-xs font-bold text-gray-600 bg-gray-200 px-2 py-0.5 rounded mr-2">예정</span>
-                   <span className="font-bold text-gray-800">구형 시뮬레이터(VR) 전면 교체</span>
+             <div className="flex flex-col md:flex-row items-start md:items-center justify-between bg-white p-4 rounded shadow-sm border-l-4 border-gray-300 gap-2 md:gap-0">
+                <div className="flex items-center">
+                   <span className="text-xs font-bold text-gray-600 bg-gray-200 px-2 py-0.5 rounded mr-2 flex-shrink-0">예정</span>
+                   <span className="font-bold text-gray-800 text-sm md:text-base">구형 시뮬레이터(VR) 전면 교체</span>
                 </div>
                 <div className="text-xs font-bold text-gray-400">예산 확보중</div>
              </div>

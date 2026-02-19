@@ -8,7 +8,9 @@ export interface Character {
   coverUrl: string;
   tags: string[];
   systemInstruction: string;
-  themeColor: 'blue' | 'purple' | 'red' | 'green';
+  themeColor: 'blue' | 'purple' | 'red' | 'green' | 'yellow';
+  abilityName?: string;
+  abilityDescription?: string;
 }
 
 export interface Message {
@@ -19,4 +21,4 @@ export interface Message {
   isError?: boolean;
 }
 
-export type ThemeColor = 'blue' | 'purple' | 'red' | 'green';
+export type ThemeColor = 'blue' | 'purple' | 'red' | 'green' | 'yellow';

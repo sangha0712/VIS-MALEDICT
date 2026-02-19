@@ -85,7 +85,7 @@ const SectionMap: React.FC<SectionMapProps> = ({ onGoHome }) => {
 
        <div className="flex flex-col lg:flex-row gap-6">
           {/* Detailed Map Visualization Area */}
-          <div className="flex-1 bg-[#F5F5F5] rounded-xl overflow-hidden border border-gray-300 relative h-[600px] shadow-inner group select-none">
+          <div className="flex-1 bg-[#F5F5F5] rounded-xl overflow-hidden border border-gray-300 relative h-[400px] md:h-[600px] shadow-inner group select-none">
              
              {/* Map Background Layer (Flat Street Map Style) */}
              <div className="absolute inset-0 bg-[#F2F4F7]">
@@ -161,7 +161,7 @@ const SectionMap: React.FC<SectionMapProps> = ({ onGoHome }) => {
              ))}
 
              {/* Compass & Legend */}
-             <div className="absolute top-6 right-6 bg-white/95 p-4 rounded-xl backdrop-blur-md text-xs text-gray-600 border border-gray-200 shadow-lg pointer-events-none z-20">
+             <div className="absolute top-6 right-6 bg-white/95 p-4 rounded-xl backdrop-blur-md text-xs text-gray-600 border border-gray-200 shadow-lg pointer-events-none z-20 hidden md:block">
                 <div className="w-12 h-12 border-2 border-gray-400 rounded-full flex items-center justify-center mb-3 mx-auto relative bg-gray-50">
                     <span className="font-serif font-bold text-red-600 absolute -top-2 bg-white px-1">N</span>
                     <div className="w-0.5 h-3/4 bg-red-500/50 absolute top-1.5 transform"></div>
@@ -179,9 +179,9 @@ const SectionMap: React.FC<SectionMapProps> = ({ onGoHome }) => {
           {/* Details Sidebar / Overlay for Mobile */}
           <div className={`
               lg:w-80 bg-white border-2 border-school-orange rounded-xl shadow-xl overflow-hidden flex flex-col
-              fixed lg:static bottom-4 left-4 right-4 lg:bottom-auto lg:left-auto lg:right-auto z-40
-              transition-all duration-300
-              ${selectedBuilding ? 'translate-y-0 opacity-100' : 'translate-y-[120%] lg:translate-y-0 lg:opacity-50 lg:pointer-events-none'}
+              fixed lg:static bottom-0 left-0 right-0 lg:bottom-auto lg:left-auto lg:right-auto z-40 rounded-b-none lg:rounded-b-xl
+              transition-transform duration-300 ease-out
+              ${selectedBuilding ? 'translate-y-0' : 'translate-y-full lg:translate-y-0 lg:opacity-50 lg:pointer-events-none'}
           `}>
              <div className="bg-school-orange p-4 flex justify-between items-center text-white">
                  <h3 className="font-bold text-lg">{selectedBuilding?.name || "건물 정보"}</h3>
@@ -191,7 +191,7 @@ const SectionMap: React.FC<SectionMapProps> = ({ onGoHome }) => {
              </div>
              
              {selectedBuilding ? (
-                 <div className="p-6 overflow-y-auto max-h-[40vh] lg:max-h-none">
+                 <div className="p-6 overflow-y-auto max-h-[50vh] lg:max-h-none pb-12 lg:pb-6">
                     <p className="text-gray-600 text-sm leading-relaxed mb-6 pb-4 border-b border-gray-100">
                        {selectedBuilding.description}
                     </p>
@@ -222,7 +222,7 @@ const SectionMap: React.FC<SectionMapProps> = ({ onGoHome }) => {
        <div className="mt-12">
           <h3 className="text-xl font-bold text-gray-800 mb-6 border-l-4 border-gray-800 pl-4">전체 시설 현황</h3>
           <div className="overflow-x-auto bg-white rounded-lg border border-gray-200 shadow-sm">
-             <table className="w-full text-sm text-left">
+             <table className="w-full text-sm text-left min-w-[600px]">
                 <thead className="bg-gray-100 text-gray-700 uppercase">
                    <tr>
                       <th className="px-6 py-4">건물명</th>

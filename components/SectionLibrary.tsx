@@ -28,19 +28,19 @@ const SectionLibrary: React.FC<SectionLibraryProps> = ({ onGoHome }) => {
        </div>
 
        {/* Search Bar Visual */}
-       <div className="bg-gray-100 p-8 rounded-xl mb-12 flex flex-col items-center">
+       <div className="bg-gray-100 p-6 md:p-8 rounded-xl mb-12 flex flex-col items-center">
           <div className="w-full max-w-2xl relative">
              <input 
                 type="text" 
                 placeholder="도서명, 저자, 또는 아티팩트 ID를 입력하세요..." 
-                className="w-full pl-12 pr-4 py-4 rounded-full border border-gray-300 focus:outline-none focus:border-school-orange shadow-sm text-lg"
+                className="w-full pl-12 pr-4 py-3 md:py-4 rounded-full border border-gray-300 focus:outline-none focus:border-school-orange shadow-sm text-sm md:text-lg"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
              />
-             <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 w-6 h-6" />
+             <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5 md:w-6 md:h-6" />
           </div>
-          <div className="flex gap-2 mt-4 text-xs text-gray-500">
-             <span>인기 검색어:</span>
+          <div className="flex flex-wrap gap-2 mt-4 text-xs text-gray-500 justify-center">
+             <span className="py-1">인기 검색어:</span>
              <span className="bg-white px-2 py-1 rounded border cursor-pointer hover:text-school-orange">기초 에테르학</span>
              <span className="bg-white px-2 py-1 rounded border cursor-pointer hover:text-school-orange">던전 생태계</span>
              <span className="bg-white px-2 py-1 rounded border cursor-pointer hover:text-school-orange text-red-500">금지된 주술(열람불가)</span>
@@ -48,7 +48,7 @@ const SectionLibrary: React.FC<SectionLibraryProps> = ({ onGoHome }) => {
        </div>
 
        {/* Floor Guide */}
-       <div className="grid md:grid-cols-3 gap-8 mb-12">
+       <div className="grid md:grid-cols-3 gap-6 md:gap-8 mb-12">
           {/* 2F */}
           <div className="border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow">
              <div className="flex justify-between items-start mb-4">
@@ -97,7 +97,7 @@ const SectionLibrary: React.FC<SectionLibraryProps> = ({ onGoHome }) => {
        </div>
 
        {/* Digital Access Banner */}
-       <div className="bg-slate-800 text-white rounded-xl p-8 flex flex-col md:flex-row items-center justify-between">
+       <div className="bg-slate-800 text-white rounded-xl p-8 flex flex-col md:flex-row items-center justify-between gap-4">
           <div>
              <h3 className="text-xl font-bold mb-2">E-Library 접속 안내</h3>
              <p className="text-slate-300 text-sm">
@@ -105,7 +105,7 @@ const SectionLibrary: React.FC<SectionLibraryProps> = ({ onGoHome }) => {
                 외부 접속 시 2단계 생체 인증이 필요합니다.
              </p>
           </div>
-          <button className="mt-4 md:mt-0 bg-school-orange hover:bg-orange-600 px-6 py-3 rounded font-bold transition-colors">
+          <button className="w-full md:w-auto bg-school-orange hover:bg-orange-600 px-6 py-3 rounded font-bold transition-colors">
              전자도서관 로그인
           </button>
        </div>
