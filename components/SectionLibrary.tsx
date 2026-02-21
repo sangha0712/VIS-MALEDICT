@@ -105,8 +105,11 @@ const SectionLibrary: React.FC<SectionLibraryProps> = ({ onGoHome }) => {
                 외부 접속 시 2단계 생체 인증이 필요합니다.
              </p>
           </div>
-          <button className="w-full md:w-auto bg-school-orange hover:bg-orange-600 px-6 py-3 rounded font-bold transition-colors">
-             전자도서관 로그인
+          <button 
+             className="w-full md:w-auto bg-school-orange hover:bg-orange-600 px-6 py-3 rounded font-bold transition-colors"
+             onClick={() => alert('전자도서관에 접속합니다.')}
+          >
+             전자도서관 접속
           </button>
        </div>
     </div>

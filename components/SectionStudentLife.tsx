@@ -253,7 +253,12 @@ const SectionStudentLife: React.FC<SectionStudentLifeProps> = ({ onGoHome, initi
                    ))}
                 </div>
                 <div className="text-center pt-4">
-                   <button className="bg-gray-800 text-white px-6 py-2 rounded font-bold hover:bg-gray-700 transition-colors">제보하기</button>
+                   <button 
+                     className="bg-gray-800 text-white px-6 py-2 rounded font-bold hover:bg-gray-700 transition-colors"
+                     onClick={() => alert('제보가 접수되었습니다.\n관리자 검토 후 익명으로 게시됩니다.')}
+                   >
+                     제보하기
+                   </button>
                 </div>
             </div>
          );
@@ -314,10 +319,14 @@ const SectionStudentLife: React.FC<SectionStudentLifeProps> = ({ onGoHome, initi
                      </p>
                      <span className="text-xs text-gray-400">2084.04.20 | 학부모회 총무</span>
                   </div>
-               </div>
-               <div className="text-center pt-8 border-t border-gray-200">
-                  <p className="text-gray-500 mb-4">더 많은 게시글을 보시려면 학부모 인증이 필요합니다.</p>
-                  <button className="bg-gray-800 text-white px-6 py-2 rounded font-bold hover:bg-gray-700">학부모 인증 로그인</button>
+                  <div className="border border-gray-200 p-6 rounded-lg bg-white">
+                     <h4 className="font-bold text-lg text-gray-800 mb-2">급식 모니터링단 모집 안내</h4>
+                     <p className="text-gray-600 text-sm mb-4">
+                        학생들의 건강한 식단 관리를 위해 급식 모니터링단을 모집합니다.
+                        관심 있는 학부모님들의 많은 참여 바랍니다.
+                     </p>
+                     <span className="text-xs text-gray-400">2084.04.15 | 학부모회</span>
+                  </div>
                </div>
             </div>
          );
@@ -342,11 +351,7 @@ const SectionStudentLife: React.FC<SectionStudentLifeProps> = ({ onGoHome, initi
             </div>
          );
       default:
-         return (
-            <div className="py-20 text-center bg-gray-50 border border-gray-200 rounded-lg">
-               <p className="text-gray-500">회원 공개 게시판입니다. 로그인 후 이용해주세요.</p>
-            </div>
-         );
+         return null;
     }
   };
 

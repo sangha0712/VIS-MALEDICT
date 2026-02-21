@@ -15,15 +15,15 @@ import SectionGifted from './components/SectionGifted';
 import SectionLibrary from './components/SectionLibrary';
 import SectionNotice from './components/SectionNotice';
 import SectionStudentLife from './components/SectionStudentLife';
-import SectionRanking from './components/SectionRanking';
 import SectionCommandCenter from './components/SectionCommandCenter';
 import SectionGNet from './components/SectionGNet';
 import SectionRules from './components/SectionRules';
 import SectionWelfare from './components/SectionWelfare';
 import FullMenuOverlay from './components/FullMenuOverlay';
-import { Search, Menu, ChevronRight, Home, User, LogIn, Shield, Phone, Lock } from 'lucide-react';
+import Modal from './components/Modal';
+import { Search, Menu, ChevronRight, Home, User, LogIn, Shield, Phone, Lock, AlertCircle } from 'lucide-react';
 
-type ViewState = 'HOME' | 'CHARACTER' | 'HISTORY' | 'ADMISSION' | 'MAP' | 'ASHGUARD' | 'TRAINING' | 'ACADEMIC_INFO' | 'STUDENT_COUNCIL' | 'GIFTED_EDU' | 'LIBRARY' | 'NOTICE' | 'STUDENT_LIFE' | 'RANKING' | 'COMMAND_CENTER' | 'GNET' | 'RULES' | 'WELFARE';
+type ViewState = 'HOME' | 'CHARACTER' | 'HISTORY' | 'ADMISSION' | 'MAP' | 'ASHGUARD' | 'TRAINING' | 'ACADEMIC_INFO' | 'STUDENT_COUNCIL' | 'GIFTED_EDU' | 'LIBRARY' | 'NOTICE' | 'STUDENT_LIFE' | 'COMMAND_CENTER' | 'GNET' | 'RULES' | 'WELFARE';
 
 const App: React.FC = () => {
   const [currentView, setCurrentView] = useState<ViewState>('HOME');
@@ -31,6 +31,13 @@ const App: React.FC = () => {
   const [selectedCharacter, setSelectedCharacter] = useState<Character | null>(null);
   const [activeFilter, setActiveFilter] = useState<string>('All');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  
+  // Interaction States
+  const [isLoginOpen, setIsLoginOpen] = useState(false);
+  const [loginId, setLoginId] = useState('');
+  const [loginPw, setLoginPw] = useState('');
+  const [searchText, setSearchText] = useState('');
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const filters = ['All', '1학년', '2학년', '3학년', '교직원', '외부 초빙 강사'];
 
@@ -42,6 +49,31 @@ const App: React.FC = () => {
     setCurrentView(view);
     setCurrentTab(tab);
     window.scrollTo(0, 0);
+  };
+
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (loginId && loginPw) {
+      setIsLoggedIn(true);
+      setIsLoginOpen(false);
+      alert(`환영합니다, ${loginId}님! 강현고등학교 인트라넷에 접속되었습니다.`);
+      setLoginId('');
+      setLoginPw('');
+    }
+  };
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!searchText.trim()) return;
+    alert(`'${searchText}'에 대한 통합 검색 결과가 없습니다.\n(보안 등급이 낮아 열람할 수 없는 자료일 수 있습니다.)`);
+    setSearchText('');
+  };
+
+  const handleFamilySite = () => {
+    const select = document.getElementById('family-site-select') as HTMLSelectElement;
+    if (select && select.value !== '관련기관 바로가기') {
+       alert(`'${select.value}'(으)로 이동합니다. (외부 링크)`);
+    }
   };
 
   const renderContent = () => {
@@ -81,9 +113,6 @@ const App: React.FC = () => {
 
       case 'STUDENT_LIFE':
         return <SectionStudentLife onGoHome={() => handleNavigate('HOME')} initialTab={currentTab} />;
-
-      case 'RANKING':
-        return <SectionRanking onGoHome={() => handleNavigate('HOME')} />;
 
       case 'COMMAND_CENTER':
         return <SectionCommandCenter onGoHome={() => handleNavigate('HOME')} />;
@@ -177,15 +206,29 @@ const App: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 h-10 flex items-center justify-end text-xs text-gray-500 space-x-4 overflow-x-auto whitespace-nowrap scrollbar-hide">
           <span className="cursor-pointer hover:text-school-orange flex-shrink-0" onClick={() => handleNavigate('HOME')}>홈</span>
           <span className="w-[1px] h-3 bg-gray-300 flex-shrink-0"></span>
-          <span className="cursor-pointer hover:text-school-orange flex items-center gap-1 flex-shrink-0"><LogIn className="w-3 h-3"/> 로그인</span>
-          <span className="w-[1px] h-3 bg-gray-300 flex-shrink-0"></span>
-          <span className="cursor-pointer hover:text-school-orange flex items-center gap-1 flex-shrink-0"><User className="w-3 h-3"/> 회원가입</span>
+          {isLoggedIn ? (
+             <span className="cursor-pointer hover:text-school-orange flex items-center gap-1 flex-shrink-0 font-bold text-school-orange" onClick={() => setIsLoggedIn(false)}>
+                <User className="w-3 h-3"/> 로그아웃
+             </span>
+          ) : (
+             <>
+               <span className="cursor-pointer hover:text-school-orange flex items-center gap-1 flex-shrink-0" onClick={() => setIsLoginOpen(true)}><LogIn className="w-3 h-3"/> 로그인</span>
+               <span className="w-[1px] h-3 bg-gray-300 flex-shrink-0"></span>
+               <span className="cursor-pointer hover:text-school-orange flex items-center gap-1 flex-shrink-0" onClick={() => alert('신입생 등록 기간이 아닙니다.')}><User className="w-3 h-3"/> 회원가입</span>
+             </>
+          )}
           <span className="w-[1px] h-3 bg-gray-300 flex-shrink-0"></span>
           <span className="cursor-pointer hover:text-school-orange flex-shrink-0" onClick={() => setIsMenuOpen(true)}>사이트맵</span>
-          <div className="ml-4 flex items-center bg-gray-100 rounded-full px-3 py-1 flex-shrink-0">
-             <input type="text" placeholder="통합검색" className="bg-transparent border-none text-xs focus:outline-none w-24 md:w-32" />
-             <Search className="w-3 h-3 text-school-orange" />
-          </div>
+          <form onSubmit={handleSearch} className="ml-4 flex items-center bg-gray-100 rounded-full px-3 py-1 flex-shrink-0">
+             <input 
+               type="text" 
+               placeholder="통합검색" 
+               className="bg-transparent border-none text-xs focus:outline-none w-24 md:w-32" 
+               value={searchText}
+               onChange={(e) => setSearchText(e.target.value)}
+             />
+             <button type="submit"><Search className="w-3 h-3 text-school-orange" /></button>
+          </form>
         </div>
       </div>
 
@@ -276,7 +319,10 @@ const App: React.FC = () => {
                      <button className="bg-school-orange hover:bg-orange-600 text-white px-6 py-3 rounded font-bold transition-colors shadow-lg text-sm md:text-base text-center" onClick={() => handleNavigate('ADMISSION', 'GUIDE')}>
                         신입생 모집요강
                      </button>
-                     <button className="bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white border border-white/50 px-6 py-3 rounded font-bold transition-colors text-sm md:text-base text-center">
+                     <button 
+                        className="bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white border border-white/50 px-6 py-3 rounded font-bold transition-colors text-sm md:text-base text-center"
+                        onClick={() => alert('홍보 영상 재생 (준비 중)')}
+                     >
                         홍보영상 보기
                      </button>
                   </div>
@@ -296,11 +342,11 @@ const App: React.FC = () => {
            <div className="flex flex-col gap-3 w-full md:w-auto">
               <div className="w-10 h-10 bg-gray-600 rounded-full flex items-center justify-center font-serif font-bold text-white mb-2">G</div>
               <div className="flex flex-wrap gap-4 text-white font-bold mb-2 text-xs md:text-sm">
-                 <span>개인정보처리방침</span>
+                 <span className="cursor-pointer hover:text-school-orange" onClick={() => alert('개인정보처리방침 전문 보기')}>개인정보처리방침</span>
                  <span className="w-[1px] bg-gray-600"></span>
-                 <span>정보공개청구</span>
+                 <span className="cursor-pointer hover:text-school-orange" onClick={() => alert('정보공개청구 페이지로 이동')}>정보공개청구</span>
                  <span className="w-[1px] bg-gray-600"></span>
-                 <span>ASH GUARD 채용</span>
+                 <span className="cursor-pointer hover:text-school-orange" onClick={() => handleNavigate('ASHGUARD', 'RECRUIT')}>ASH GUARD 채용</span>
               </div>
               <div className="flex flex-col gap-1 text-xs leading-relaxed">
                  <p>(04521) 서울특별시 강현구 히어로대로 119 강현고등학교</p>
@@ -315,13 +361,18 @@ const App: React.FC = () => {
            <div className="flex flex-col items-start md:items-end gap-2 w-full md:w-auto">
               <span className="text-xs font-bold text-gray-500 uppercase tracking-widest">Family Site</span>
               <div className="flex items-center gap-2 w-full md:w-auto">
-                <select className="bg-[#444] text-white p-2 text-xs border border-gray-600 rounded w-full md:w-48">
+                <select id="family-site-select" className="bg-[#444] text-white p-2 text-xs border border-gray-600 rounded w-full md:w-48">
                    <option>관련기관 바로가기</option>
                    <option>ASH GUARD 본부</option>
                    <option>경찰청 특수수사국</option>
                    <option>국립 이능력 연구소</option>
                 </select>
-                <button className="bg-school-orange text-white px-3 py-2 text-xs rounded font-bold whitespace-nowrap">GO</button>
+                <button 
+                  onClick={handleFamilySite}
+                  className="bg-school-orange text-white px-3 py-2 text-xs rounded font-bold whitespace-nowrap hover:bg-orange-600 transition-colors"
+                >
+                  GO
+                </button>
               </div>
            </div>
         </div>
@@ -341,6 +392,45 @@ const App: React.FC = () => {
           onClose={() => setSelectedCharacter(null)} 
         />
       )}
+
+      {/* Login Modal */}
+      <Modal isOpen={isLoginOpen} onClose={() => setIsLoginOpen(false)} title="통합 로그인">
+         <form onSubmit={handleLogin} className="space-y-4">
+            <div className="bg-blue-50 p-3 rounded text-xs text-blue-700 flex items-start gap-2">
+               <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5" />
+               <p>교직원 및 재학생은 부여된 ID로 로그인하십시오.<br/>외부인은 임시 발급된 코드를 입력해주세요.</p>
+            </div>
+            <div>
+               <label className="block text-sm font-bold text-gray-700 mb-1">아이디 / 학번</label>
+               <input 
+                  type="text" 
+                  className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:border-school-orange" 
+                  value={loginId}
+                  onChange={(e) => setLoginId(e.target.value)}
+                  placeholder="ID 입력"
+               />
+            </div>
+            <div>
+               <label className="block text-sm font-bold text-gray-700 mb-1">비밀번호</label>
+               <input 
+                  type="password" 
+                  className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:border-school-orange" 
+                  value={loginPw}
+                  onChange={(e) => setLoginPw(e.target.value)}
+                  placeholder="Password 입력"
+               />
+            </div>
+            <div className="flex items-center justify-between text-xs text-gray-500">
+               <label className="flex items-center gap-1 cursor-pointer">
+                  <input type="checkbox" /> 자동 로그인
+               </label>
+               <span className="cursor-pointer hover:text-school-orange">비밀번호 찾기</span>
+            </div>
+            <button type="submit" className="w-full bg-school-orange text-white font-bold py-3 rounded hover:bg-orange-600 transition-colors">
+               로그인
+            </button>
+         </form>
+      </Modal>
     </div>
   );
 };

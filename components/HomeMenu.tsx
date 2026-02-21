@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
-import { Megaphone, Calendar, Users, BookOpen, PenTool, ExternalLink, Shield, Crosshair, Briefcase, Dumbbell, Library, Monitor, GraduationCap, Gavel, Radio, FileText } from 'lucide-react';
+import React, { useState, useRef } from 'react';
+import { Megaphone, Calendar, Users, BookOpen, PenTool, ExternalLink, Shield, Crosshair, Briefcase, Dumbbell, Library, GraduationCap, Gavel, Radio, FileText } from 'lucide-react';
 
 interface HomeMenuProps {
-  onNavigate: (view: 'CHARACTER' | 'HISTORY' | 'ADMISSION' | 'ACADEMIC_INFO' | 'LIBRARY' | 'NOTICE' | 'RANKING' | 'COMMAND_CENTER' | 'GNET' | 'RULES' | 'WELFARE') => void;
+  onNavigate: (view: 'CHARACTER' | 'HISTORY' | 'ADMISSION' | 'ACADEMIC_INFO' | 'LIBRARY' | 'NOTICE' | 'COMMAND_CENTER' | 'GNET' | 'RULES' | 'WELFARE' | 'TRAINING' | 'MAP' | 'ASHGUARD' | 'STUDENT_COUNCIL' | 'GIFTED_EDU' | 'STUDENT_LIFE') => void;
 }
 
 const HomeMenu: React.FC<HomeMenuProps> = ({ onNavigate }) => {
   const [activeTab, setActiveTab] = useState<'NOTICE' | 'RECRUIT' | 'TRAINING'>('NOTICE');
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   const notices = [
     { id: 1, title: '2084학년도 1학기 중간고사 일정 및 부정행위(이능력 사용) 단속 안내', date: '2084-04-10', new: true, category: '학사' },
@@ -46,12 +47,23 @@ const HomeMenu: React.FC<HomeMenuProps> = ({ onNavigate }) => {
   const iconLinks = [
     { label: "아티팩트 도서관", icon: Library, color: "bg-cyan-100 text-cyan-600", view: 'LIBRARY' },
     { label: "강현 알리미", icon: Megaphone, color: "bg-blue-100 text-blue-600", view: 'NOTICE' },
-    { label: "히어로 랭킹 포털", icon: Monitor, color: "bg-purple-100 text-purple-600", view: 'RANKING' },
     { label: "작전 지휘 통제실", icon: Gavel, color: "bg-slate-100 text-slate-600", view: 'COMMAND_CENTER' },
     { label: "G-NET (전술망)", icon: Radio, color: "bg-rose-100 text-rose-600", view: 'GNET' },
     { label: "이능력 사용 규정", icon: GraduationCap, color: "bg-green-100 text-green-600", view: 'RULES' },
     { label: "장비/치료비 청구", icon: FileText, color: "bg-yellow-100 text-yellow-600", view: 'WELFARE' },
   ];
+
+  const scroll = (direction: 'left' | 'right') => {
+    if (scrollRef.current) {
+      const { current } = scrollRef;
+      const scrollAmount = 200;
+      if (direction === 'left') {
+        current.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+      } else {
+        current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+      }
+    }
+  };
 
   return (
     <div className="w-full">
@@ -82,14 +94,14 @@ const HomeMenu: React.FC<HomeMenuProps> = ({ onNavigate }) => {
                         <Dumbbell className="w-4 h-4" /> 훈련일정
                      </button>
                   </div>
-                  <button className="text-gray-400 hover:text-black hidden md:block">
+                  <button className="text-gray-400 hover:text-black hidden md:block" onClick={() => onNavigate('NOTICE')}>
                      <ExternalLink className="w-4 h-4" />
                   </button>
                </div>
                
                <ul className="space-y-3">
                   {activeList.map((item) => (
-                     <li key={item.id} className="flex justify-between items-start md:items-center text-sm group cursor-pointer hover:bg-gray-50 p-1 rounded transition-colors flex-col md:flex-row gap-1 md:gap-0">
+                     <li key={item.id} className="flex justify-between items-start md:items-center text-sm group cursor-pointer hover:bg-gray-50 p-1 rounded transition-colors flex-col md:flex-row gap-1 md:gap-0" onClick={() => alert(`[${item.category}] ${item.title}\n\n(상세 내용이 팝업으로 표시됩니다.)`)}>
                         <div className="flex items-center gap-2 overflow-hidden w-full">
                            <span className="text-[10px] font-bold text-gray-500 bg-gray-200 px-1.5 py-0.5 rounded min-w-[40px] text-center flex-shrink-0">
                              {item.category}
@@ -106,7 +118,10 @@ const HomeMenu: React.FC<HomeMenuProps> = ({ onNavigate }) => {
             </div>
 
             {/* Column 3: Popup Zone (Visual) */}
-            <div className="md:col-span-1 bg-gradient-to-br from-red-600 to-red-800 rounded-xl shadow-soft border border-red-700 overflow-hidden relative group cursor-pointer h-48 md:h-auto flex flex-col items-center justify-center text-white p-4 text-center transition-transform hover:-translate-y-1">
+            <div 
+               className="md:col-span-1 bg-gradient-to-br from-red-600 to-red-800 rounded-xl shadow-soft border border-red-700 overflow-hidden relative group cursor-pointer h-48 md:h-auto flex flex-col items-center justify-center text-white p-4 text-center transition-transform hover:-translate-y-1"
+               onClick={() => alert('제52회 히어로 면허 필기시험\n\n일시: 2084. 06. 12 (토) 09:00\n장소: 제1체육관\n준비물: 수험표, 신분증, 컴퓨터용 사인펜\n\n※ 부정행위(이능력 사용) 적발 시 즉시 실격 및 3년간 응시 제한')}
+            >
                <div className="absolute top-0 left-0 bg-white text-red-600 text-xs font-bold px-3 py-1 z-10 rounded-br-lg shadow-sm">
                   D-DAY
                </div>
@@ -153,13 +168,16 @@ const HomeMenu: React.FC<HomeMenuProps> = ({ onNavigate }) => {
                </div>
                <span className="font-bold text-gray-700 text-xs md:text-sm">교관/교사 소개</span>
             </button>
-            <button className="flex flex-col items-center justify-center p-4 md:p-6 bg-white border border-gray-200 rounded-lg hover:border-school-orange hover:shadow-md transition-all group h-28 md:h-32">
+            <button 
+               onClick={() => alert('모의전투 신청 시스템에 접속합니다...\n\n[알림] 현재 예약 가능한 슬롯이 없습니다. (대기자: 14명)')}
+               className="flex flex-col items-center justify-center p-4 md:p-6 bg-white border border-gray-200 rounded-lg hover:border-school-orange hover:shadow-md transition-all group h-28 md:h-32"
+            >
                <div className="w-10 h-10 md:w-12 md:h-12 bg-red-50 text-red-500 rounded-full flex items-center justify-center mb-2 group-hover:bg-school-orange group-hover:text-white transition-colors">
                   <Crosshair className="w-5 h-5 md:w-6 md:h-6" />
                </div>
                <span className="font-bold text-gray-700 text-xs md:text-sm">모의전투 신청</span>
             </button>
-            <button className="flex flex-col items-center justify-center p-4 md:p-6 bg-white border border-gray-200 rounded-lg hover:border-school-orange hover:shadow-md transition-all group h-28 md:h-32">
+            <button onClick={() => onNavigate('TRAINING')} className="flex flex-col items-center justify-center p-4 md:p-6 bg-white border border-gray-200 rounded-lg hover:border-school-orange hover:shadow-md transition-all group h-28 md:h-32">
                <div className="w-10 h-10 md:w-12 md:h-12 bg-gray-50 text-gray-500 rounded-full flex items-center justify-center mb-2 group-hover:bg-school-orange group-hover:text-white transition-colors">
                   <Calendar className="w-5 h-5 md:w-6 md:h-6" />
                </div>
@@ -192,25 +210,31 @@ const HomeMenu: React.FC<HomeMenuProps> = ({ onNavigate }) => {
              <div className="flex items-center justify-between mb-4">
                 <h3 className="font-bold text-gray-700">주요 협력 기관</h3>
                 <div className="flex gap-1">
-                   <button className="w-6 h-6 border border-gray-300 bg-white flex items-center justify-center text-gray-500 hover:text-black">&lt;</button>
-                   <button className="w-6 h-6 border border-gray-300 bg-white flex items-center justify-center text-gray-500 hover:text-black">&gt;</button>
+                   <button onClick={() => scroll('left')} className="w-6 h-6 border border-gray-300 bg-white flex items-center justify-center text-gray-500 hover:text-black">&lt;</button>
+                   <button onClick={() => scroll('right')} className="w-6 h-6 border border-gray-300 bg-white flex items-center justify-center text-gray-500 hover:text-black">&gt;</button>
                 </div>
              </div>
-             <div className="flex gap-4 overflow-x-auto scrollbar-hide pb-2">
-                <div className="flex-1 min-w-[120px] bg-white border border-gray-200 p-3 flex items-center justify-center text-center text-xs font-bold text-gray-600 h-16 shadow-sm rounded">
+             <div ref={scrollRef} className="flex gap-4 overflow-x-auto scrollbar-hide pb-2 scroll-smooth">
+                <div className="flex-1 min-w-[120px] bg-white border border-gray-200 p-3 flex items-center justify-center text-center text-xs font-bold text-gray-600 h-16 shadow-sm rounded cursor-pointer hover:border-school-orange" onClick={() => alert('ASH GUARD 본부 사이트로 이동합니다. (외부 링크)')}>
                    ASH GUARD<br/>본부
                 </div>
-                <div className="flex-1 min-w-[120px] bg-white border border-gray-200 p-3 flex items-center justify-center text-center text-xs font-bold text-gray-600 h-16 shadow-sm rounded">
+                <div className="flex-1 min-w-[120px] bg-white border border-gray-200 p-3 flex items-center justify-center text-center text-xs font-bold text-gray-600 h-16 shadow-sm rounded cursor-pointer hover:border-school-orange" onClick={() => alert('국가대테러대책위원회 사이트로 이동합니다. (외부 링크)')}>
                    국가대테러<br/>대책위원회
                 </div>
-                <div className="flex-1 min-w-[120px] bg-white border border-gray-200 p-3 flex items-center justify-center text-center text-xs font-bold text-gray-600 h-16 shadow-sm rounded">
+                <div className="flex-1 min-w-[120px] bg-white border border-gray-200 p-3 flex items-center justify-center text-center text-xs font-bold text-gray-600 h-16 shadow-sm rounded cursor-pointer hover:border-school-orange" onClick={() => alert('특수경찰청 사이트로 이동합니다. (외부 링크)')}>
                    특수경찰청
                 </div>
-                <div className="flex-1 min-w-[120px] bg-white border border-gray-200 p-3 flex items-center justify-center text-center text-xs font-bold text-gray-600 h-16 shadow-sm rounded">
+                <div className="flex-1 min-w-[120px] bg-white border border-gray-200 p-3 flex items-center justify-center text-center text-xs font-bold text-gray-600 h-16 shadow-sm rounded cursor-pointer hover:border-school-orange" onClick={() => alert('국립과학수사연구원 사이트로 이동합니다. (외부 링크)')}>
                    국립과학수사<br/>연구원
                 </div>
-                <div className="flex-1 min-w-[120px] bg-white border border-gray-200 p-3 flex items-center justify-center text-center text-xs font-bold text-gray-600 h-16 shadow-sm rounded">
+                <div className="flex-1 min-w-[120px] bg-white border border-gray-200 p-3 flex items-center justify-center text-center text-xs font-bold text-gray-600 h-16 shadow-sm rounded cursor-pointer hover:border-school-orange" onClick={() => alert('한국이능력자협회 사이트로 이동합니다. (외부 링크)')}>
                    한국이능력자<br/>협회
+                </div>
+                <div className="flex-1 min-w-[120px] bg-white border border-gray-200 p-3 flex items-center justify-center text-center text-xs font-bold text-gray-600 h-16 shadow-sm rounded cursor-pointer hover:border-school-orange" onClick={() => alert('국제히어로연맹(IHF) 사이트로 이동합니다. (외부 링크)')}>
+                   국제히어로연맹<br/>(IHF)
+                </div>
+                <div className="flex-1 min-w-[120px] bg-white border border-gray-200 p-3 flex items-center justify-center text-center text-xs font-bold text-gray-600 h-16 shadow-sm rounded cursor-pointer hover:border-school-orange" onClick={() => alert('헌터스 길드 사이트로 이동합니다. (외부 링크)')}>
+                   헌터스 길드
                 </div>
              </div>
           </div>

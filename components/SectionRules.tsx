@@ -86,7 +86,10 @@ const SectionRules: React.FC<SectionRulesProps> = ({ onGoHome }) => {
             <h4 className="font-bold text-gray-800">2084학년도 학생 생활 규정집 (전체)</h4>
             <p className="text-xs text-gray-500 mt-1">최종 개정일: 2084. 03. 01</p>
           </div>
-          <button className="flex items-center gap-2 bg-white border border-gray-300 px-4 py-2 rounded font-bold text-sm hover:bg-gray-50 text-gray-700">
+          <button 
+            className="flex items-center gap-2 bg-white border border-gray-300 px-4 py-2 rounded font-bold text-sm hover:bg-gray-50 text-gray-700"
+            onClick={() => alert('PDF 다운로드를 시작합니다...')}
+          >
             <FileText className="w-4 h-4" /> PDF 다운로드
           </button>
         </div>

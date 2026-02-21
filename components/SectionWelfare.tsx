@@ -88,7 +88,10 @@ const SectionWelfare: React.FC<SectionWelfareProps> = ({ onGoHome }) => {
             </ul>
           </div>
 
-          <button className="w-full bg-school-orange text-white font-bold py-4 rounded-lg hover:bg-orange-600 transition-colors flex items-center justify-center gap-2">
+          <button 
+            className="w-full bg-school-orange text-white font-bold py-4 rounded-lg hover:bg-orange-600 transition-colors flex items-center justify-center gap-2"
+            onClick={() => alert('신청서가 제출되었습니다.\n처리 결과는 [마이페이지]에서 확인 가능합니다.')}
+          >
             <FileText className="w-5 h-5" /> 신청서 제출하기
           </button>
         </form>

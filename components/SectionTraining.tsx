@@ -194,8 +194,11 @@ const SectionTraining: React.FC<SectionTrainingProps> = ({ onGoHome, initialTab 
                    <MonitorPlay className="w-16 h-16 text-gray-300 mx-auto mb-4" />
                    <h3 className="text-xl font-bold text-gray-700 mb-2">E-Learning Center</h3>
                    <p className="text-gray-500 mb-6">재학생 전용 온라인 강의 플랫폼입니다.</p>
-                   <button className="bg-school-orange text-white px-6 py-2 rounded font-bold hover:bg-orange-600">
-                      LMS 로그인
+                   <button 
+                      className="bg-school-orange text-white px-6 py-2 rounded font-bold hover:bg-orange-600"
+                      onClick={() => alert('LMS(학습관리시스템)에 접속합니다.')}
+                   >
+                      LMS 접속
                    </button>
                 </div>
              )}
