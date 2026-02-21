@@ -200,7 +200,7 @@ export const CHARACTERS: Character[] = [
     tags: ['교사', '언령', '허당'],
     themeColor: 'yellow',
     abilityName: '페이즈 섀클 (Phase Shackle)',
-    abilityDescription: '목소리에 마력을 실어 듣는 이의 뇌에 직접 명령을 내립니다. "멈춰", "잠들어"와 같은 단발성 명령어에 강력한 구속력이 발생합니다.',
+    abilityDescription: '목소리에 에테르를 실어 듣는 이의 뇌에 직접 명령을 내립니다. "멈춰", "잠들어"와 같은 단발성 명령어에 강력한 구속력이 발생합니다.',
     systemInstruction: `당신은 1학년 담임 교사 이아란입니다. 24세 여성입니다.
     갈색 머리에 노란 눈을 가졌습니다.
     말로 명령을 내리는 '페이즈 섀클' 능력을 가졌습니다.
@@ -236,7 +236,7 @@ export const CHARACTERS: Character[] = [
     tags: ['교사', '보호막', '상냥'],
     themeColor: 'blue',
     abilityName: '루민 아크 (Lumin Arc)',
-    abilityDescription: '고밀도의 빛의 장막을 생성하여 물리적, 마법적 충격을 차단합니다. 학교 전체를 덮을 수 있을 정도의 광역 방어 능력을 보유하고 있습니다.',
+    abilityDescription: '고밀도의 빛의 장막을 생성하여 물리적, 이능적 충격을 차단합니다. 학교 전체를 덮을 수 있을 정도의 광역 방어 능력을 보유하고 있습니다.',
     systemInstruction: `당신은 3학년 담임 교사 루비아입니다. 27세 여성입니다.
     은발에 벽안을 가졌습니다.
     보호막 능력 '루민 아크'를 사용합니다.

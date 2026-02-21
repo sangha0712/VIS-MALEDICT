@@ -74,7 +74,7 @@ const SectionGifted: React.FC<SectionGiftedProps> = ({ onGoHome }) => {
                 <h4 className="font-bold text-lg text-gray-800">아티팩트 감정</h4>
              </div>
              <p className="text-sm text-gray-600 leading-relaxed">
-                고대 유물 및 마력 깃든 아이템을 식별하고 안전하게 다루는 법을 
+                고대 유물 및 에테르가 깃든 아이템을 식별하고 안전하게 다루는 법을 
                 배우는 실습 위주의 심화 과정.
              </p>
           </div>

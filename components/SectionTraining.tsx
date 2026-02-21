@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ChevronRight, Home, Zap, Book, Brain, Activity, Sword, Target, Eye, MonitorPlay, Calendar } from 'lucide-react';
+import { ChevronRight, Home, Zap, Activity, Sword, Target, MonitorPlay } from 'lucide-react';
 
 interface SectionTrainingProps {
   onGoHome: () => void;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ChevronRight, Home, Users, Megaphone, Star, ShieldCheck, HeartHandshake, CheckCircle } from 'lucide-react';
+import { ChevronRight, Home, Users, Megaphone, ShieldCheck, HeartHandshake, CheckCircle } from 'lucide-react';
 
 interface SectionStudentCouncilProps {
   onGoHome: () => void;

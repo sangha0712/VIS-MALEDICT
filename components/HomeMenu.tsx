@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Megaphone, Calendar, Users, BookOpen, PenTool, ExternalLink, Star, Shield, Target, Crosshair, Briefcase, Dumbbell, Library, Monitor, GraduationCap, Gavel, Radio, HeartPulse, FileText } from 'lucide-react';
+import { Megaphone, Calendar, Users, BookOpen, PenTool, ExternalLink, Shield, Crosshair, Briefcase, Dumbbell, Library, Monitor, GraduationCap, Gavel, Radio, FileText } from 'lucide-react';
 
 interface HomeMenuProps {
-  onNavigate: (view: 'CHARACTER' | 'HISTORY' | 'ADMISSION' | 'ACADEMIC_INFO') => void;
+  onNavigate: (view: 'CHARACTER' | 'HISTORY' | 'ADMISSION' | 'ACADEMIC_INFO' | 'LIBRARY' | 'NOTICE' | 'RANKING' | 'COMMAND_CENTER' | 'GNET' | 'RULES' | 'WELFARE') => void;
 }
 
 const HomeMenu: React.FC<HomeMenuProps> = ({ onNavigate }) => {
@@ -20,7 +20,7 @@ const HomeMenu: React.FC<HomeMenuProps> = ({ onNavigate }) => {
     { id: 1, title: 'ASH GUARD 전략분석팀 하계 인턴십 모집 (3학년 대상)', date: '2084-04-12', new: true, category: '인턴' },
     { id: 2, title: '경찰청 사이버수사국 특채 설명회 (화이트해커 트랙)', date: '2084-04-05', new: true, category: '특채' },
     { id: 3, title: '글로벌 민간군사기업(PMC) "블랙스톤" 졸업 예정자 채용 공고', date: '2084-03-30', new: false, category: '채용' },
-    { id: 4, title: '국립 이능력 연구소 연구 보조원 모집 (물리학/마법학 전공)', date: '2084-03-20', new: false, category: '아르바이트' },
+    { id: 4, title: '국립 이능력 연구소 연구 보조원 모집 (물리학/이능학 전공)', date: '2084-03-20', new: false, category: '아르바이트' },
     { id: 5, title: 'S급 히어로 에이전시 "오로라" 스카우트 팀 학교 방문 일정', date: '2084-03-10', new: false, category: '스카우트' },
   ];
 
@@ -44,13 +44,13 @@ const HomeMenu: React.FC<HomeMenuProps> = ({ onNavigate }) => {
   const activeList = getActiveList();
 
   const iconLinks = [
-    { label: "아티팩트 도서관", icon: Library, color: "bg-cyan-100 text-cyan-600" },
-    { label: "강현 알리미", icon: Megaphone, color: "bg-blue-100 text-blue-600" },
-    { label: "히어로 랭킹 포털", icon: Monitor, color: "bg-purple-100 text-purple-600" },
-    { label: "작전 지휘 통제실", icon: Gavel, color: "bg-slate-100 text-slate-600" },
-    { label: "G-NET (전술망)", icon: Radio, color: "bg-rose-100 text-rose-600" },
-    { label: "이능력 사용 규정", icon: GraduationCap, color: "bg-green-100 text-green-600" },
-    { label: "장비/치료비 청구", icon: FileText, color: "bg-yellow-100 text-yellow-600" },
+    { label: "아티팩트 도서관", icon: Library, color: "bg-cyan-100 text-cyan-600", view: 'LIBRARY' },
+    { label: "강현 알리미", icon: Megaphone, color: "bg-blue-100 text-blue-600", view: 'NOTICE' },
+    { label: "히어로 랭킹 포털", icon: Monitor, color: "bg-purple-100 text-purple-600", view: 'RANKING' },
+    { label: "작전 지휘 통제실", icon: Gavel, color: "bg-slate-100 text-slate-600", view: 'COMMAND_CENTER' },
+    { label: "G-NET (전술망)", icon: Radio, color: "bg-rose-100 text-rose-600", view: 'GNET' },
+    { label: "이능력 사용 규정", icon: GraduationCap, color: "bg-green-100 text-green-600", view: 'RULES' },
+    { label: "장비/치료비 청구", icon: FileText, color: "bg-yellow-100 text-yellow-600", view: 'WELFARE' },
   ];
 
   return (
@@ -106,15 +106,15 @@ const HomeMenu: React.FC<HomeMenuProps> = ({ onNavigate }) => {
             </div>
 
             {/* Column 3: Popup Zone (Visual) */}
-            <div className="md:col-span-1 bg-white rounded-xl shadow-soft border border-gray-100 overflow-hidden relative group cursor-pointer h-48 md:h-auto">
-               <div className="absolute top-0 left-0 bg-red-600 text-white text-xs font-bold px-3 py-1 z-10 rounded-br-lg">
+            <div className="md:col-span-1 bg-gradient-to-br from-red-600 to-red-800 rounded-xl shadow-soft border border-red-700 overflow-hidden relative group cursor-pointer h-48 md:h-auto flex flex-col items-center justify-center text-white p-4 text-center transition-transform hover:-translate-y-1">
+               <div className="absolute top-0 left-0 bg-white text-red-600 text-xs font-bold px-3 py-1 z-10 rounded-br-lg shadow-sm">
                   D-DAY
                </div>
-               <img src="https://picsum.photos/seed/special_forces/400/300" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 grayscale group-hover:grayscale-0" alt="Recruit" />
-               <div className="absolute bottom-0 w-full bg-gradient-to-t from-black/90 to-transparent p-4 text-white">
-                  <p className="font-bold text-lg">제52회 히어로 면허 필기시험</p>
-                  <p className="text-xs text-gray-300 mt-1">2084. 06. 12 (토) | 제1체육관</p>
+               <div className="bg-white/20 p-4 rounded-full mb-3 group-hover:scale-110 transition-transform">
+                  <PenTool className="w-8 h-8 text-white" />
                </div>
+               <p className="font-bold text-lg leading-tight">제52회 히어로 면허<br/>필기시험</p>
+               <p className="text-xs text-red-200 mt-2">2084. 06. 12 (토) | 제1체육관</p>
             </div>
 
             {/* Column 4: Quick Links Banner */}
@@ -173,7 +173,7 @@ const HomeMenu: React.FC<HomeMenuProps> = ({ onNavigate }) => {
          <div className="max-w-7xl mx-auto px-4">
             <div className="grid grid-cols-3 md:grid-cols-7 gap-6 text-center">
                {iconLinks.map((link, idx) => (
-                  <button key={idx} className="flex flex-col items-center group cursor-pointer" onClick={() => alert("현재 준비 중인 서비스입니다.")}>
+                  <button key={idx} className="flex flex-col items-center group cursor-pointer" onClick={() => onNavigate(link.view as any)}>
                      <div className={`w-14 h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center mb-3 shadow-sm transition-transform group-hover:-translate-y-1 group-hover:shadow-md ${link.color}`}>
                         <link.icon className="w-7 h-7 md:w-8 md:h-8" />
                      </div>

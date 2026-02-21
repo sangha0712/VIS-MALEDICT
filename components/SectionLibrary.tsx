@@ -43,7 +43,7 @@ const SectionLibrary: React.FC<SectionLibraryProps> = ({ onGoHome }) => {
              <span className="py-1">인기 검색어:</span>
              <span className="bg-white px-2 py-1 rounded border cursor-pointer hover:text-school-orange">기초 에테르학</span>
              <span className="bg-white px-2 py-1 rounded border cursor-pointer hover:text-school-orange">던전 생태계</span>
-             <span className="bg-white px-2 py-1 rounded border cursor-pointer hover:text-school-orange text-red-500">금지된 주술(열람불가)</span>
+             <span className="bg-white px-2 py-1 rounded border cursor-pointer hover:text-school-orange text-red-500">금지된 이능(열람불가)</span>
           </div>
        </div>
 
@@ -88,7 +88,7 @@ const SectionLibrary: React.FC<SectionLibraryProps> = ({ onGoHome }) => {
              </div>
              <ul className="space-y-2 text-sm text-gray-700">
                 <li className="flex items-center gap-2"><FolderLock className="w-4 h-4" /> 아티팩트 도감 (원본)</li>
-                <li className="flex items-center gap-2"><AlertTriangle className="w-4 h-4" /> 위험 등급 마도서</li>
+                <li className="flex items-center gap-2"><AlertTriangle className="w-4 h-4" /> 위험 등급 이능 서적</li>
                 <li className="flex items-center gap-2 text-xs text-red-600 font-bold mt-2 pt-2 border-t border-red-200">
                    ※ 보안 등급 B 이상 출입 가능
                 </li>

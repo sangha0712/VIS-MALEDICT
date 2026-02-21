@@ -15,10 +15,15 @@ import SectionGifted from './components/SectionGifted';
 import SectionLibrary from './components/SectionLibrary';
 import SectionNotice from './components/SectionNotice';
 import SectionStudentLife from './components/SectionStudentLife';
+import SectionRanking from './components/SectionRanking';
+import SectionCommandCenter from './components/SectionCommandCenter';
+import SectionGNet from './components/SectionGNet';
+import SectionRules from './components/SectionRules';
+import SectionWelfare from './components/SectionWelfare';
 import FullMenuOverlay from './components/FullMenuOverlay';
 import { Search, Menu, ChevronRight, Home, User, LogIn, Shield, Phone, Lock } from 'lucide-react';
 
-type ViewState = 'HOME' | 'CHARACTER' | 'HISTORY' | 'ADMISSION' | 'MAP' | 'ASHGUARD' | 'TRAINING' | 'ACADEMIC_INFO' | 'STUDENT_COUNCIL' | 'GIFTED_EDU' | 'LIBRARY' | 'NOTICE' | 'STUDENT_LIFE';
+type ViewState = 'HOME' | 'CHARACTER' | 'HISTORY' | 'ADMISSION' | 'MAP' | 'ASHGUARD' | 'TRAINING' | 'ACADEMIC_INFO' | 'STUDENT_COUNCIL' | 'GIFTED_EDU' | 'LIBRARY' | 'NOTICE' | 'STUDENT_LIFE' | 'RANKING' | 'COMMAND_CENTER' | 'GNET' | 'RULES' | 'WELFARE';
 
 const App: React.FC = () => {
   const [currentView, setCurrentView] = useState<ViewState>('HOME');
@@ -76,6 +81,21 @@ const App: React.FC = () => {
 
       case 'STUDENT_LIFE':
         return <SectionStudentLife onGoHome={() => handleNavigate('HOME')} initialTab={currentTab} />;
+
+      case 'RANKING':
+        return <SectionRanking onGoHome={() => handleNavigate('HOME')} />;
+
+      case 'COMMAND_CENTER':
+        return <SectionCommandCenter onGoHome={() => handleNavigate('HOME')} />;
+
+      case 'GNET':
+        return <SectionGNet onGoHome={() => handleNavigate('HOME')} />;
+
+      case 'RULES':
+        return <SectionRules onGoHome={() => handleNavigate('HOME')} />;
+
+      case 'WELFARE':
+        return <SectionWelfare onGoHome={() => handleNavigate('HOME')} />;
 
       case 'CHARACTER':
         return (
@@ -196,7 +216,7 @@ const App: React.FC = () => {
       {/* Orange Navbar */}
       <nav className="bg-school-orange shadow-md sticky top-0 z-40">
          <div className="max-w-7xl mx-auto px-4">
-            <ul className="flex items-center justify-between md:justify-start md:space-x-12 h-14 text-white font-medium text-[15px]">
+            <ul className="flex items-center justify-between md:justify-start md:pl-20 md:space-x-12 h-14 text-white font-medium text-[15px]">
                <li className={`h-full hidden md:flex items-center cursor-pointer border-b-4 ${currentView === 'HISTORY' ? 'border-white font-bold' : 'border-transparent hover:border-orange-300'}`} onClick={() => handleNavigate('HISTORY')}>
                   학교소개
                </li>

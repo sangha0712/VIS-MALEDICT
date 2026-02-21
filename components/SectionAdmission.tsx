@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { ChevronRight, Home, Download, AlertCircle, Shield, CheckCircle, FileText, Scan, Activity, Zap, Award, Search, Check, Loader2 } from 'lucide-react';
+import { ChevronRight, Home, AlertCircle, Shield, FileText, Zap, Award, Search, Loader2 } from 'lucide-react';
 
 interface SectionAdmissionProps {
   onGoHome: () => void;
@@ -459,7 +459,7 @@ const SectionAdmission: React.FC<SectionAdmissionProps> = ({ onGoHome }) => {
              )}
              
              {/* RESULT TAB CONTENT (Placeholder for manual navigation if needed) */}
-             {activeTab === 'RESULT' && status !== 'COMPLETED' && (
+             {activeTab === 'RESULT' && (
                 <div className="text-center py-20 border border-gray-200 rounded-lg bg-gray-50">
                     <Search className="w-16 h-16 text-gray-300 mx-auto mb-4" />
                     <h3 className="text-xl font-bold text-gray-700 mb-2">합격자 조회</h3>

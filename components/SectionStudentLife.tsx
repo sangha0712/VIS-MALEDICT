@@ -48,6 +48,184 @@ const SectionStudentLife: React.FC<SectionStudentLifeProps> = ({ onGoHome, initi
             </div>
          );
       case 'BAMBOO':
+         const bambooPosts = [
+            {
+               id: 34845,
+               time: '방금 전',
+               content: '아니 급식실 오늘 메뉴 실화냐? 마나 회복 스프라면서 그냥 맹물에 파 띄운 맛인데;; 영양사님 이거 맞아요?',
+               likes: 56,
+               comments: 12
+            },
+            {
+               id: 34844,
+               time: '5분 전',
+               content: '1학년 신입생들 제발 복도에서 능력 쓰지 마라. 지나가다 옷에 불붙을 뻔함. 니네 능력 조절 못하는 거 자랑 아니라고.',
+               likes: 230,
+               comments: 45
+            },
+            {
+               id: 34843,
+               time: '12분 전',
+               content: '이번 전술학 개론 시험 범위 어디까지임? 교수님이 말씀하신 거랑 공지랑 다른데?',
+               likes: 5,
+               comments: 8
+            },
+            {
+               id: 34842,
+               time: '20분 전',
+               content: '도서관 3층 창가 자리 찜해두고 3시간째 안 오는 사람 누구냐? 양심 있으면 치워라 진짜.',
+               likes: 89,
+               comments: 2
+            },
+            {
+               id: 34841,
+               time: '35분 전',
+               content: '야 너네 "그" 소문 들었냐? 이번에 전학 온 2학년, S급 빌런 자식이라던데... 우리 학교 괜찮은 거임?',
+               likes: 567,
+               comments: 120
+            },
+            {
+               id: 34840,
+               time: '40분 전',
+               content: '체육대회 때 서포트과 무시하지 마라. 니네 장비 수리해주는 게 누군데 ㅡㅡ',
+               likes: 145,
+               comments: 34
+            },
+            {
+               id: 34839,
+               time: '1시간 전',
+               content: '기숙사 402호 밤마다 이상한 주문 외우는 소리 들림. 룸메가 흑마법사인가 봐 살려줘.',
+               likes: 312,
+               comments: 56
+            },
+            {
+               id: 34838,
+               time: '1시간 전',
+               content: '매점 아줌마가 몰래 챙겨주신 "힘이 솟는 초코우유" 효과 대박임. 마시고 3대 500 침.',
+               likes: 88,
+               comments: 15
+            },
+            {
+               id: 34837,
+               time: '2시간 전',
+               content: '교장 쌤 훈화 말씀 때 마이크 하울링 일부러 내시는 거 같지 않냐? 정신 공격 훈련의 일환인 듯.',
+               likes: 1004,
+               comments: 23
+            },
+            {
+               id: 34836,
+               time: '2시간 전',
+               content: '분실물: 제 "투명 망토" 잃어버렸습니다. 안 보여서 못 찾겠어요. 보신 분 연락 좀.',
+               likes: 45,
+               comments: 12
+            },
+            {
+               id: 34835,
+               time: '3시간 전',
+               content: '3학년 선배님들, 졸업하면 진짜 바로 현장 투입되나요? 무서운데 팁 좀 주세요.',
+               likes: 67,
+               comments: 28
+            },
+            {
+               id: 34834,
+               time: '3시간 전',
+               content: '오늘 모의전 쩔더라. 2반 김철수(가명)가 혼자서 3명 닦는 거 봄? 걔 각성한 듯.',
+               likes: 210,
+               comments: 41
+            },
+            {
+               id: 34833,
+               time: '4시간 전',
+               content: '연애 상담) 여친이 염동력자인데 싸울 때마다 물건이 날아다녀요. 헤어져야 할까요?',
+               likes: 34,
+               comments: 99
+            },
+            {
+               id: 34832,
+               time: '5시간 전',
+               content: '학교 뒷산에 멧돼지 출몰했다는데 멧돼지가 불 뿜는다더라. 조심해라.',
+               likes: 156,
+               comments: 12
+            },
+            {
+               id: 34831,
+               time: '6시간 전',
+               content: '시험 기간에 도서관에서 연애질 좀 하지 마라. 책 읽는데 옆에서 텔레파시로 꽁냥대는 거 다 느껴짐.',
+               likes: 440,
+               comments: 8
+            },
+            {
+               id: 34830,
+               time: '7시간 전',
+               content: '솔직히 우리 학교 교복 디자인 좀 구리지 않냐? 방탄 기능 때문이라지만 너무 쫄쫄이임.',
+               likes: 78,
+               comments: 22
+            },
+            {
+               id: 34829,
+               time: '8시간 전',
+               content: '내일 수행평가 파트너 구함. 본인 힐러임. 탱커나 딜러 구함. 버스 태워드림.',
+               likes: 12,
+               comments: 5
+            },
+            {
+               id: 34828,
+               time: '9시간 전',
+               content: '야간 자율 학습 째다가 걸리면 진짜 영창 가냐? 선도부 애들이 겁주는데.',
+               likes: 55,
+               comments: 10
+            },
+            {
+               id: 34827,
+               time: '10시간 전',
+               content: '초능력 없어도 노력하면 ASH GUARD 갈 수 있나요? 비능력자 전형 경쟁률 아시는 분?',
+               likes: 90,
+               comments: 33
+            },
+            {
+               id: 34826,
+               time: '11시간 전',
+               content: '오늘 하늘 날아다니던 3학년 선배 누구임? 자세 개멋있던데.',
+               likes: 112,
+               comments: 7
+            },
+            {
+               id: 34825,
+               time: '12시간 전',
+               content: '학교 앞 떡볶이집 사장님 전직 S급 히어로라는 썰 진짜임? 떡볶이 맛이 평범하지 않긴 함.',
+               likes: 333,
+               comments: 40
+            },
+            {
+               id: 34824,
+               time: '어제',
+               content: '야 솔직히 F급이나 무능력자들은 일반고 전학 가야 되는 거 아님? 세금 들여서 훈련시켜봤자 빌런 만나면 3초컷일 텐데 왜 굳이 여기서 버티면서 조별 과제 민폐 끼치냐? 진짜 이해 안 됨;; 특히 일반과 2학년 3반 너네 말이야 훈련장에서 알짱거리지 마라 다친다.',
+               likes: 1240,
+               comments: 342
+            },
+            {
+               id: 34823,
+               time: '어제',
+               content: '어제 시가전 모의 훈련에서 트롤짓한 1학년 누구냐? 광역기 쓰는데 아군 위치 확인도 안 하고 쏘면 어떡함? 내 쉴드 아니었으면 우리 분대 전멸이었어. 제발 기본은 하고 살자.',
+               likes: 89,
+               comments: 12
+            },
+            {
+               id: 34822,
+               time: '어제',
+               content: '요즘 빌런들 너무 설치는데 학교 밖에서 능력 써도 정당방위 인정해줘야 하는 거 아님? 어제 하교하다가 뒷골목에서 이상한 놈 마주쳤는데, 교칙 때문에 튀느라 진짜 죽을 뻔했다. 우리가 히어로 지망생이지 동네북이냐고.',
+               likes: 203,
+               comments: 56
+            },
+            {
+               id: 34821,
+               time: '2일 전',
+               content: '[소문] 3학년 선배 중에 빌런 조직이랑 내통하는 사람 있다는데 진짜임? 저번에 압수된 "레드 더스트"도 내부 소행이라며... 무섭다 진짜.',
+               likes: 450,
+               comments: 118
+            }
+         ];
+
          return (
             <div className="space-y-6">
                 <div className="bg-green-50 border border-green-200 p-4 rounded text-center mb-4">
@@ -58,71 +236,24 @@ const SectionStudentLife: React.FC<SectionStudentLifeProps> = ({ onGoHome, initi
                 </div>
                 
                 <div className="space-y-4">
-                   <div className="border border-gray-200 p-5 rounded-lg bg-white shadow-sm">
-                      <div className="flex justify-between items-center mb-3">
-                         <span className="font-bold text-school-orange">#34824번째_외침</span>
-                         <span className="text-xs text-gray-400">방금 전</span>
+                   {bambooPosts.map((post) => (
+                      <div key={post.id} className="border border-gray-200 p-5 rounded-lg bg-white shadow-sm hover:shadow-md transition-shadow">
+                         <div className="flex justify-between items-center mb-3">
+                            <span className="font-bold text-school-orange">#{post.id}번째_외침</span>
+                            <span className="text-xs text-gray-400">{post.time}</span>
+                         </div>
+                         <p className="text-gray-800 mb-4 leading-relaxed whitespace-pre-line">
+                            {post.content}
+                         </p>
+                         <div className="flex gap-4 text-xs text-gray-500 border-t border-gray-100 pt-3">
+                            <span className="flex items-center gap-1"><ThumbsUp className="w-3 h-3"/> 공감 {post.likes}</span>
+                            <span className="flex items-center gap-1"><MessageSquare className="w-3 h-3"/> 댓글 {post.comments}</span>
+                         </div>
                       </div>
-                      <p className="text-gray-800 mb-4 leading-relaxed">
-                         야 솔직히 F급이나 무능력자들은 일반고 전학 가야 되는 거 아님?<br/>
-                         세금 들여서 훈련시켜봤자 빌런 만나면 3초컷일 텐데 왜 굳이 여기서 버티면서 조별 과제 민폐 끼치냐? 진짜 이해 안 됨;;<br/>
-                         특히 일반과 2학년 3반 너네 말이야 훈련장에서 알짱거리지 마라 다친다.
-                      </p>
-                      <div className="flex gap-4 text-xs text-gray-500 border-t border-gray-100 pt-3">
-                         <span className="flex items-center gap-1"><ThumbsUp className="w-3 h-3"/> 공감 1,240</span>
-                         <span className="flex items-center gap-1"><MessageSquare className="w-3 h-3"/> 댓글 342</span>
-                      </div>
-                   </div>
-
-                   <div className="border border-gray-200 p-5 rounded-lg bg-white shadow-sm">
-                      <div className="flex justify-between items-center mb-3">
-                         <span className="font-bold text-school-orange">#34823번째_외침</span>
-                         <span className="text-xs text-gray-400">15분 전</span>
-                      </div>
-                      <p className="text-gray-800 mb-4 leading-relaxed">
-                         어제 시가전 모의 훈련에서 트롤짓한 1학년 누구냐? <br/>
-                         광역기 쓰는데 아군 위치 확인도 안 하고 쏘면 어떡함? 내 쉴드 아니었으면 우리 분대 전멸이었어.<br/>
-                         제발 기본은 하고 살자.
-                      </p>
-                      <div className="flex gap-4 text-xs text-gray-500 border-t border-gray-100 pt-3">
-                         <span className="flex items-center gap-1"><ThumbsUp className="w-3 h-3"/> 공감 89</span>
-                         <span className="flex items-center gap-1"><MessageSquare className="w-3 h-3"/> 댓글 12</span>
-                      </div>
-                   </div>
-
-                   <div className="border border-gray-200 p-5 rounded-lg bg-white shadow-sm">
-                      <div className="flex justify-between items-center mb-3">
-                         <span className="font-bold text-school-orange">#34822번째_외침</span>
-                         <span className="text-xs text-gray-400">1시간 전</span>
-                      </div>
-                      <p className="text-gray-800 mb-4 leading-relaxed">
-                         요즘 빌런들 너무 설치는데 학교 밖에서 능력 써도 정당방위 인정해줘야 하는 거 아님?<br/>
-                         어제 하교하다가 뒷골목에서 이상한 놈 마주쳤는데, 교칙 때문에 튀느라 진짜 죽을 뻔했다.<br/>
-                         우리가 히어로 지망생이지 동네북이냐고.
-                      </p>
-                      <div className="flex gap-4 text-xs text-gray-500 border-t border-gray-100 pt-3">
-                         <span className="flex items-center gap-1"><ThumbsUp className="w-3 h-3"/> 공감 203</span>
-                         <span className="flex items-center gap-1"><MessageSquare className="w-3 h-3"/> 댓글 56</span>
-                      </div>
-                   </div>
-
-                   <div className="border border-gray-200 p-5 rounded-lg bg-white shadow-sm">
-                      <div className="flex justify-between items-center mb-3">
-                         <span className="font-bold text-school-orange">#34821번째_외침</span>
-                         <span className="text-xs text-gray-400">3시간 전</span>
-                      </div>
-                      <p className="text-gray-800 mb-4 leading-relaxed">
-                         [소문] 3학년 선배 중에 빌런 조직이랑 내통하는 사람 있다는데 진짜임?<br/>
-                         저번에 압수된 '레드 더스트'도 내부 소행이라며... 무섭다 진짜.
-                      </p>
-                      <div className="flex gap-4 text-xs text-gray-500 border-t border-gray-100 pt-3">
-                         <span className="flex items-center gap-1"><ThumbsUp className="w-3 h-3"/> 공감 450</span>
-                         <span className="flex items-center gap-1"><MessageSquare className="w-3 h-3"/> 댓글 118</span>
-                      </div>
-                   </div>
+                   ))}
                 </div>
-                <div className="text-center">
-                   <button className="bg-gray-800 text-white px-6 py-2 rounded font-bold hover:bg-gray-700">제보하기</button>
+                <div className="text-center pt-4">
+                   <button className="bg-gray-800 text-white px-6 py-2 rounded font-bold hover:bg-gray-700 transition-colors">제보하기</button>
                 </div>
             </div>
          );

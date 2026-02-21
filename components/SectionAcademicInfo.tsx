@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ChevronRight, Home, FileText, UserPlus, UserMinus, AlertTriangle, ShieldAlert, Activity, CreditCard, Printer } from 'lucide-react';
+import { ChevronRight, Home, FileText, UserPlus, ShieldAlert, Activity, CreditCard, Printer } from 'lucide-react';
 
 interface SectionAcademicInfoProps {
   onGoHome: () => void;
